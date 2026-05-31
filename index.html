@@ -106,7 +106,7 @@
       background: white;
       border-radius: 1.5rem;
       padding: 1rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
       max-height: 500px;
       overflow-y: auto;
     }
@@ -116,10 +116,23 @@
       padding: 0.7rem;
       margin-bottom: 1rem;
       border-left: 4px solid #f5a623;
+      position: relative;
     }
-    .chat-question { font-weight: bold; margin-bottom: 0.3rem; }
+    .chat-name { font-weight: bold; color: #c0621a; margin-right: 8px; }
+    .chat-date { font-size: 0.6rem; color: #999; margin-left: 8px; }
+    .delete-msg {
+      position: absolute;
+      top: 8px;
+      right: 12px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      opacity: 0.5;
+    }
+    .delete-msg:hover { opacity: 1; }
+    .chat-question { margin-top: 4px; word-break: break-word; }
     .chat-answer { margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px dashed #ffcf8a; color: #b45f2b; }
-    .chat-date { font-size: 0.6rem; color: #999; text-align: right; }
     .chat-form {
       display: flex;
       flex-direction: column;
@@ -135,6 +148,8 @@
     .btn { background: #f5a623; border: none; padding: 0.4rem 1rem; border-radius: 1.5rem; cursor: pointer; margin-right: 6px; font-weight: bold; }
     .btn-secondary { background: #ddd; }
     footer { text-align: center; margin-top: 1.8rem; font-size: 0.7rem; color: #b87a3c; }
+    .chat-settings { text-align: right; margin-bottom: 8px; }
+    .chat-settings button { background: none; border: none; font-size: 0.9rem; color: #c0621a; cursor: pointer; text-decoration: underline; }
   </style>
 </head>
 <body>
@@ -173,6 +188,9 @@
   </div>
 
   <div id="tab-chat" class="tab-content">
+    <div class="chat-settings">
+      <button id="changeNameBtn">✏️ Změnit jméno</button>
+    </div>
     <div class="chat-container" id="chatMessages">
       <div style="text-align: center; color: #b87a3c;">Načítání zpráv...</div>
     </div>
@@ -210,12 +228,21 @@
   </div>
 </div>
 
+<div id="nameModal" class="modal">
+  <div class="modal-content">
+    <h3>👤 Tvé jméno v chatu</h3>
+    <input type="text" id="userNameInput" placeholder="Zadej přezdívku">
+    <button id="saveNameBtn" class="btn">Uložit</button>
+    <button id="closeNameBtn" class="btn-secondary">Zrušit</button>
+  </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
 <script>
   // ==================== KONFIGURACE ====================
   const BOT_TOKEN = "8613265812:AAE3uVJYnZ-t5Kd8viX4H2xGJZaqnYk6vx8";
   const CHAT_ID = "5417843713";
-  const SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbxRp3r7APuMcnw41C63JYupF7XUsZTlWwYfWcDoUFTJ8KZmvXeZlNBT-FE12QdoZrWa/exec";
+  const SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbzVoKqUmT6IIhA-yHgTdxyaxqwPOxeeeD8oY5U8Z4aC8D8a2WFv3rT4TL-wGht4dCr9/exec";
   const SHEETS_EDIT_URL = "https://docs.google.com/spreadsheets/d/16MQbz6lUd4M4m92oa9fEhbvCTzN4FmA5AWCXtCjARO4/edit";
   // ====================================================
 
@@ -308,15 +335,29 @@
   let activity = {};
   let soundEnabled = true;
   let chatInterval = null;
+  let currentUserId = localStorage.getItem("chat_userId") || (Math.random().toString(36) + Date.now().toString(36));
+  let currentUserName = localStorage.getItem("chat_userName") || "";
 
-  // ---------- CHAT ----------
-  async function sendMessageToSheet(message) {
+  // ---------- CHAT FUNCTIONS ----------
+  async function sendMessageToSheet(message, name, userId) {
     try {
       await fetch(SHEETS_API_URL, {
         method: "POST",
         mode: "no-cors",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: message })
+        body: JSON.stringify({ message, name, userId })
+      });
+      return true;
+    } catch(e) { return false; }
+  }
+
+  async function deleteMessageFromSheet(msgId, userId) {
+    try {
+      await fetch(SHEETS_API_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "delete", id: msgId, userId })
       });
       return true;
     } catch(e) { return false; }
@@ -332,11 +373,15 @@
   async function sendChatMessage() {
     const msg = document.getElementById("chatMessageInput").value.trim();
     if (!msg) return;
+    if (!currentUserName) {
+      document.getElementById("nameModal").style.display = "flex";
+      return;
+    }
     document.getElementById("chatMessageInput").value = "";
-    const ok = await sendMessageToSheet(msg);
+    const ok = await sendMessageToSheet(msg, currentUserName, currentUserId);
     if (ok) {
       try {
-        const tgMsg = `💬 <b>Nová zpráva z chatu webu</b>\n📝 ${msg}\n\n✏️ Odpověz zde: ${SHEETS_EDIT_URL}`;
+        const tgMsg = `💬 <b>Nová zpráva z chatu webu</b>\n👤 ${currentUserName}\n📝 ${msg}\n\n✏️ Odpověz zde: ${SHEETS_EDIT_URL}`;
         await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -349,6 +394,13 @@
     }
   }
 
+  async function deleteMessage(msgId) {
+    if (confirm("Opravdu chcete smazat tuto zprávu?")) {
+      await deleteMessageFromSheet(msgId, currentUserId);
+      renderChat();
+    }
+  }
+
   async function renderChat() {
     const container = document.getElementById("chatMessages");
     const messages = await loadMessagesFromSheet();
@@ -357,21 +409,51 @@
       return;
     }
     messages.sort((a,b) => new Date(a.timestamp) - new Date(b.timestamp));
-    container.innerHTML = messages.map(msg => `
-      <div class="chat-message">
-        <div class="chat-question">💬 <strong>Otázka:</strong> ${escapeHtml(msg.message)}</div>
-        <div class="chat-answer">✏️ <strong>Odpověď admina:</strong> ${msg.answer ? escapeHtml(msg.answer) : "<em>Zatím bez odpovědi...</em>"}</div>
-        <div class="chat-date">${new Date(msg.timestamp).toLocaleString()}</div>
-      </div>
-    `).join('');
+    container.innerHTML = messages.map(msg => {
+      const isOwner = (msg.userId === currentUserId);
+      const displayMessage = msg.deleted ? "[сообщение удалено]" : msg.message;
+      return `
+        <div class="chat-message">
+          <div>
+            <span class="chat-name">${escapeHtml(msg.name)}</span>
+            <span class="chat-date">${new Date(msg.timestamp).toLocaleString()}</span>
+            ${isOwner && !msg.deleted ? `<button class="delete-msg" data-id="${msg.id}">🗑️</button>` : ''}
+          </div>
+          <div class="chat-question">${escapeHtml(displayMessage)}</div>
+          <div class="chat-answer">✏️ <strong>Odpověď admina:</strong> ${msg.answer ? escapeHtml(msg.answer) : "<em>Zatím bez odpovědi...</em>"}</div>
+        </div>
+      `;
+    }).join('');
+    container.querySelectorAll('.delete-msg').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        deleteMessage(btn.getAttribute('data-id'));
+      });
+    });
     container.scrollTop = container.scrollHeight;
   }
 
   function escapeHtml(str) {
+    if (!str) return "";
     return str.replace(/[&<>]/g, m => m==='&'?'&amp;':m==='<'?'&lt;':'&gt;');
   }
 
-  // ---------- CHECKLIST (KOMPLETNÍ LOGIKA) ----------
+  // ---------- NAME MODAL ----------
+  function saveUserName() {
+    const newName = document.getElementById("userNameInput").value.trim();
+    if (newName) {
+      currentUserName = newName;
+      localStorage.setItem("chat_userName", currentUserName);
+      localStorage.setItem("chat_userId", currentUserId);
+      document.getElementById("nameModal").style.display = "none";
+    }
+  }
+  function showNameModal() {
+    document.getElementById("userNameInput").value = currentUserName;
+    document.getElementById("nameModal").style.display = "flex";
+  }
+
+  // ---------- CHECKLIST (STEJNÁ LOGIKA JAKO DŘÍVE) ----------
   function save() {
     localStorage.setItem("summer_checks", JSON.stringify(checks));
     localStorage.setItem("summer_comments", JSON.stringify(comments));
@@ -379,6 +461,8 @@
     localStorage.setItem("summer_activity", JSON.stringify(activity));
     localStorage.setItem("summer_lang", lang);
     localStorage.setItem("summer_sound", soundEnabled);
+    localStorage.setItem("chat_userId", currentUserId);
+    localStorage.setItem("chat_userName", currentUserName);
   }
 
   function loadData() {
@@ -388,6 +472,8 @@
     const ac = localStorage.getItem("summer_activity"); if (ac) activity = JSON.parse(ac);
     const l = localStorage.getItem("summer_lang"); if (l === "cs" || l === "ru") lang = l;
     const s = localStorage.getItem("summer_sound"); if (s !== null) soundEnabled = s === "true";
+    const uid = localStorage.getItem("chat_userId"); if (uid) currentUserId = uid;
+    const uname = localStorage.getItem("chat_userName"); if (uname) currentUserName = uname;
     document.getElementById("langSelect").value = lang;
     document.getElementById("soundCheck").checked = soundEnabled;
   }
@@ -575,7 +661,7 @@
     renderChecklist();
   }
 
-  // ---------- NAVIGACE, MODÁLY, INICIALIZACE ----------
+  // ---------- NAVIGACE, MODÁLY ----------
   document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -601,9 +687,15 @@
   document.getElementById("resetAchBtn").onclick = () => { if(confirm(translations[lang].confirmResetAch)) { achievements = []; save(); renderAchievements(); } };
   document.getElementById("resetAllBtn").onclick = () => { if(confirm(translations[lang].confirmReset)) { checks.fill(false); save(); renderChecklist(); updateProgress(); checkAchievements(); } };
   document.getElementById("sendChatMsgBtn").onclick = sendChatMessage;
+  document.getElementById("changeNameBtn").onclick = showNameModal;
+  document.getElementById("saveNameBtn").onclick = saveUserName;
+  document.getElementById("closeNameBtn").onclick = () => document.getElementById("nameModal").style.display = "none";
 
   function init() {
     loadData();
+    if (!currentUserName) {
+      setTimeout(() => showNameModal(), 500);
+    }
     applyLanguage();
     renderCalendar();
     updateCounters();
