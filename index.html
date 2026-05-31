@@ -3,32 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>✨ Legendární léto 2026 ✨</title>
+  <title>✨ Legendární léto 2026 ✨ Chat + Checklist</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       background: linear-gradient(145deg, #fff9e8 0%, #fee6c5 100%);
       font-family: 'Segoe UI', system-ui, 'Inter', sans-serif;
       padding: 1rem;
       color: #2a241a;
     }
-
-    .container {
-      max-width: 1300px;
-      margin: 0 auto;
-    }
-
-    .header-row {
+    .container { max-width: 1300px; margin: 0 auto; }
+    .tabs {
       display: flex;
-      justify-content: flex-end;
-      gap: 12px;
+      gap: 10px;
       margin-bottom: 1rem;
+      border-bottom: 2px solid #ffd184;
+      padding-bottom: 6px;
     }
+    .tab-btn {
+      background: #fff9ef;
+      border: none;
+      padding: 0.5rem 1.2rem;
+      border-radius: 30px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    .tab-btn.active { background: #f5a623; color: white; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .header-row { display: flex; justify-content: flex-end; gap: 12px; margin-bottom: 1rem; }
     .icon-btn {
       background: #fff9ef;
       border: 1px solid #f3bc6e;
@@ -40,17 +44,10 @@
       justify-content: center;
       font-size: 1.5rem;
       cursor: pointer;
-      transition: 0.2s;
     }
-    .icon-btn:hover {
-      background: #ffe8cf;
-      transform: scale(0.96);
-    }
-
     .hero {
       text-align: center;
       background: #fffcf0cc;
-      backdrop-filter: blur(6px);
       border-radius: 2.5rem;
       padding: 1rem;
       margin-bottom: 1.5rem;
@@ -62,20 +59,8 @@
       -webkit-background-clip: text;
       color: transparent;
     }
-    .counters {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin-top: 0.5rem;
-    }
-    .counter {
-      background: #fff0dd;
-      border-radius: 40px;
-      padding: 0.2rem 1rem;
-      font-size: 0.8rem;
-    }
-
+    .counters { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 0.5rem; }
+    .counter { background: #fff0dd; border-radius: 40px; padding: 0.2rem 1rem; font-size: 0.8rem; }
     .stats-card {
       background: white;
       border-radius: 2rem;
@@ -86,41 +71,12 @@
       align-items: center;
       justify-content: space-between;
       gap: 10px;
-      border: 1px solid #ffdfb0;
     }
-    .progress-text {
-      background: #fff0dd;
-      padding: 0.2rem 0.9rem;
-      border-radius: 30px;
-      font-weight: bold;
-      font-size: 0.9rem;
-      white-space: nowrap;
-    }
-    .progress-bar {
-      background: #ffeed9;
-      border-radius: 30px;
-      height: 10px;
-      flex: 2;
-      min-width: 100px;
-    }
-    .progress-fill {
-      background: #f5a623;
-      width: 0%;
-      height: 100%;
-      border-radius: 30px;
-      transition: width 0.2s;
-    }
-    .reset-btn {
-      background: #fff0dd;
-      border: 1px solid #f3bc6e;
-      padding: 0.3rem 0.9rem;
-      border-radius: 30px;
-      font-weight: bold;
-      font-size: 0.85rem;
-      cursor: pointer;
-    }
-
-    .achievements-panel {
+    .progress-text { background: #fff0dd; padding: 0.2rem 0.9rem; border-radius: 30px; font-weight: bold; font-size: 0.9rem; white-space: nowrap; }
+    .progress-bar { background: #ffeed9; border-radius: 30px; height: 10px; flex: 2; min-width: 100px; }
+    .progress-fill { background: #f5a623; width: 0%; height: 100%; border-radius: 30px; transition: width 0.2s; }
+    .reset-btn { background: #fff0dd; border: 1px solid #f3bc6e; padding: 0.3rem 0.9rem; border-radius: 30px; font-weight: bold; cursor: pointer; }
+    .achievements-panel, .calendar-mini {
       background: #fffef5;
       border-radius: 1.5rem;
       padding: 0.6rem 0.8rem;
@@ -130,177 +86,60 @@
       align-items: center;
       gap: 10px;
     }
-    .badge-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-    .badge {
-      background: #ffefcf;
-      border-radius: 30px;
-      padding: 0.2rem 0.7rem;
-      font-size: 0.7rem;
-    }
-    .badge.locked {
-      opacity: 0.4;
-    }
-
-    .calendar-mini {
-      background: #fffef5;
-      border-radius: 1.5rem;
-      padding: 0.6rem 0.8rem;
-      margin-bottom: 1.2rem;
-    }
-    .calendar-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-      margin-top: 6px;
-    }
-    .cal-day {
-      width: 30px;
-      height: 30px;
-      background: #ffe2bc;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.7rem;
-      font-weight: bold;
-    }
-    .cal-day.active {
-      background: #f5a623;
-      color: white;
-    }
-
-    .checklist-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 1.2rem;
-    }
-    .category-card {
+    .badge-list { display: flex; flex-wrap: wrap; gap: 6px; }
+    .badge { background: #ffefcf; border-radius: 30px; padding: 0.2rem 0.7rem; font-size: 0.7rem; }
+    .badge.locked { opacity: 0.4; }
+    .calendar-grid { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+    .cal-day { width: 30px; height: 30px; background: #ffe2bc; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: bold; }
+    .cal-day.active { background: #f5a623; color: white; }
+    .checklist-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.2rem; }
+    .category-card { background: white; border-radius: 1.2rem; overflow: hidden; border: 1px solid #ffe6bb; }
+    .category-header { background: #fff0dc; padding: 0.5rem 0.8rem; display: flex; justify-content: space-between; border-bottom: 2px solid #ffd184; }
+    .tasks-list { padding: 0.5rem; display: flex; flex-direction: column; gap: 0.4rem; }
+    .task-item { display: flex; gap: 8px; background: #fefef7; padding: 0.4rem 0.5rem; border-radius: 0.9rem; border: 1px solid #ffe5c2; align-items: flex-start; }
+    .task-checkbox { flex-shrink: 0; width: 18px; height: 18px; margin-top: 2px; accent-color: #f5a623; }
+    .task-text { flex: 1; font-size: 0.8rem; line-height: 1.3; word-break: break-word; }
+    .comment-icon { cursor: pointer; opacity: 0.6; font-size: 0.8rem; margin-left: 4px; flex-shrink: 0; }
+    .comment-preview { font-size: 0.65rem; color: #aa7733; margin-top: 2px; }
+    .legend-badge { background: #f5c481; border-radius: 20px; padding: 0.05rem 0.4rem; font-size: 0.6rem; margin-left: 6px; white-space: nowrap; }
+    .chat-container {
       background: white;
-      border-radius: 1.2rem;
-      overflow: hidden;
-      border: 1px solid #ffe6bb;
+      border-radius: 1.5rem;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      max-height: 500px;
+      overflow-y: auto;
     }
-    .category-header {
-      background: #fff0dc;
-      padding: 0.5rem 0.8rem;
-      display: flex;
-      justify-content: space-between;
-      border-bottom: 2px solid #ffd184;
-      font-size: 0.95rem;
+    .chat-message {
+      background: #fef5e6;
+      border-radius: 1rem;
+      padding: 0.7rem;
+      margin-bottom: 1rem;
+      border-left: 4px solid #f5a623;
     }
-    .cat-stats {
-      background: #fff3e0;
-      border-radius: 30px;
-      padding: 0.1rem 0.6rem;
-      font-size: 0.7rem;
-    }
-    .tasks-list {
-      padding: 0.5rem;
+    .chat-question { font-weight: bold; margin-bottom: 0.3rem; }
+    .chat-answer { margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px dashed #ffcf8a; color: #b45f2b; }
+    .chat-date { font-size: 0.6rem; color: #999; text-align: right; }
+    .chat-form {
       display: flex;
       flex-direction: column;
-      gap: 0.4rem;
-    }
-    .task-item {
-      display: flex;
-      gap: 8px;
-      background: #fefef7;
-      padding: 0.4rem 0.5rem;
-      border-radius: 0.9rem;
-      border: 1px solid #ffe5c2;
-      align-items: flex-start;
-    }
-    .task-checkbox {
-      flex-shrink: 0;
-      width: 18px;
-      height: 18px;
-      margin-top: 2px;
-      accent-color: #f5a623;
-    }
-    .task-text {
-      flex: 1;
-      font-size: 0.8rem;
-      line-height: 1.3;
-      word-break: break-word;
-      overflow-wrap: break-word;
-    }
-    .comment-icon {
-      cursor: pointer;
-      opacity: 0.6;
-      font-size: 0.8rem;
-      margin-left: 4px;
-      display: inline-block;
-      flex-shrink: 0;
-    }
-    .comment-preview {
-      font-size: 0.65rem;
-      color: #aa7733;
-      margin-top: 2px;
-      word-break: break-word;
-    }
-    .legend-badge {
-      background: #f5c481;
-      border-radius: 20px;
-      padding: 0.05rem 0.4rem;
-      font-size: 0.6rem;
-      margin-left: 6px;
-      white-space: nowrap;
-    }
-
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.5);
-      backdrop-filter: blur(4px);
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-    }
-    .modal-content {
-      background: white;
-      max-width: 450px;
-      width: 90%;
+      gap: 10px;
+      background: #fffef5;
       border-radius: 1.5rem;
-      padding: 1.2rem;
+      padding: 1rem;
     }
-    input, textarea, select {
-      width: 100%;
-      border-radius: 1rem;
-      border: 1px solid #ffcf8a;
-      padding: 0.5rem;
-      margin: 0.4rem 0;
-      font-size: 0.85rem;
-    }
-    .btn {
-      background: #f5a623;
-      border: none;
-      padding: 0.4rem 1rem;
-      border-radius: 1.5rem;
-      cursor: pointer;
-      margin-right: 6px;
-      font-weight: bold;
-      font-size: 0.85rem;
-    }
-    .btn-secondary {
-      background: #ddd;
-    }
-    footer {
-      text-align: center;
-      margin-top: 1.8rem;
-      font-size: 0.7rem;
-      color: #b87a3c;
-    }
+    .chat-form textarea { resize: vertical; }
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); align-items: center; justify-content: center; z-index: 1000; }
+    .modal-content { background: white; max-width: 450px; width: 90%; border-radius: 1.5rem; padding: 1.2rem; }
+    input, textarea, select { width: 100%; border-radius: 1rem; border: 1px solid #ffcf8a; padding: 0.5rem; margin: 0.4rem 0; font-size: 0.85rem; }
+    .btn { background: #f5a623; border: none; padding: 0.4rem 1rem; border-radius: 1.5rem; cursor: pointer; margin-right: 6px; font-weight: bold; }
+    .btn-secondary { background: #ddd; }
+    footer { text-align: center; margin-top: 1.8rem; font-size: 0.7rem; color: #b87a3c; }
   </style>
 </head>
 <body>
 <div class="container">
   <div class="header-row">
-    <div class="icon-btn" id="feedbackBtn">💬</div>
     <div class="icon-btn" id="settingsBtn">⚙️</div>
   </div>
   <div class="hero">
@@ -311,36 +150,39 @@
     </div>
   </div>
 
-  <div class="stats-card">
-    <div class="progress-text" id="progressLabel">🏆 Splněno: 0/0</div>
-    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-    <button class="reset-btn" id="resetAllBtn">🌀 Reset vše</button>
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="checklist">📋 Checklist</button>
+    <button class="tab-btn" data-tab="chat">💬 Chat s adminem</button>
   </div>
 
-  <div class="achievements-panel">
-    <div id="achievementsTitle">🏅 Dosažené úspěchy</div>
-    <div class="badge-list" id="badgeList"></div>
+  <div id="tab-checklist" class="tab-content active">
+    <div class="stats-card">
+      <div class="progress-text" id="progressLabel">🏆 Splněno: 0/0</div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <button class="reset-btn" id="resetAllBtn">🌀 Reset vše</button>
+    </div>
+    <div class="achievements-panel">
+      <div id="achievementsTitle">🏅 Dosažené úspěchy</div>
+      <div class="badge-list" id="badgeList"></div>
+    </div>
+    <div class="calendar-mini">
+      <div id="calendarTitle">📅 Aktivita (den s odškrtnutím)</div>
+      <div id="calendarGrid" class="calendar-grid"></div>
+    </div>
+    <div id="checklistRoot" class="checklist-grid"></div>
   </div>
 
-  <div class="calendar-mini">
-    <div id="calendarTitle">📅 Aktivita (den s odškrtnutím)</div>
-    <div id="calendarGrid" class="calendar-grid"></div>
+  <div id="tab-chat" class="tab-content">
+    <div class="chat-container" id="chatMessages">
+      <div style="text-align: center; color: #b87a3c;">Načítání zpráv...</div>
+    </div>
+    <div class="chat-form">
+      <textarea id="chatMessageInput" rows="2" placeholder="Napiš svůj dotaz nebo nápad..."></textarea>
+      <button id="sendChatMsgBtn" class="btn">📤 Odeslat zprávu</button>
+    </div>
   </div>
 
-  <div id="checklistRoot" class="checklist-grid"></div>
-  <footer id="footerText">💾 vše se ukládá v prohlížeči · komentáře · nápady posílej přes 💬</footer>
-</div>
-
-<!-- modals -->
-<div id="feedbackModal" class="modal">
-  <div class="modal-content">
-    <h3 id="fbTitle">💬 Návrhy / Zlepšení</h3>
-    <input type="text" id="fbName" placeholder="Tvé jméno (nepovinné)">
-    <textarea id="fbMsg" rows="3" placeholder="Napiš svůj nápad..."></textarea>
-    <button id="sendFbBtn" class="btn">📤 Odeslat</button>
-    <button id="closeFbBtn" class="btn-secondary btn">Zavřít</button>
-    <div id="fbStatus" style="font-size:0.75rem; margin-top:6px;"></div>
-  </div>
+  <footer id="footerText">💾 vše se ukládá v prohlížeči · komentáře · chat s adminem</footer>
 </div>
 
 <div id="settingsModal" class="modal">
@@ -370,11 +212,14 @@
 
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
 <script>
-  // ========== TELEGRAM DATA ==========
+  // ==================== KONFIGURACE ====================
   const BOT_TOKEN = "8613265812:AAE3uVJYnZ-t5Kd8viX4H2xGJZaqnYk6vx8";
   const CHAT_ID = "5417843713";
-  // ===================================
+  const SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbxRp3r7APuMcnw41C63JYupF7XUsZTlWwYfWcDoUFTJ8KZmvXeZlNBT-FE12QdoZrWa/exec";
+  const SHEETS_EDIT_URL = "https://docs.google.com/spreadsheets/d/16MQbz6lUd4M4m92oa9fEhbvCTzN4FmA5AWCXtCjARO4/edit";
+  // ====================================================
 
+  // ---------- SEZNAM ÚKOLŮ (PODLE PDF) ----------
   const TASKS = [
     { id:0, cat:"adventures", cz:"Nachodit 20 000 kroků za den", ru:"Пройти 20 000 шагов за день", emoji:"👣" },
     { id:1, cat:"adventures", cz:"Nachodit 30 000 kroků za den", ru:"Пройти 30 000 шагов за день", emoji:"🚶" },
@@ -434,27 +279,25 @@
   const translations = {
     cs: {
       progress: "🏆 Splněno:", resetBtn: "🌀 Reset vše", achievementsTitle: "🏅 Dosažené úspěchy",
-      calendarTitle: "📅 Aktivita (den s odškrtnutím)", footer: "💾 vše se ukládá v prohlížeči · komentáře · nápady posílej přes 💬",
-      commentTitle: "📝 Komentář k úkolu", save: "Uložit", cancel: "Zrušit",
-      settingsTitle: "⚙️ Nastavení", langLabel: "Jazyk / Language:", soundLabel: "🔊 Zvuk při odškrtnutí",
+      calendarTitle: "📅 Aktivita", footer: "💾 vše se ukládá · komentáře · chat s adminem",
+      commentTitle: "📝 Komentář", save: "Uložit", cancel: "Zrušit",
+      settingsTitle: "⚙️ Nastavení", langLabel: "Jazyk / Language:", soundLabel: "🔊 Zvuk",
       resetAch: "🏅 Resetovat achievements", close: "Zavřít",
       summerLabel: "🌞 Léto: {total} dní · zbývá {left}", vacLabel: "🏖️ Prázdniny: {total} dní · zbývá {left}",
-      fbTitle: "💬 Návrhy / Zlepšení", send: "📤 Odeslat", fbPlaceholder: "Napiš svůj nápad...", namePlaceholder: "Tvé jméno (nepovinné)",
-      sending: "Odesílání...", sentOk: "Díky! Odesláno 👍", sentError: "Chyba odeslání",
-      achNames: { first: "První krev", half: "50% hotovo", full: "Letní šampion 100%", nature: "Strážce lesa", night: "Pán noci", group: "Král party", legend: "Legendární hledač" },
-      alertNew: "🏆 NOVÝ ÚSPĚCH!", confirmReset: "Resetovat všechny úkoly?", confirmResetAch: "Resetovat achievements?"
+      achNames: { first: "První krev", half: "50%", full: "100%", nature: "Les", night: "Noc", group: "Parta", legend: "Legenda" },
+      alertNew: "🏆 NOVÝ ÚSPĚCH!", confirmReset: "Resetovat vše?", confirmResetAch: "Resetovat achievements?",
+      chatPlaceholder: "Napiš dotaz...", sendBtn: "📤 Odeslat"
     },
     ru: {
       progress: "🏆 Выполнено:", resetBtn: "🌀 Сбросить всё", achievementsTitle: "🏅 Достижения",
-      calendarTitle: "📅 Активность (день с отметкой)", footer: "💾 всё сохраняется в браузере · комментарии · идеи отправляй через 💬",
-      commentTitle: "📝 Комментарий к заданию", save: "Сохранить", cancel: "Отмена",
-      settingsTitle: "⚙️ Настройки", langLabel: "Язык / Language:", soundLabel: "🔊 Звук при отметке",
+      calendarTitle: "📅 Активность", footer: "💾 всё сохраняется · комментарии · чат с админом",
+      commentTitle: "📝 Комментарий", save: "Сохранить", cancel: "Отмена",
+      settingsTitle: "⚙️ Настройки", langLabel: "Язык / Language:", soundLabel: "🔊 Звук",
       resetAch: "🏅 Сбросить достижения", close: "Закрыть",
       summerLabel: "🌞 Лето: {total} дн. · осталось {left}", vacLabel: "🏖️ Каникулы: {total} дн. · осталось {left}",
-      fbTitle: "💬 Предложения", send: "📤 Отправить", fbPlaceholder: "Напиши идею...", namePlaceholder: "Твоё имя (необязательно)",
-      sending: "Отправка...", sentOk: "Спасибо! Отправлено 👍", sentError: "Ошибка",
-      achNames: { first: "Первая кровь", half: "50%", full: "Чемпион 100%", nature: "Хранитель леса", night: "Повелитель ночи", group: "Король компании", legend: "Легенда" },
-      alertNew: "🏆 НОВОЕ ДОСТИЖЕНИЕ!", confirmReset: "Сбросить все задания?", confirmResetAch: "Сбросить достижения?"
+      achNames: { first: "Первая", half: "50%", full: "100%", nature: "Лес", night: "Ночь", group: "Компания", legend: "Легенда" },
+      alertNew: "🏆 НОВОЕ ДОСТИЖЕНИЕ!", confirmReset: "Сбросить всё?", confirmResetAch: "Сбросить достижения?",
+      chatPlaceholder: "Напиши вопрос...", sendBtn: "📤 Отправить"
     }
   };
 
@@ -464,8 +307,71 @@
   let achievements = [];
   let activity = {};
   let soundEnabled = true;
-  let lastFeedback = 0;
+  let chatInterval = null;
 
+  // ---------- CHAT ----------
+  async function sendMessageToSheet(message) {
+    try {
+      await fetch(SHEETS_API_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: message })
+      });
+      return true;
+    } catch(e) { return false; }
+  }
+
+  async function loadMessagesFromSheet() {
+    try {
+      const res = await fetch(SHEETS_API_URL);
+      return await res.json();
+    } catch(e) { return []; }
+  }
+
+  async function sendChatMessage() {
+    const msg = document.getElementById("chatMessageInput").value.trim();
+    if (!msg) return;
+    document.getElementById("chatMessageInput").value = "";
+    const ok = await sendMessageToSheet(msg);
+    if (ok) {
+      try {
+        const tgMsg = `💬 <b>Nová zpráva z chatu webu</b>\n📝 ${msg}\n\n✏️ Odpověz zde: ${SHEETS_EDIT_URL}`;
+        await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ chat_id: CHAT_ID, text: tgMsg, parse_mode: "HTML" })
+        });
+      } catch(e) {}
+      setTimeout(() => renderChat(), 1000);
+    } else {
+      alert("Chyba odeslání, zkuste znovu.");
+    }
+  }
+
+  async function renderChat() {
+    const container = document.getElementById("chatMessages");
+    const messages = await loadMessagesFromSheet();
+    if (!messages || messages.length === 0) {
+      container.innerHTML = '<div style="text-align: center; color: #b87a3c;">Zatím žádné zprávy. Napiš první!</div>';
+      return;
+    }
+    messages.sort((a,b) => new Date(a.timestamp) - new Date(b.timestamp));
+    container.innerHTML = messages.map(msg => `
+      <div class="chat-message">
+        <div class="chat-question">💬 <strong>Otázka:</strong> ${escapeHtml(msg.message)}</div>
+        <div class="chat-answer">✏️ <strong>Odpověď admina:</strong> ${msg.answer ? escapeHtml(msg.answer) : "<em>Zatím bez odpovědi...</em>"}</div>
+        <div class="chat-date">${new Date(msg.timestamp).toLocaleString()}</div>
+      </div>
+    `).join('');
+    container.scrollTop = container.scrollHeight;
+  }
+
+  function escapeHtml(str) {
+    return str.replace(/[&<>]/g, m => m==='&'?'&amp;':m==='<'?'&lt;':'&gt;');
+  }
+
+  // ---------- CHECKLIST (KOMPLETNÍ LOGIKA) ----------
   function save() {
     localStorage.setItem("summer_checks", JSON.stringify(checks));
     localStorage.setItem("summer_comments", JSON.stringify(comments));
@@ -474,25 +380,16 @@
     localStorage.setItem("summer_lang", lang);
     localStorage.setItem("summer_sound", soundEnabled);
   }
-  function load() {
-    let c = localStorage.getItem("summer_checks"); if (c) checks = JSON.parse(c);
-    let cm = localStorage.getItem("summer_comments"); if (cm) comments = JSON.parse(cm);
-    let a = localStorage.getItem("summer_achievements"); if (a) achievements = JSON.parse(a);
-    let ac = localStorage.getItem("summer_activity"); if (ac) activity = JSON.parse(ac);
-    let l = localStorage.getItem("summer_lang"); if (l === "cs" || l === "ru") lang = l;
-    let s = localStorage.getItem("summer_sound"); if (s !== null) soundEnabled = s === "true";
+
+  function loadData() {
+    const c = localStorage.getItem("summer_checks"); if (c) checks = JSON.parse(c);
+    const cm = localStorage.getItem("summer_comments"); if (cm) comments = JSON.parse(cm);
+    const a = localStorage.getItem("summer_achievements"); if (a) achievements = JSON.parse(a);
+    const ac = localStorage.getItem("summer_activity"); if (ac) activity = JSON.parse(ac);
+    const l = localStorage.getItem("summer_lang"); if (l === "cs" || l === "ru") lang = l;
+    const s = localStorage.getItem("summer_sound"); if (s !== null) soundEnabled = s === "true";
     document.getElementById("langSelect").value = lang;
     document.getElementById("soundCheck").checked = soundEnabled;
-  }
-
-  async function sendToTelegram(msg) {
-    const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
-    const res = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ chat_id: CHAT_ID, text: msg, parse_mode: "HTML" })
-    });
-    if (!res.ok) throw new Error();
   }
 
   function playBeep() {
@@ -509,32 +406,32 @@
       osc.start();
       gain.gain.exponentialRampToValueAtTime(0.00001, ctx.currentTime + 0.3);
       osc.stop(ctx.currentTime + 0.3);
-    } catch (e) {}
+    } catch(e) {}
   }
 
   function recordActivity() {
-    activity[new Date().toISOString().slice(0, 10)] = true;
+    activity[new Date().toISOString().slice(0,10)] = true;
     save();
     renderCalendar();
   }
 
   function checkAchievements() {
     const total = TASKS.length;
-    const doneTotal = checks.filter(v => v).length;
+    const doneTotal = checks.filter(v=>v).length;
     const catDone = {};
     for (let t of TASKS) {
-      if (!catDone[t.cat]) catDone[t.cat] = { total: 0, done: 0 };
+      if (!catDone[t.cat]) catDone[t.cat] = { total:0, done:0 };
       catDone[t.cat].total++;
       if (checks[t.id]) catDone[t.cat].done++;
     }
     const newA = [];
     if (doneTotal >= 1 && !achievements.includes("first")) newA.push("first");
-    if (doneTotal >= total / 2 && !achievements.includes("half")) newA.push("half");
+    if (doneTotal >= total/2 && !achievements.includes("half")) newA.push("half");
     if (doneTotal === total && !achievements.includes("full")) newA.push("full");
     if (catDone.nature && catDone.nature.done === catDone.nature.total && !achievements.includes("nature")) newA.push("nature");
     if (catDone.night && catDone.night.done === catDone.night.total && !achievements.includes("night")) newA.push("night");
     if (catDone.group && catDone.group.done === catDone.group.total && !achievements.includes("group")) newA.push("group");
-    if (TASKS.some(t => t.leg && checks[t.id]) && !achievements.includes("legend")) newA.push("legend");
+    if (TASKS.some(t=>t.leg&&checks[t.id]) && !achievements.includes("legend")) newA.push("legend");
     for (let a of newA) {
       achievements.push(a);
       if (soundEnabled) playBeep();
@@ -545,18 +442,17 @@
   }
 
   function renderAchievements() {
-    const all = ["first", "half", "full", "nature", "night", "group", "legend"];
-    const container = document.getElementById("badgeList");
-    container.innerHTML = all.map(a => `<div class="badge ${achievements.includes(a) ? "" : "locked"}">${achievements.includes(a) ? "🏅" : "🔒"} ${translations[lang].achNames[a]}</div>`).join("");
+    const all = ["first","half","full","nature","night","group","legend"];
+    document.getElementById("badgeList").innerHTML = all.map(a => `<div class="badge ${achievements.includes(a)?'':'locked'}">${achievements.includes(a)?'🏅':'🔒'} ${translations[lang].achNames[a]}</div>`).join('');
   }
 
   function renderCalendar() {
-    let html = "";
-    for (let m = 5; m <= 7; m++) {
-      const days = new Date(2026, m + 1, 0).getDate();
-      for (let d = 1; d <= days; d++) {
-        const date = `2026-${String(m + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
-        html += `<div class="cal-day ${activity[date] ? "active" : ""}">${d}</div>`;
+    let html = '';
+    for (let m=5; m<=7; m++) {
+      const days = new Date(2026, m+1, 0).getDate();
+      for (let d=1; d<=days; d++) {
+        const date = `2026-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+        html += `<div class="cal-day ${activity[date]?'active':''}">${d}</div>`;
       }
     }
     document.getElementById("calendarGrid").innerHTML = html;
@@ -564,23 +460,23 @@
 
   function updateCounters() {
     const today = new Date();
-    const june1 = new Date(2026, 5, 1), aug31 = new Date(2026, 7, 31), july1 = new Date(2026, 6, 1);
-    const totalSummer = Math.ceil((aug31 - june1) / 864e5) + 1, leftSummer = Math.max(0, Math.ceil((aug31 - today) / 864e5));
-    const totalVac = Math.ceil((aug31 - july1) / 864e5) + 1, leftVac = Math.max(0, Math.ceil((aug31 - today) / 864e5));
-    document.getElementById("summerTotal").innerText = totalSummer;
-    document.getElementById("summerLeft").innerText = leftSummer;
-    document.getElementById("vacTotal").innerText = totalVac;
-    document.getElementById("vacLeft").innerText = leftVac;
-    document.getElementById("summerCounter").innerHTML = translations[lang].summerLabel.replace("{total}", totalSummer).replace("{left}", leftSummer);
-    document.getElementById("vacCounter").innerHTML = translations[lang].vacLabel.replace("{total}", totalVac).replace("{left}", leftVac);
+    const june1 = new Date(2026,5,1), aug31 = new Date(2026,7,31), july1 = new Date(2026,6,1);
+    const totalS = Math.ceil((aug31-june1)/864e5)+1, leftS = Math.max(0, Math.ceil((aug31-today)/864e5));
+    const totalV = Math.ceil((aug31-july1)/864e5)+1, leftV = Math.max(0, Math.ceil((aug31-today)/864e5));
+    document.getElementById("summerTotal").innerText = totalS;
+    document.getElementById("summerLeft").innerText = leftS;
+    document.getElementById("vacTotal").innerText = totalV;
+    document.getElementById("vacLeft").innerText = leftV;
+    document.getElementById("summerCounter").innerHTML = translations[lang].summerLabel.replace("{total}", totalS).replace("{left}", leftS);
+    document.getElementById("vacCounter").innerHTML = translations[lang].vacLabel.replace("{total}", totalV).replace("{left}", leftV);
   }
 
   function updateProgress() {
-    const done = checks.filter(v => v).length;
+    const done = checks.filter(v=>v).length;
     const total = TASKS.length;
     document.getElementById("progressLabel").innerHTML = `${translations[lang].progress} ${done}/${total}`;
-    document.getElementById("progressFill").style.width = `${(done / total) * 100}%`;
-    if (done === total) canvasConfetti({ particleCount: 200, spread: 70 });
+    document.getElementById("progressFill").style.width = `${(done/total)*100}%`;
+    if (done === total) canvasConfetti({ particleCount:200, spread:70 });
   }
 
   function renderChecklist() {
@@ -593,7 +489,7 @@
     root.innerHTML = "";
     for (let [cat, tasks] of groups.entries()) {
       const catName = categories[cat][lang];
-      const doneInCat = tasks.filter(t => checks[t.id]).length;
+      const doneInCat = tasks.filter(t=>checks[t.id]).length;
       const card = document.createElement("div");
       card.className = "category-card";
       card.innerHTML = `
@@ -611,11 +507,11 @@
         const taskDiv = document.createElement("div");
         taskDiv.className = "task-item";
         taskDiv.innerHTML = `
-          <input type="checkbox" class="task-checkbox" data-id="${task.id}" ${checked ? "checked" : ""}>
+          <input type="checkbox" class="task-checkbox" data-id="${task.id}" ${checked?"checked":""}>
           <div class="task-text">
-            <strong>${task.emoji} ${text}</strong> ${task.leg ? '<span class="legend-badge">🏅 LEGEND</span>' : ''}
-            <span class="comment-icon" data-id="${task.id}">💬 ${comment ? "✏️" : ""}</span>
-            ${comment ? `<div class="comment-preview">📌 ${comment.slice(0, 40)}${comment.length > 40 ? "..." : ""}</div>` : ""}
+            <strong>${task.emoji} ${text}</strong> ${task.leg?'<span class="legend-badge">🏅 LEGEND</span>':''}
+            <span class="comment-icon" data-id="${task.id}">💬 ${comment?"✏️":""}</span>
+            ${comment?`<div class="comment-preview">📌 ${comment.slice(0,40)}${comment.length>40?"...":""}</div>`:""}
           </div>
         `;
         const chk = taskDiv.querySelector("input");
@@ -627,7 +523,7 @@
           checkAchievements();
           renderChecklist();
           if (soundEnabled && chk.checked) playBeep();
-          if (checks.filter(v => v).length === TASKS.length) canvasConfetti({ particleCount: 300 });
+          if (checks.filter(v=>v).length === TASKS.length) canvasConfetti({ particleCount:300 });
         });
         taskDiv.querySelector(".comment-icon").addEventListener("click", (e) => {
           e.stopPropagation();
@@ -670,81 +566,44 @@
     document.getElementById("soundLabel").innerText = translations[lang].soundLabel;
     document.getElementById("resetAchBtn").innerText = translations[lang].resetAch;
     document.getElementById("closeSetBtn").innerText = translations[lang].close;
-    document.getElementById("fbTitle").innerText = translations[lang].fbTitle;
-    document.getElementById("sendFbBtn").innerText = translations[lang].send;
-    document.getElementById("fbMsg").placeholder = translations[lang].fbPlaceholder;
-    document.getElementById("fbName").placeholder = translations[lang].namePlaceholder;
     document.getElementById("resetAllBtn").innerText = translations[lang].resetBtn;
+    document.getElementById("chatMessageInput").placeholder = translations[lang].chatPlaceholder;
+    document.getElementById("sendChatMsgBtn").innerText = translations[lang].sendBtn;
     updateCounters();
     updateProgress();
     renderAchievements();
     renderChecklist();
   }
 
-  // feedback
-  const fbModal = document.getElementById("feedbackModal");
-  document.getElementById("feedbackBtn").onclick = () => fbModal.style.display = "flex";
-  document.getElementById("closeFbBtn").onclick = () => {
-    fbModal.style.display = "none";
-    document.getElementById("fbStatus").innerText = "";
-  };
-  document.getElementById("sendFbBtn").onclick = async () => {
-    const name = document.getElementById("fbName").value.trim();
-    const msg = document.getElementById("fbMsg").value.trim();
-    if (!msg) {
-      document.getElementById("fbStatus").innerText = "✏️ Napiš zprávu.";
-      return;
-    }
-    if (Date.now() - lastFeedback < 60000) {
-      document.getElementById("fbStatus").innerText = "⏳ Jen jednou za minutu.";
-      return;
-    }
-    document.getElementById("fbStatus").innerText = translations[lang].sending;
-    try {
-      await sendToTelegram(`💬 <b>Nový návrh z webu</b>\n${name ? `👤 ${name}\n` : ""}📝 ${msg}`);
-      lastFeedback = Date.now();
-      document.getElementById("fbStatus").innerText = translations[lang].sentOk;
-      document.getElementById("fbMsg").value = "";
-      document.getElementById("fbName").value = "";
-      setTimeout(() => document.getElementById("fbStatus").innerText = "", 3000);
-    } catch (e) {
-      console.error(e);
-      document.getElementById("fbStatus").innerText = translations[lang].sentError;
-    }
-  };
+  // ---------- NAVIGACE, MODÁLY, INICIALIZACE ----------
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const tabId = btn.getAttribute('data-tab');
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+      document.getElementById(`tab-${tabId}`).classList.add('active');
+      if (tabId === 'chat') {
+        renderChat();
+        if (chatInterval) clearInterval(chatInterval);
+        chatInterval = setInterval(renderChat, 8000);
+      } else {
+        if (chatInterval) clearInterval(chatInterval);
+      }
+    });
+  });
 
-  // settings
   const setModal = document.getElementById("settingsModal");
   document.getElementById("settingsBtn").onclick = () => setModal.style.display = "flex";
   document.getElementById("closeSetBtn").onclick = () => setModal.style.display = "none";
-  document.getElementById("langSelect").onchange = (e) => {
-    lang = e.target.value;
-    save();
-    applyLanguage();
-  };
-  document.getElementById("soundCheck").onchange = (e) => {
-    soundEnabled = e.target.checked;
-    save();
-  };
-  document.getElementById("resetAchBtn").onclick = () => {
-    if (confirm(translations[lang].confirmResetAch)) {
-      achievements = [];
-      save();
-      renderAchievements();
-    }
-  };
-  document.getElementById("resetAllBtn").onclick = () => {
-    if (confirm(translations[lang].confirmReset)) {
-      checks.fill(false);
-      save();
-      renderChecklist();
-      updateProgress();
-      checkAchievements();
-    }
-  };
+  document.getElementById("langSelect").onchange = (e) => { lang = e.target.value; save(); applyLanguage(); };
+  document.getElementById("soundCheck").onchange = (e) => { soundEnabled = e.target.checked; save(); };
+  document.getElementById("resetAchBtn").onclick = () => { if(confirm(translations[lang].confirmResetAch)) { achievements = []; save(); renderAchievements(); } };
+  document.getElementById("resetAllBtn").onclick = () => { if(confirm(translations[lang].confirmReset)) { checks.fill(false); save(); renderChecklist(); updateProgress(); checkAchievements(); } };
+  document.getElementById("sendChatMsgBtn").onclick = sendChatMessage;
 
   function init() {
-    load();
+    loadData();
     applyLanguage();
     renderCalendar();
     updateCounters();
