@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>✨ Legendární léto 2026 ✨ | Letní checklist</title>
+  <title>✨ Legendární léto 2026 ✨</title>
   <style>
     * {
       margin: 0;
@@ -13,50 +13,50 @@
 
     body {
       background: linear-gradient(145deg, #fff9e8 0%, #fee6c5 100%);
-      font-family: 'Segoe UI', 'Quicksand', system-ui, -apple-system, 'Inter', sans-serif;
-      padding: 1.5rem 1.2rem 2.5rem;
+      font-family: 'Segoe UI', system-ui, 'Inter', sans-serif;
+      padding: 1rem;
       color: #2a241a;
     }
 
     .container {
-      max-width: 1400px;
+      max-width: 1300px;
       margin: 0 auto;
     }
 
     .header-row {
       display: flex;
       justify-content: flex-end;
-      margin-bottom: 0.5rem;
+      gap: 12px;
+      margin-bottom: 1rem;
     }
-    .settings-icon {
+    .icon-btn {
       background: #fff9ef;
       border: 1px solid #f3bc6e;
-      border-radius: 50%;
-      width: 48px;
-      height: 48px;
+      border-radius: 50px;
+      width: 44px;
+      height: 44px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       cursor: pointer;
       transition: 0.2s;
     }
-    .settings-icon:hover {
-      transform: rotate(15deg);
-      background: #fff0df;
+    .icon-btn:hover {
+      background: #ffe8cf;
+      transform: scale(0.96);
     }
 
     .hero {
       text-align: center;
-      margin-bottom: 2rem;
-      background: rgba(255, 252, 240, 0.85);
-      backdrop-filter: blur(8px);
-      border-radius: 90px;
-      padding: 1.5rem 1rem;
-      box-shadow: 0 20px 30px rgba(0,0,0,0.1);
+      background: #fffcf0cc;
+      backdrop-filter: blur(6px);
+      border-radius: 2.5rem;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
     }
     .hero h1 {
-      font-size: 2.8rem;
+      font-size: 1.9rem;
       background: linear-gradient(125deg, #e67e22, #f7b731);
       background-clip: text;
       -webkit-background-clip: text;
@@ -65,102 +65,104 @@
     .counters {
       display: flex;
       justify-content: center;
-      gap: 1.5rem;
-      margin-top: 0.8rem;
-      font-weight: 600;
+      gap: 1rem;
       flex-wrap: wrap;
+      margin-top: 0.5rem;
     }
     .counter {
-      background: #fff0ddbb;
-      padding: 0.2rem 1rem;
+      background: #fff0dd;
       border-radius: 40px;
-      font-size: 0.85rem;
+      padding: 0.2rem 1rem;
+      font-size: 0.8rem;
     }
 
     .stats-card {
-      background: #fffef7;
-      border-radius: 60px;
-      padding: 0.9rem 1.8rem;
-      margin-bottom: 2rem;
+      background: white;
+      border-radius: 2rem;
+      padding: 0.8rem 1rem;
+      margin-bottom: 1.5rem;
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-between;
       align-items: center;
-      gap: 1rem;
+      justify-content: space-between;
+      gap: 10px;
       border: 1px solid #ffdfb0;
     }
     .progress-text {
-      font-weight: 700;
       background: #fff0dd;
-      padding: 0.2rem 1rem;
-      border-radius: 50px;
+      padding: 0.2rem 0.9rem;
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 0.9rem;
+      white-space: nowrap;
     }
     .progress-bar {
-      background-color: #ffeed9;
-      border-radius: 40px;
-      height: 14px;
+      background: #ffeed9;
+      border-radius: 30px;
+      height: 10px;
       flex: 2;
-      overflow: hidden;
+      min-width: 100px;
     }
     .progress-fill {
-      background: linear-gradient(95deg, #f5a623, #ffce70);
+      background: #f5a623;
       width: 0%;
       height: 100%;
+      border-radius: 30px;
+      transition: width 0.2s;
     }
     .reset-btn {
-      background: #fffaee;
+      background: #fff0dd;
       border: 1px solid #f3bc6e;
-      padding: 0.5rem 1.2rem;
-      border-radius: 60px;
-      font-weight: 700;
+      padding: 0.3rem 0.9rem;
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 0.85rem;
       cursor: pointer;
     }
 
     .achievements-panel {
-      background: #fffcf0cc;
-      border-radius: 2rem;
-      padding: 0.8rem 1.2rem;
-      margin-bottom: 1.5rem;
+      background: #fffef5;
+      border-radius: 1.5rem;
+      padding: 0.6rem 0.8rem;
+      margin-bottom: 1.2rem;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 1rem;
+      gap: 10px;
     }
     .badge-list {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 6px;
     }
     .badge {
       background: #ffefcf;
-      border-radius: 40px;
-      padding: 0.2rem 0.8rem;
-      font-size: 0.75rem;
-      font-weight: bold;
+      border-radius: 30px;
+      padding: 0.2rem 0.7rem;
+      font-size: 0.7rem;
     }
     .badge.locked {
       opacity: 0.4;
-      filter: grayscale(0.3);
     }
 
     .calendar-mini {
-      background: #fffef5cc;
+      background: #fffef5;
       border-radius: 1.5rem;
-      padding: 0.8rem;
-      margin-bottom: 1.5rem;
+      padding: 0.6rem 0.8rem;
+      margin-bottom: 1.2rem;
     }
     .calendar-grid {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 8px;
+      gap: 5px;
+      margin-top: 6px;
     }
     .cal-day {
-      width: 32px;
-      height: 32px;
+      width: 30px;
+      height: 30px;
       background: #ffe2bc;
-      border-radius: 12px;
-      display: inline-flex;
+      border-radius: 10px;
+      display: flex;
       align-items: center;
       justify-content: center;
       font-size: 0.7rem;
@@ -173,71 +175,79 @@
 
     .checklist-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(370px, 1fr));
-      gap: 1.8rem;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.2rem;
     }
     .category-card {
-      background: rgba(255, 255, 248, 0.96);
-      border-radius: 2rem;
+      background: white;
+      border-radius: 1.2rem;
       overflow: hidden;
       border: 1px solid #ffe6bb;
     }
     .category-header {
-      background: linear-gradient(115deg, #fff0dc, #ffe9ce);
-      padding: 0.8rem 1.2rem;
-      border-bottom: 3px solid #ffd184;
+      background: #fff0dc;
+      padding: 0.5rem 0.8rem;
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
+      border-bottom: 2px solid #ffd184;
+      font-size: 0.95rem;
     }
     .cat-stats {
-      font-size: 0.8rem;
       background: #fff3e0;
       border-radius: 30px;
-      padding: 0.2rem 0.7rem;
+      padding: 0.1rem 0.6rem;
+      font-size: 0.7rem;
     }
     .tasks-list {
-      padding: 0.7rem;
+      padding: 0.5rem;
       display: flex;
       flex-direction: column;
-      gap: 0.6rem;
+      gap: 0.4rem;
     }
     .task-item {
       display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      background: #ffffffdd;
-      padding: 0.6rem 0.8rem;
-      border-radius: 1.2rem;
+      gap: 8px;
+      background: #fefef7;
+      padding: 0.4rem 0.5rem;
+      border-radius: 0.9rem;
       border: 1px solid #ffe5c2;
+      align-items: flex-start;
     }
     .task-checkbox {
-      transform: scale(1.2);
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
       margin-top: 2px;
       accent-color: #f5a623;
     }
     .task-text {
       flex: 1;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
+      line-height: 1.3;
+      word-break: break-word;
+      overflow-wrap: break-word;
     }
     .comment-icon {
       cursor: pointer;
       opacity: 0.6;
-      font-size: 1rem;
+      font-size: 0.8rem;
+      margin-left: 4px;
       display: inline-block;
-      margin-left: 6px;
+      flex-shrink: 0;
     }
     .comment-preview {
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       color: #aa7733;
-      margin-top: 4px;
+      margin-top: 2px;
+      word-break: break-word;
     }
     .legend-badge {
       background: #f5c481;
-      border-radius: 30px;
-      padding: 0.1rem 0.5rem;
-      font-size: 0.65rem;
+      border-radius: 20px;
+      padding: 0.05rem 0.4rem;
+      font-size: 0.6rem;
       margin-left: 6px;
+      white-space: nowrap;
     }
 
     .modal {
@@ -245,63 +255,64 @@
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(5px);
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px);
       align-items: center;
       justify-content: center;
       z-index: 1000;
     }
     .modal-content {
-      background: #fffcf0;
+      background: white;
       max-width: 450px;
       width: 90%;
-      border-radius: 2rem;
-      padding: 1.5rem;
+      border-radius: 1.5rem;
+      padding: 1.2rem;
     }
-    textarea {
+    input, textarea, select {
       width: 100%;
       border-radius: 1rem;
       border: 1px solid #ffcf8a;
       padding: 0.5rem;
-      margin: 0.5rem 0;
+      margin: 0.4rem 0;
+      font-size: 0.85rem;
     }
     .btn {
       background: #f5a623;
       border: none;
       padding: 0.4rem 1rem;
-      border-radius: 2rem;
+      border-radius: 1.5rem;
       cursor: pointer;
-      margin-right: 8px;
+      margin-right: 6px;
+      font-weight: bold;
+      font-size: 0.85rem;
+    }
+    .btn-secondary {
+      background: #ddd;
     }
     footer {
       text-align: center;
-      margin-top: 2rem;
+      margin-top: 1.8rem;
       font-size: 0.7rem;
-    }
-    select {
-      background: #fff9ef;
-      border: 1px solid #f3bc6e;
-      border-radius: 2rem;
-      padding: 0.3rem 0.8rem;
-      font-size: 0.9rem;
+      color: #b87a3c;
     }
   </style>
 </head>
 <body>
 <div class="container">
   <div class="header-row">
-    <div class="settings-icon" id="settingsBtn">⚙️</div>
+    <div class="icon-btn" id="feedbackBtn">💬</div>
+    <div class="icon-btn" id="settingsBtn">⚙️</div>
   </div>
   <div class="hero">
     <h1>☀️ LEGENDARY SUMMER 2026 ☀️</h1>
     <div class="counters">
-      <div class="counter" id="summerCounterLabel">🌞 Léto: <span id="summerTotal">0</span> dní · zbývá <span id="summerLeft">0</span></div>
-      <div class="counter" id="vacCounterLabel">🏖️ Prázdniny: <span id="vacTotal">0</span> dní · zbývá <span id="vacLeft">0</span></div>
+      <div class="counter" id="summerCounter">🌞 Léto: <span id="summerTotal">0</span> dní · zbývá <span id="summerLeft">0</span></div>
+      <div class="counter" id="vacCounter">🏖️ Prázdniny: <span id="vacTotal">0</span> dní · zbývá <span id="vacLeft">0</span></div>
     </div>
   </div>
 
   <div class="stats-card">
-    <div class="progress-text" id="progressLabel">🏆 Splněno: <span id="completedCount">0</span>/<span id="totalCount">0</span></div>
+    <div class="progress-text" id="progressLabel">🏆 Splněno: 0/0</div>
     <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
     <button class="reset-btn" id="resetAllBtn">🌀 Reset vše</button>
   </div>
@@ -317,275 +328,235 @@
   </div>
 
   <div id="checklistRoot" class="checklist-grid"></div>
-  <footer id="footerText">💾 vše se ukládá v prohlížeči · komentáře · achievements</footer>
+  <footer id="footerText">💾 vše se ukládá v prohlížeči · komentáře · nápady posílej přes 💬</footer>
 </div>
 
-<!-- Modal komentář -->
-<div id="commentModal" class="modal">
+<!-- modals -->
+<div id="feedbackModal" class="modal">
   <div class="modal-content">
-    <h3 id="commentModalTitle">📝 Komentář k úkolu</h3>
-    <textarea id="commentText" rows="3" placeholder="..."></textarea>
-    <button id="saveCommentBtn" class="btn">Uložit</button>
-    <button id="closeCommentBtn" style="background:#ddd;">Zrušit</button>
+    <h3 id="fbTitle">💬 Návrhy / Zlepšení</h3>
+    <input type="text" id="fbName" placeholder="Tvé jméno (nepovinné)">
+    <textarea id="fbMsg" rows="3" placeholder="Napiš svůj nápad..."></textarea>
+    <button id="sendFbBtn" class="btn">📤 Odeslat</button>
+    <button id="closeFbBtn" class="btn-secondary btn">Zavřít</button>
+    <div id="fbStatus" style="font-size:0.75rem; margin-top:6px;"></div>
   </div>
 </div>
 
-<!-- Modal nastavení -->
 <div id="settingsModal" class="modal">
   <div class="modal-content">
-    <h3 id="settingsTitle">⚙️ Nastavení</h3>
-    <label style="display:flex; gap:10px; margin:10px 0">
-      <span id="langLabel">Jazyk / Language:</span>
+    <h3 id="setTitle">⚙️ Nastavení</h3>
+    <label><span id="langLabel">Jazyk / Language:</span>
       <select id="langSelect">
         <option value="cs">🇨🇿 Čeština</option>
         <option value="ru">🇷🇺 Русский</option>
       </select>
     </label>
-    <label style="display:flex; gap:10px; margin:10px 0">
-      <input type="checkbox" id="soundToggle"> <span id="soundLabel">🔊 Zvuk při odškrtnutí</span>
-    </label>
-    <button id="resetAchievementsBtn" style="background:#f0c0a0;">🏅 Resetovat achievements</button>
-    <button id="closeSettingsBtn" style="margin-top:12px;">Zavřít</button>
+    <label><input type="checkbox" id="soundCheck"> <span id="soundLabel">🔊 Zvuk při odškrtnutí</span></label>
+    <hr>
+    <button id="resetAchBtn" style="background:#f0c0a0;">🏅 Resetovat achievements</button>
+    <button id="closeSetBtn" class="btn-secondary btn">Zavřít</button>
+  </div>
+</div>
+
+<div id="commentModal" class="modal">
+  <div class="modal-content">
+    <h3 id="commentTitle">📝 Komentář k úkolu</h3>
+    <textarea id="commentText" rows="3"></textarea>
+    <button id="saveCommentBtn" class="btn">Uložit</button>
+    <button id="closeCommentBtn" class="btn-secondary">Zrušit</button>
   </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
 <script>
-  // ------------------- ZADÁNÍ (česky + rusky) -------------------
-  const TASKS_DATA = [
-    { id: 0, cat: "adventures", cz: "Nachodit 20 000 kroků za den", ru: "Пройти 20 000 шагов за день", emoji: "👣" },
-    { id: 1, cat: "adventures", cz: "Nachodit 30 000 kroků za den", ru: "Пройти 30 000 шагов за день", emoji: "🚶" },
-    { id: 2, cat: "adventures", cz: "Nachodit 40 000 kroků za den (Hard)", ru: "Пройти 40 000 шагов за день (Хард)", emoji: "⚡" },
-    { id: 3, cat: "adventures", cz: "Ujít 30 km za den (Legenda)", ru: "Пройти 30 км за день (Легенда)", emoji: "🏅", legendary: true },
-    { id: 4, cat: "adventures", cz: "Jít daleko od domova (15–20 km)", ru: "Уйти далеко от дома (15–20 км)", emoji: "🗺️" },
-    { id: 5, cat: "adventures", cz: "Jet na náhodné místo a prozkoumat ho", ru: "Поехать в случайное место и исследовать его", emoji: "🎲" },
-    { id: 6, cat: "adventures", cz: "Den bez plánu", ru: "День без плана", emoji: "🌀" },
-    { id: 7, cat: "adventures", cz: "Celý den jen pěšky", ru: "Целый день только пешком", emoji: "🥾" },
-    { id: 8, cat: "adventures", cz: "Celý den na kolech", ru: "Целый день на велосипедах", emoji: "🚲" },
-    { id: 9, cat: "adventures", cz: "Celodenní výlet do lesa", ru: "Поход в лес на целый день", emoji: "🌲" },
-    { id: 10, cat: "adventures", cz: "Najít nové místo, kde nikdo z vás ještě nebyl", ru: "Найти новое место, где никто из вас раньше не был", emoji: "✨" },
-    { id: 11, cat: "adventures", cz: "Prozkoumat 3 nová místa za jeden den", ru: "Исследовать 3 новых места за один день", emoji: "🔍" },
-    { id: 12, cat: "adventures", cz: "Den turisty ve vlastním městě", ru: "День туриста в своём городе", emoji: "🏙️" },
-    { id: 13, cat: "adventures", cz: "Najít nejkrásnější místo léta", ru: "Найти самое красивое место лета", emoji: "📸" },
-    { id: 14, cat: "nature", cz: "Postavit přístřešek (šaloun)", ru: "Построить шалаш", emoji: "🏕️" },
-    { id: 15, cat: "nature", cz: "Postavit základnu v lese a později se k ní vrátit", ru: "Построить базу в лесу и вернуться к ней позже", emoji: "🌿" },
-    { id: 16, cat: "nature", cz: "Připravit si jídlo v přírodě", ru: "Приготовить еду на природе", emoji: "🔥" },
-    { id: 17, cat: "nature", cz: "Rybaření", ru: "Рыбалка", emoji: "🎣" },
-    { id: 18, cat: "nature", cz: "Koupání v jezeře nebo řece", ru: "Купание в озере или реке", emoji: "💦" },
-    { id: 19, cat: "nature", cz: "Den lesního zálesáka", ru: "День лесного выживальщика", emoji: "🌲🪓" },
-    { id: 20, cat: "nature", cz: "Zmoknout během dobrodružství", ru: "Попасть под дождь во время приключения", emoji: "🌧️" },
-    { id: 21, cat: "challenges", cz: "Začít den s 0 korunami a vydělat si na jídlo nebo pití", ru: "Начать день с 0 крон и заработать на еду или напиток", emoji: "💰" },
-    { id: 22, cat: "challenges", cz: "24 hodin bez telefonu", ru: "24 часа без телефона", emoji: "📵" },
-    { id: 23, cat: "challenges", cz: "Den náhodných rozhodnutí", ru: "День случайных решений", emoji: "🎭" },
-    { id: 24, cat: "challenges", cz: "Nespat celou noc", ru: "Не спать всю ночь", emoji: "🌙" },
-    { id: 25, cat: "night", cz: "Noční procházka", ru: "Ночная прогулка", emoji: "🌃" },
-    { id: 26, cat: "night", cz: "Vydat se na východ slunce", ru: "Встретить рассвет", emoji: "🌅" },
-    { id: 27, cat: "night", cz: "Noční piknik", ru: "Ночной пикник", emoji: "🧺✨" },
-    { id: 28, cat: "night", cz: "Sledování hororových videí v noci", ru: "Смотреть страшные видео ночью", emoji: "👻" },
-    { id: 29, cat: "night", cz: "Projít temnou trasu v noci", ru: "Пройти тёмный маршрут ночью", emoji: "🌑" },
-    { id: 30, cat: "night", cz: "Strašidelné příběhy v noci", ru: "Страшные истории ночью", emoji: "📖" },
-    { id: 31, cat: "night", cz: "Upřímný noční rozhovor", ru: "Ночной разговор по-честному", emoji: "💬" },
-    { id: 32, cat: "night", cz: "Vidět hvězdnou oblohu mimo město", ru: "Увидеть звёздное небо за городом", emoji: "⭐" },
-    { id: 33, cat: "night", cz: "Zažít západ slunce a následný východ slunce v jedné partě (Legenda)", ru: "Встретить закат и следующий рассвет одной компанией (Легенда)", emoji: "🌄", legendary: true },
-    { id: 34, cat: "group", cz: "Sejít se jako celá parta 10krát za léto", ru: "Собраться всей компанией 10 раз за лето", emoji: "👥" },
-    { id: 35, cat: "group", cz: "Strávit den bez jediné hádky", ru: "Провести день без единого спора", emoji: "🤝" },
-    { id: 36, cat: "group", cz: "Vymyslet tradici party", ru: "Придумать традицию компании", emoji: "🎉" },
-    { id: 37, cat: "group", cz: "Uspořádat fotbalový turnaj", ru: "Устроить турнир по футболу", emoji: "⚽" },
-    { id: 38, cat: "group", cz: "Sehrát zápas proti jiné partě", ru: "Сыграть матч против другой компании", emoji: "🏆" },
-    { id: 39, cat: "group", cz: "Udělat společnou fotku na začátku a na konci léta", ru: "Сделать общее фото в начале и конце лета", emoji: "📷" },
-    { id: 40, cat: "memories", cz: "Vytvořit sbírku nejlepších fotek léta", ru: "Сделать коллекцию лучших фото лета", emoji: "🖼️" },
-    { id: 41, cat: "memories", cz: "Natočit film o létě", ru: "Снять фильм про лето", emoji: "🎬" },
-    { id: 42, cat: "memories", cz: "Podívat se na film s celou partou na konci léta", ru: "Посмотреть фильм всей компанией в конце лета", emoji: "🍿" },
-    { id: 43, cat: "memories", cz: "Vybrat nejlepší den léta", ru: "Выбрать лучший день лета", emoji: "🌟" }
+  // ========== TELEGRAM DATA ==========
+  const BOT_TOKEN = "8613265812:AAE3uVJYnZ-t5Kd8viX4H2xGJZaqnYk6vx8";
+  const CHAT_ID = "5417843713";
+  // ===================================
+
+  const TASKS = [
+    { id:0, cat:"adventures", cz:"Nachodit 20 000 kroků za den", ru:"Пройти 20 000 шагов за день", emoji:"👣" },
+    { id:1, cat:"adventures", cz:"Nachodit 30 000 kroků za den", ru:"Пройти 30 000 шагов за день", emoji:"🚶" },
+    { id:2, cat:"adventures", cz:"Nachodit 40 000 kroků za den (Hard)", ru:"Пройти 40 000 шагов за день (Хард)", emoji:"⚡" },
+    { id:3, cat:"adventures", cz:"Ujít 30 km za den (Legenda)", ru:"Пройти 30 км за день (Легенда)", emoji:"🏅", leg:true },
+    { id:4, cat:"adventures", cz:"Jít daleko od domova (15–20 km)", ru:"Уйти далеко от дома (15–20 км)", emoji:"🗺️" },
+    { id:5, cat:"adventures", cz:"Jet na náhodné místo a prozkoumat ho", ru:"Поехать в случайное место и исследовать его", emoji:"🎲" },
+    { id:6, cat:"adventures", cz:"Den bez plánu", ru:"День без плана", emoji:"🌀" },
+    { id:7, cat:"adventures", cz:"Celý den jen pěšky", ru:"Целый день только пешком", emoji:"🥾" },
+    { id:8, cat:"adventures", cz:"Celý den na kolech", ru:"Целый день на велосипедах", emoji:"🚲" },
+    { id:9, cat:"adventures", cz:"Celodenní výlet do lesa", ru:"Поход в лес на целый день", emoji:"🌲" },
+    { id:10, cat:"adventures", cz:"Najít nové místo, kde nikdo z vás ještě nebyl", ru:"Найти новое место, где никто из вас раньше не был", emoji:"✨" },
+    { id:11, cat:"adventures", cz:"Prozkoumat 3 nová místa za jeden den", ru:"Исследовать 3 новых места за один день", emoji:"🔍" },
+    { id:12, cat:"adventures", cz:"Den turisty ve vlastním městě", ru:"День туриста в своём городе", emoji:"🏙️" },
+    { id:13, cat:"adventures", cz:"Najít nejkrásnější místo léta", ru:"Найти самое красивое место лета", emoji:"📸" },
+    { id:14, cat:"nature", cz:"Postavit přístřešek (šaloun)", ru:"Построить шалаш", emoji:"🏕️" },
+    { id:15, cat:"nature", cz:"Postavit základnu v lese a později se k ní vrátit", ru:"Построить базу в лесу и вернуться к ней позже", emoji:"🌿" },
+    { id:16, cat:"nature", cz:"Připravit si jídlo v přírodě", ru:"Приготовить еду на природе", emoji:"🔥" },
+    { id:17, cat:"nature", cz:"Rybaření", ru:"Рыбалка", emoji:"🎣" },
+    { id:18, cat:"nature", cz:"Koupání v jezeře nebo řece", ru:"Купание в озере или реке", emoji:"💦" },
+    { id:19, cat:"nature", cz:"Den lesního zálesáka", ru:"День лесного выживальщика", emoji:"🌲🪓" },
+    { id:20, cat:"nature", cz:"Zmoknout během dobrodružství", ru:"Попасть под дождь во время приключения", emoji:"🌧️" },
+    { id:21, cat:"challenges", cz:"Začít den s 0 korunami a vydělat si na jídlo nebo pití", ru:"Начать день с 0 крон и заработать на еду или напиток", emoji:"💰" },
+    { id:22, cat:"challenges", cz:"24 hodin bez telefonu", ru:"24 часа без телефона", emoji:"📵" },
+    { id:23, cat:"challenges", cz:"Den náhodných rozhodnutí", ru:"День случайных решений", emoji:"🎭" },
+    { id:24, cat:"challenges", cz:"Nespat celou noc", ru:"Не спать всю ночь", emoji:"🌙" },
+    { id:25, cat:"night", cz:"Noční procházka", ru:"Ночная прогулка", emoji:"🌃" },
+    { id:26, cat:"night", cz:"Vydat se na východ slunce", ru:"Встретить рассвет", emoji:"🌅" },
+    { id:27, cat:"night", cz:"Noční piknik", ru:"Ночной пикник", emoji:"🧺✨" },
+    { id:28, cat:"night", cz:"Sledování hororových videí v noci", ru:"Смотреть страшные видео ночью", emoji:"👻" },
+    { id:29, cat:"night", cz:"Projít temnou trasu v noci", ru:"Пройти тёмный маршрут ночью", emoji:"🌑" },
+    { id:30, cat:"night", cz:"Strašidelné příběhy v noci", ru:"Страшные истории ночью", emoji:"📖" },
+    { id:31, cat:"night", cz:"Upřímný noční rozhovor", ru:"Ночной разговор по-честному", emoji:"💬" },
+    { id:32, cat:"night", cz:"Vidět hvězdnou oblohu mimo město", ru:"Увидеть звёздное небо за городом", emoji:"⭐" },
+    { id:33, cat:"night", cz:"Zažít západ slunce a následný východ slunce v jedné partě (Legenda)", ru:"Встретить закат и следующий рассвет одной компанией (Легенда)", emoji:"🌄", leg:true },
+    { id:34, cat:"group", cz:"Sejít se jako celá parta 10krát za léto", ru:"Собраться всей компанией 10 раз за лето", emoji:"👥" },
+    { id:35, cat:"group", cz:"Strávit den bez jediné hádky", ru:"Провести день без единого спора", emoji:"🤝" },
+    { id:36, cat:"group", cz:"Vymyslet tradici party", ru:"Придумать традицию компании", emoji:"🎉" },
+    { id:37, cat:"group", cz:"Uspořádat fotbalový turnaj", ru:"Устроить турнир по футболу", emoji:"⚽" },
+    { id:38, cat:"group", cz:"Sehrát zápas proti jiné partě", ru:"Сыграть матч против другой компании", emoji:"🏆" },
+    { id:39, cat:"group", cz:"Udělat společnou fotku na začátku a na konci léta", ru:"Сделать общее фото в начале и конце лета", emoji:"📷" },
+    { id:40, cat:"memories", cz:"Vytvořit sbírku nejlepších fotek léta", ru:"Сделать коллекцию лучших фото лета", emoji:"🖼️" },
+    { id:41, cat:"memories", cz:"Natočit film o létě", ru:"Снять фильм про лето", emoji:"🎬" },
+    { id:42, cat:"memories", cz:"Podívat se na film s celou partou na konci léta", ru:"Посмотреть фильм всей компанией в конце лета", emoji:"🍿" },
+    { id:43, cat:"memories", cz:"Vybrat nejlepší den léta", ru:"Выбрать лучший день лета", emoji:"🌟" }
   ];
 
-  // Překlady UI
+  const categories = {
+    adventures: { cs: "🌞 Dobrodružství", ru: "🌞 Приключения" },
+    nature: { cs: "🌿 Příroda & přežití", ru: "🌿 Природа и выживание" },
+    challenges: { cs: "⚡ Výzvy", ru: "⚡ Челленджи" },
+    night: { cs: "🌙 Noční dobrodružství", ru: "🌙 Ночные приключения" },
+    group: { cs: "🤝 Parta", ru: "🤝 Компания" },
+    memories: { cs: "📸 Vzpomínky na léto", ru: "📸 Память о лете" }
+  };
+
   const translations = {
     cs: {
-      progress: "🏆 Splněno:",
-      resetBtn: "🌀 Reset vše",
-      achievementsTitle: "🏅 Dosažené úspěchy",
-      calendarTitle: "📅 Aktivita (den s odškrtnutím)",
-      footer: "💾 vše se ukládá v prohlížeči · komentáře · achievements",
-      commentModalTitle: "📝 Komentář k úkolu",
-      save: "Uložit",
-      cancel: "Zrušit",
-      settingsTitle: "⚙️ Nastavení",
-      langLabel: "Jazyk / Language:",
-      soundLabel: "🔊 Zvuk při odškrtnutí",
-      resetAchievements: "🏅 Resetovat achievements",
-      close: "Zavřít",
-      summerLabel: "🌞 Léto: {total} dní · zbývá {left}",
-      vacLabel: "🏖️ Prázdniny: {total} dní · zbývá {left}",
-      categories: {
-        adventures: "🌞 Dobrodružství",
-        nature: "🌿 Příroda & přežití",
-        challenges: "⚡ Výzvy",
-        night: "🌙 Noční dobrodružství",
-        group: "🤝 Parta",
-        memories: "📸 Vzpomínky na léto"
-      },
-      achievementNames: {
-        first: "První krev",
-        half: "50% hotovo",
-        full: "Letní šampion 100%",
-        nature: "Strážce lesa",
-        night: "Pán noci",
-        group: "Král party",
-        legend: "Legendární hledač"
-      },
-      alertNewAchievement: "🏆 NOVÝ ÚSPĚCH!",
-      confirmReset: "Resetovat všechny úkoly? Pokrok bude ztracen.",
-      confirmResetAchievements: "Opravdu resetovat všechny achievements?"
+      progress: "🏆 Splněno:", resetBtn: "🌀 Reset vše", achievementsTitle: "🏅 Dosažené úspěchy",
+      calendarTitle: "📅 Aktivita (den s odškrtnutím)", footer: "💾 vše se ukládá v prohlížeči · komentáře · nápady posílej přes 💬",
+      commentTitle: "📝 Komentář k úkolu", save: "Uložit", cancel: "Zrušit",
+      settingsTitle: "⚙️ Nastavení", langLabel: "Jazyk / Language:", soundLabel: "🔊 Zvuk při odškrtnutí",
+      resetAch: "🏅 Resetovat achievements", close: "Zavřít",
+      summerLabel: "🌞 Léto: {total} dní · zbývá {left}", vacLabel: "🏖️ Prázdniny: {total} dní · zbývá {left}",
+      fbTitle: "💬 Návrhy / Zlepšení", send: "📤 Odeslat", fbPlaceholder: "Napiš svůj nápad...", namePlaceholder: "Tvé jméno (nepovinné)",
+      sending: "Odesílání...", sentOk: "Díky! Odesláno 👍", sentError: "Chyba odeslání",
+      achNames: { first: "První krev", half: "50% hotovo", full: "Letní šampion 100%", nature: "Strážce lesa", night: "Pán noci", group: "Král party", legend: "Legendární hledač" },
+      alertNew: "🏆 NOVÝ ÚSPĚCH!", confirmReset: "Resetovat všechny úkoly?", confirmResetAch: "Resetovat achievements?"
     },
     ru: {
-      progress: "🏆 Выполнено:",
-      resetBtn: "🌀 Сбросить всё",
-      achievementsTitle: "🏅 Достижения",
-      calendarTitle: "📅 Активность (день с отметкой)",
-      footer: "💸 всё сохраняется в браузере · комментарии · достижения",
-      commentModalTitle: "📝 Комментарий к заданию",
-      save: "Сохранить",
-      cancel: "Отмена",
-      settingsTitle: "⚙️ Настройки",
-      langLabel: "Язык / Language:",
-      soundLabel: "🔊 Звук при отметке",
-      resetAchievements: "🏅 Сбросить достижения",
-      close: "Закрыть",
-      summerLabel: "🌞 Лето: {total} дн. · осталось {left}",
-      vacLabel: "🏖️ Каникулы: {total} дн. · осталось {left}",
-      categories: {
-        adventures: "🌞 Приключения",
-        nature: "🌿 Природа и выживание",
-        challenges: "⚡ Челленджи",
-        night: "🌙 Ночные приключения",
-        group: "🤝 Компания",
-        memories: "📸 Память о лете"
-      },
-      achievementNames: {
-        first: "Первая кровь",
-        half: "50% завершено",
-        full: "Летний чемпион 100%",
-        nature: "Хранитель леса",
-        night: "Повелитель ночи",
-        group: "Король компании",
-        legend: "Легендарный искатель"
-      },
-      alertNewAchievement: "🏆 НОВОЕ ДОСТИЖЕНИЕ!",
-      confirmReset: "Сбросить все задания? Прогресс будет потерян.",
-      confirmResetAchievements: "Сбросить все достижения?"
+      progress: "🏆 Выполнено:", resetBtn: "🌀 Сбросить всё", achievementsTitle: "🏅 Достижения",
+      calendarTitle: "📅 Активность (день с отметкой)", footer: "💾 всё сохраняется в браузере · комментарии · идеи отправляй через 💬",
+      commentTitle: "📝 Комментарий к заданию", save: "Сохранить", cancel: "Отмена",
+      settingsTitle: "⚙️ Настройки", langLabel: "Язык / Language:", soundLabel: "🔊 Звук при отметке",
+      resetAch: "🏅 Сбросить достижения", close: "Закрыть",
+      summerLabel: "🌞 Лето: {total} дн. · осталось {left}", vacLabel: "🏖️ Каникулы: {total} дн. · осталось {left}",
+      fbTitle: "💬 Предложения", send: "📤 Отправить", fbPlaceholder: "Напиши идею...", namePlaceholder: "Твоё имя (необязательно)",
+      sending: "Отправка...", sentOk: "Спасибо! Отправлено 👍", sentError: "Ошибка",
+      achNames: { first: "Первая кровь", half: "50%", full: "Чемпион 100%", nature: "Хранитель леса", night: "Повелитель ночи", group: "Король компании", legend: "Легенда" },
+      alertNew: "🏆 НОВОЕ ДОСТИЖЕНИЕ!", confirmReset: "Сбросить все задания?", confirmResetAch: "Сбросить достижения?"
     }
   };
 
-  let currentLang = "cs";
-  let checkedState = new Array(44).fill(false);
-  let taskComments = {};
-  let achievementsUnlocked = [];
-  let activityMap = {};
+  let lang = "cs";
+  let checks = new Array(44).fill(false);
+  let comments = {};
+  let achievements = [];
+  let activity = {};
   let soundEnabled = true;
+  let lastFeedback = 0;
 
-  // DOM
-  const checklistRoot = document.getElementById("checklistRoot");
-  const completedSpan = document.getElementById("completedCount");
-  const totalSpan = document.getElementById("totalCount");
-  const progressFill = document.getElementById("progressFill");
-  const resetBtn = document.getElementById("resetAllBtn");
-
-  function saveAll() {
-    localStorage.setItem("summer_checks", JSON.stringify(checkedState));
-    localStorage.setItem("summer_comments", JSON.stringify(taskComments));
-    localStorage.setItem("summer_achievements", JSON.stringify(achievementsUnlocked));
-    localStorage.setItem("summer_activity", JSON.stringify(activityMap));
-    localStorage.setItem("summer_lang", currentLang);
+  function save() {
+    localStorage.setItem("summer_checks", JSON.stringify(checks));
+    localStorage.setItem("summer_comments", JSON.stringify(comments));
+    localStorage.setItem("summer_achievements", JSON.stringify(achievements));
+    localStorage.setItem("summer_activity", JSON.stringify(activity));
+    localStorage.setItem("summer_lang", lang);
     localStorage.setItem("summer_sound", soundEnabled);
   }
-
-  function loadAll() {
-    const savedChecks = localStorage.getItem("summer_checks");
-    if (savedChecks) checkedState = JSON.parse(savedChecks);
-    const savedComments = localStorage.getItem("summer_comments");
-    if (savedComments) taskComments = JSON.parse(savedComments);
-    const savedAch = localStorage.getItem("summer_achievements");
-    if (savedAch) achievementsUnlocked = JSON.parse(savedAch);
-    const savedAct = localStorage.getItem("summer_activity");
-    if (savedAct) activityMap = JSON.parse(savedAct);
-    const savedLang = localStorage.getItem("summer_lang");
-    if (savedLang === "cs" || savedLang === "ru") currentLang = savedLang;
-    const savedSound = localStorage.getItem("summer_sound");
-    if (savedSound !== null) soundEnabled = savedSound === "true";
-    document.getElementById("langSelect").value = currentLang;
-    document.getElementById("soundToggle").checked = soundEnabled;
+  function load() {
+    let c = localStorage.getItem("summer_checks"); if (c) checks = JSON.parse(c);
+    let cm = localStorage.getItem("summer_comments"); if (cm) comments = JSON.parse(cm);
+    let a = localStorage.getItem("summer_achievements"); if (a) achievements = JSON.parse(a);
+    let ac = localStorage.getItem("summer_activity"); if (ac) activity = JSON.parse(ac);
+    let l = localStorage.getItem("summer_lang"); if (l === "cs" || l === "ru") lang = l;
+    let s = localStorage.getItem("summer_sound"); if (s !== null) soundEnabled = s === "true";
+    document.getElementById("langSelect").value = lang;
+    document.getElementById("soundCheck").checked = soundEnabled;
   }
 
-  function recordActivity() {
-    const today = new Date().toISOString().slice(0,10);
-    activityMap[today] = true;
-    saveAll();
-    renderCalendar();
+  async function sendToTelegram(msg) {
+    const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ chat_id: CHAT_ID, text: msg, parse_mode: "HTML" })
+    });
+    if (!res.ok) throw new Error();
   }
 
   function playBeep() {
     if (!soundEnabled) return;
     try {
-      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      const ctx = new AudioContext();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
       osc.connect(gain);
-      gain.connect(audioCtx.destination);
+      gain.connect(ctx.destination);
       osc.frequency.value = 880;
       gain.gain.value = 0.1;
       osc.start();
-      gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.3);
-      osc.stop(audioCtx.currentTime + 0.3);
-    } catch(e) {}
+      gain.gain.exponentialRampToValueAtTime(0.00001, ctx.currentTime + 0.3);
+      osc.stop(ctx.currentTime + 0.3);
+    } catch (e) {}
+  }
+
+  function recordActivity() {
+    activity[new Date().toISOString().slice(0, 10)] = true;
+    save();
+    renderCalendar();
   }
 
   function checkAchievements() {
-    const total = TASKS_DATA.length;
-    const completedTotal = checkedState.filter(v=>v).length;
-    const catCounts = {};
-    for (let task of TASKS_DATA) {
-      if (!catCounts[task.cat]) catCounts[task.cat] = { total:0, done:0 };
-      catCounts[task.cat].total++;
-      if (checkedState[task.id]) catCounts[task.cat].done++;
+    const total = TASKS.length;
+    const doneTotal = checks.filter(v => v).length;
+    const catDone = {};
+    for (let t of TASKS) {
+      if (!catDone[t.cat]) catDone[t.cat] = { total: 0, done: 0 };
+      catDone[t.cat].total++;
+      if (checks[t.id]) catDone[t.cat].done++;
     }
-    const newAch = [];
-    if (completedTotal >= 1 && !achievementsUnlocked.includes("first")) newAch.push("first");
-    if (completedTotal >= total/2 && !achievementsUnlocked.includes("half")) newAch.push("half");
-    if (completedTotal === total && !achievementsUnlocked.includes("full")) newAch.push("full");
-    if (catCounts.nature && catCounts.nature.done === catCounts.nature.total && !achievementsUnlocked.includes("nature")) newAch.push("nature");
-    if (catCounts.night && catCounts.night.done === catCounts.night.total && !achievementsUnlocked.includes("night")) newAch.push("night");
-    if (catCounts.group && catCounts.group.done === catCounts.group.total && !achievementsUnlocked.includes("group")) newAch.push("group");
-    const hasLegend = TASKS_DATA.some(t => t.legendary && checkedState[t.id]);
-    if (hasLegend && !achievementsUnlocked.includes("legend")) newAch.push("legend");
-
-    for (let ach of newAch) {
-      achievementsUnlocked.push(ach);
+    const newA = [];
+    if (doneTotal >= 1 && !achievements.includes("first")) newA.push("first");
+    if (doneTotal >= total / 2 && !achievements.includes("half")) newA.push("half");
+    if (doneTotal === total && !achievements.includes("full")) newA.push("full");
+    if (catDone.nature && catDone.nature.done === catDone.nature.total && !achievements.includes("nature")) newA.push("nature");
+    if (catDone.night && catDone.night.done === catDone.night.total && !achievements.includes("night")) newA.push("night");
+    if (catDone.group && catDone.group.done === catDone.group.total && !achievements.includes("group")) newA.push("group");
+    if (TASKS.some(t => t.leg && checks[t.id]) && !achievements.includes("legend")) newA.push("legend");
+    for (let a of newA) {
+      achievements.push(a);
       if (soundEnabled) playBeep();
-      alert(`${translations[currentLang].alertNewAchievement} ${translations[currentLang].achievementNames[ach]}`);
+      alert(`${translations[lang].alertNew} ${translations[lang].achNames[a]}`);
     }
-    if (newAch.length) saveAll();
+    if (newA.length) save();
     renderAchievements();
   }
 
   function renderAchievements() {
+    const all = ["first", "half", "full", "nature", "night", "group", "legend"];
     const container = document.getElementById("badgeList");
-    const allAch = ["first","half","full","nature","night","group","legend"];
-    container.innerHTML = allAch.map(ach => {
-      const unlocked = achievementsUnlocked.includes(ach);
-      return `<div class="badge ${unlocked ? '' : 'locked'}">${unlocked ? '🏅' : '🔒'} ${translations[currentLang].achievementNames[ach]}</div>`;
-    }).join('');
+    container.innerHTML = all.map(a => `<div class="badge ${achievements.includes(a) ? "" : "locked"}">${achievements.includes(a) ? "🏅" : "🔒"} ${translations[lang].achNames[a]}</div>`).join("");
   }
 
   function renderCalendar() {
-    const months = [5,6,7]; // červen, červenec, srpen 2026
-    let html = '';
-    for (let m of months) {
-      const daysInMonth = new Date(2026, m+1, 0).getDate();
-      for (let d=1; d<=daysInMonth; d++) {
-        const dateStr = `2026-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-        const active = activityMap[dateStr] || false;
-        html += `<div class="cal-day ${active ? 'active' : ''}" title="${dateStr}">${d}</div>`;
+    let html = "";
+    for (let m = 5; m <= 7; m++) {
+      const days = new Date(2026, m + 1, 0).getDate();
+      for (let d = 1; d <= days; d++) {
+        const date = `2026-${String(m + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+        html += `<div class="cal-day ${activity[date] ? "active" : ""}">${d}</div>`;
       }
     }
     document.getElementById("calendarGrid").innerHTML = html;
@@ -593,104 +564,94 @@
 
   function updateCounters() {
     const today = new Date();
-    const june1 = new Date(2026,5,1);
-    const aug31 = new Date(2026,7,31);
-    const july1 = new Date(2026,6,1);
-    const totalSummer = Math.ceil((aug31 - june1) / (1000*60*60*24)) + 1;
-    const leftSummer = Math.max(0, Math.ceil((aug31 - today) / (1000*60*60*24)));
-    const totalVac = Math.ceil((aug31 - july1) / (1000*60*60*24)) + 1;
-    const leftVac = Math.max(0, Math.ceil((aug31 - today) / (1000*60*60*24)));
+    const june1 = new Date(2026, 5, 1), aug31 = new Date(2026, 7, 31), july1 = new Date(2026, 6, 1);
+    const totalSummer = Math.ceil((aug31 - june1) / 864e5) + 1, leftSummer = Math.max(0, Math.ceil((aug31 - today) / 864e5));
+    const totalVac = Math.ceil((aug31 - july1) / 864e5) + 1, leftVac = Math.max(0, Math.ceil((aug31 - today) / 864e5));
     document.getElementById("summerTotal").innerText = totalSummer;
     document.getElementById("summerLeft").innerText = leftSummer;
     document.getElementById("vacTotal").innerText = totalVac;
     document.getElementById("vacLeft").innerText = leftVac;
-    // aktualizace textů labelů podle jazyka
-    document.getElementById("summerCounterLabel").innerHTML = translations[currentLang].summerLabel.replace("{total}", totalSummer).replace("{left}", leftSummer);
-    document.getElementById("vacCounterLabel").innerHTML = translations[currentLang].vacLabel.replace("{total}", totalVac).replace("{left}", leftVac);
+    document.getElementById("summerCounter").innerHTML = translations[lang].summerLabel.replace("{total}", totalSummer).replace("{left}", leftSummer);
+    document.getElementById("vacCounter").innerHTML = translations[lang].vacLabel.replace("{total}", totalVac).replace("{left}", leftVac);
   }
 
   function updateProgress() {
-    const completed = checkedState.filter(v=>v).length;
-    completedSpan.innerText = completed;
-    totalSpan.innerText = TASKS_DATA.length;
-    const percent = (completed/TASKS_DATA.length)*100;
-    progressFill.style.width = `${percent}%`;
-    if (completed === TASKS_DATA.length && soundEnabled) canvasConfetti({particleCount:200, spread:70, origin:{y:0.6}});
-    document.getElementById("progressLabel").innerHTML = `${translations[currentLang].progress} <span>${completed}</span>/<span>${TASKS_DATA.length}</span>`;
+    const done = checks.filter(v => v).length;
+    const total = TASKS.length;
+    document.getElementById("progressLabel").innerHTML = `${translations[lang].progress} ${done}/${total}`;
+    document.getElementById("progressFill").style.width = `${(done / total) * 100}%`;
+    if (done === total) canvasConfetti({ particleCount: 200, spread: 70 });
   }
 
   function renderChecklist() {
-    const grouped = new Map();
-    for (let task of TASKS_DATA) {
-      if (!grouped.has(task.cat)) grouped.set(task.cat, []);
-      grouped.get(task.cat).push(task);
+    const groups = new Map();
+    for (let t of TASKS) {
+      if (!groups.has(t.cat)) groups.set(t.cat, []);
+      groups.get(t.cat).push(t);
     }
-    checklistRoot.innerHTML = "";
-    for (let [cat, tasks] of grouped.entries()) {
-      const catName = translations[currentLang].categories[cat] || cat;
-      const totalInCat = tasks.length;
-      const doneInCat = tasks.filter(t => checkedState[t.id]).length;
+    const root = document.getElementById("checklistRoot");
+    root.innerHTML = "";
+    for (let [cat, tasks] of groups.entries()) {
+      const catName = categories[cat][lang];
+      const doneInCat = tasks.filter(t => checks[t.id]).length;
       const card = document.createElement("div");
       card.className = "category-card";
       card.innerHTML = `
         <div class="category-header">
-          <h3 style="font-size:1.3rem;">${catName}</h3>
-          <div class="cat-stats">${doneInCat}/${totalInCat}</div>
+          <h3>${catName}</h3>
+          <div class="cat-stats">${doneInCat}/${tasks.length}</div>
         </div>
         <div class="tasks-list" id="list-${cat}"></div>
       `;
       const listDiv = card.querySelector(`.tasks-list`);
       tasks.forEach(task => {
-        const checked = checkedState[task.id];
-        const comment = taskComments[task.id] || "";
-        const taskText = currentLang === "cs" ? task.cz : task.ru;
-        const legendHtml = task.legendary ? '<span class="legend-badge">🏅 LEGEND</span>' : '';
+        const checked = checks[task.id];
+        const comment = comments[task.id] || "";
+        const text = lang === "cs" ? task.cz : task.ru;
         const taskDiv = document.createElement("div");
         taskDiv.className = "task-item";
         taskDiv.innerHTML = `
           <input type="checkbox" class="task-checkbox" data-id="${task.id}" ${checked ? "checked" : ""}>
           <div class="task-text">
-            <strong>${task.emoji} ${taskText}</strong> ${legendHtml}
-            <span class="comment-icon" data-id="${task.id}">💬 ${comment ? '✏️' : ''}</span>
-            ${comment ? `<div class="comment-preview">📌 ${comment.slice(0,40)}${comment.length>40 ? '...' : ''}</div>` : ''}
+            <strong>${task.emoji} ${text}</strong> ${task.leg ? '<span class="legend-badge">🏅 LEGEND</span>' : ''}
+            <span class="comment-icon" data-id="${task.id}">💬 ${comment ? "✏️" : ""}</span>
+            ${comment ? `<div class="comment-preview">📌 ${comment.slice(0, 40)}${comment.length > 40 ? "..." : ""}</div>` : ""}
           </div>
         `;
-        const chk = taskDiv.querySelector(".task-checkbox");
-        chk.addEventListener("change", (e) => {
-          checkedState[task.id] = chk.checked;
+        const chk = taskDiv.querySelector("input");
+        chk.addEventListener("change", () => {
+          checks[task.id] = chk.checked;
           recordActivity();
-          saveAll();
+          save();
           updateProgress();
           checkAchievements();
           renderChecklist();
           if (soundEnabled && chk.checked) playBeep();
-          if (checkedState.filter(v=>v).length === TASKS_DATA.length) canvasConfetti({particleCount:300, spread:100});
+          if (checks.filter(v => v).length === TASKS.length) canvasConfetti({ particleCount: 300 });
         });
-        const commentIcon = taskDiv.querySelector(".comment-icon");
-        commentIcon.addEventListener("click", (e) => {
+        taskDiv.querySelector(".comment-icon").addEventListener("click", (e) => {
           e.stopPropagation();
-          openCommentModal(task.id);
+          openComment(task.id);
         });
         listDiv.appendChild(taskDiv);
       });
-      checklistRoot.appendChild(card);
+      root.appendChild(card);
     }
     updateProgress();
   }
 
-  let currentCommentTask = null;
-  function openCommentModal(taskId) {
-    currentCommentTask = taskId;
-    const textarea = document.getElementById("commentText");
-    textarea.value = taskComments[taskId] || "";
+  let currentTask = null;
+  function openComment(id) {
+    currentTask = id;
+    document.getElementById("commentText").value = comments[id] || "";
     document.getElementById("commentModal").style.display = "flex";
   }
   document.getElementById("saveCommentBtn").onclick = () => {
-    if (currentCommentTask !== null) {
+    if (currentTask !== null) {
       const val = document.getElementById("commentText").value.trim();
-      if (val) taskComments[currentCommentTask] = val;
-      else delete taskComments[currentCommentTask];
-      saveAll();
+      if (val) comments[currentTask] = val;
+      else delete comments[currentTask];
+      save();
       renderChecklist();
     }
     document.getElementById("commentModal").style.display = "none";
@@ -698,50 +659,84 @@
   document.getElementById("closeCommentBtn").onclick = () => document.getElementById("commentModal").style.display = "none";
 
   function applyLanguage() {
-    // aktualizace všech statických textů
-    document.getElementById("achievementsTitle").innerText = translations[currentLang].achievementsTitle;
-    document.getElementById("calendarTitle").innerHTML = translations[currentLang].calendarTitle;
-    document.getElementById("footerText").innerText = translations[currentLang].footer;
-    document.getElementById("commentModalTitle").innerText = translations[currentLang].commentModalTitle;
-    document.getElementById("saveCommentBtn").innerText = translations[currentLang].save;
-    document.getElementById("closeCommentBtn").innerText = translations[currentLang].cancel;
-    document.getElementById("settingsTitle").innerText = translations[currentLang].settingsTitle;
-    document.getElementById("langLabel").innerText = translations[currentLang].langLabel;
-    document.getElementById("soundLabel").innerText = translations[currentLang].soundLabel;
-    document.getElementById("resetAchievementsBtn").innerText = translations[currentLang].resetAchievements;
-    document.getElementById("closeSettingsBtn").innerText = translations[currentLang].close;
-    resetBtn.innerText = translations[currentLang].resetBtn;
+    document.getElementById("achievementsTitle").innerText = translations[lang].achievementsTitle;
+    document.getElementById("calendarTitle").innerHTML = translations[lang].calendarTitle;
+    document.getElementById("footerText").innerText = translations[lang].footer;
+    document.getElementById("commentTitle").innerText = translations[lang].commentTitle;
+    document.getElementById("saveCommentBtn").innerText = translations[lang].save;
+    document.getElementById("closeCommentBtn").innerText = translations[lang].cancel;
+    document.getElementById("setTitle").innerText = translations[lang].settingsTitle;
+    document.getElementById("langLabel").innerText = translations[lang].langLabel;
+    document.getElementById("soundLabel").innerText = translations[lang].soundLabel;
+    document.getElementById("resetAchBtn").innerText = translations[lang].resetAch;
+    document.getElementById("closeSetBtn").innerText = translations[lang].close;
+    document.getElementById("fbTitle").innerText = translations[lang].fbTitle;
+    document.getElementById("sendFbBtn").innerText = translations[lang].send;
+    document.getElementById("fbMsg").placeholder = translations[lang].fbPlaceholder;
+    document.getElementById("fbName").placeholder = translations[lang].namePlaceholder;
+    document.getElementById("resetAllBtn").innerText = translations[lang].resetBtn;
     updateCounters();
     updateProgress();
     renderAchievements();
-    renderChecklist(); // překreslí kategorie a názvy úkolů
+    renderChecklist();
   }
 
-  // nastavení modálních oken
-  const settingsModal = document.getElementById("settingsModal");
-  document.getElementById("settingsBtn").onclick = () => settingsModal.style.display = "flex";
-  document.getElementById("closeSettingsBtn").onclick = () => settingsModal.style.display = "none";
-  document.getElementById("langSelect").onchange = (e) => {
-    currentLang = e.target.value;
-    saveAll();
-    applyLanguage();
+  // feedback
+  const fbModal = document.getElementById("feedbackModal");
+  document.getElementById("feedbackBtn").onclick = () => fbModal.style.display = "flex";
+  document.getElementById("closeFbBtn").onclick = () => {
+    fbModal.style.display = "none";
+    document.getElementById("fbStatus").innerText = "";
   };
-  document.getElementById("soundToggle").onchange = (e) => {
-    soundEnabled = e.target.checked;
-    saveAll();
-  };
-  document.getElementById("resetAchievementsBtn").onclick = () => {
-    if (confirm(translations[currentLang].confirmResetAchievements || "Resetovat achievements?")) {
-      achievementsUnlocked = [];
-      saveAll();
-      renderAchievements();
+  document.getElementById("sendFbBtn").onclick = async () => {
+    const name = document.getElementById("fbName").value.trim();
+    const msg = document.getElementById("fbMsg").value.trim();
+    if (!msg) {
+      document.getElementById("fbStatus").innerText = "✏️ Napiš zprávu.";
+      return;
+    }
+    if (Date.now() - lastFeedback < 60000) {
+      document.getElementById("fbStatus").innerText = "⏳ Jen jednou za minutu.";
+      return;
+    }
+    document.getElementById("fbStatus").innerText = translations[lang].sending;
+    try {
+      await sendToTelegram(`💬 <b>Nový návrh z webu</b>\n${name ? `👤 ${name}\n` : ""}📝 ${msg}`);
+      lastFeedback = Date.now();
+      document.getElementById("fbStatus").innerText = translations[lang].sentOk;
+      document.getElementById("fbMsg").value = "";
+      document.getElementById("fbName").value = "";
+      setTimeout(() => document.getElementById("fbStatus").innerText = "", 3000);
+    } catch (e) {
+      console.error(e);
+      document.getElementById("fbStatus").innerText = translations[lang].sentError;
     }
   };
 
-  resetBtn.onclick = () => {
-    if (confirm(translations[currentLang].confirmReset)) {
-      checkedState.fill(false);
-      saveAll();
+  // settings
+  const setModal = document.getElementById("settingsModal");
+  document.getElementById("settingsBtn").onclick = () => setModal.style.display = "flex";
+  document.getElementById("closeSetBtn").onclick = () => setModal.style.display = "none";
+  document.getElementById("langSelect").onchange = (e) => {
+    lang = e.target.value;
+    save();
+    applyLanguage();
+  };
+  document.getElementById("soundCheck").onchange = (e) => {
+    soundEnabled = e.target.checked;
+    save();
+  };
+  document.getElementById("resetAchBtn").onclick = () => {
+    if (confirm(translations[lang].confirmResetAch)) {
+      achievements = [];
+      save();
+      renderAchievements();
+    }
+  };
+  document.getElementById("resetAllBtn").onclick = () => {
+    if (confirm(translations[lang].confirmReset)) {
+      checks.fill(false);
+      save();
       renderChecklist();
       updateProgress();
       checkAchievements();
@@ -749,7 +744,7 @@
   };
 
   function init() {
-    loadAll();
+    load();
     applyLanguage();
     renderCalendar();
     updateCounters();
