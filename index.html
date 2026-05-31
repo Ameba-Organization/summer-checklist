@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>✨ Legendární léto 2026 ✨ | Letní checklist s partou</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(145deg, #fff9e8 0%, #fee6c5 100%);
+      font-family: 'Segoe UI', 'Quicksand', system-ui, -apple-system, 'Inter', 'Poppins', sans-serif;
+      padding: 2rem 1.2rem 3rem;
+      color: #2a241a;
+      position: relative;
+    }
+
+    /* jemné sluneční paprsky na pozadí */
+    body::before {
+      content: "☀️";
+      font-size: 120px;
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      opacity: 0.08;
+      pointer-events: none;
+      transform: rotate(15deg);
+      z-index: 0;
+    }
+
+    body::after {
+      content: "🌻";
+      font-size: 90px;
+      position: fixed;
+      top: 20px;
+      left: 10px;
+      opacity: 0.08;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* hero sekce – letní vibe */
+    .hero {
+      text-align: center;
+      margin-bottom: 2rem;
+      background: rgba(255, 252, 240, 0.75);
+      backdrop-filter: blur(10px);
+      border-radius: 90px;
+      padding: 1.8rem 1rem;
+      box-shadow: 0 25px 40px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(255, 215, 150, 0.6);
+      border: 1px solid rgba(255, 215, 140, 0.8);
+      transition: all 0.2s;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      background: linear-gradient(125deg, #e67e22, #f7b731, #f39c12);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.5px;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .hero .sub {
+      font-size: 1.1rem;
+      background: #fff3e0cc;
+      display: inline-block;
+      padding: 0.4rem 1.6rem;
+      border-radius: 40px;
+      margin-top: 12px;
+      font-weight: 500;
+      color: #b45f2b;
+      backdrop-filter: blur(4px);
+    }
+
+    /* progress panel */
+    .stats-card {
+      background: #fffef7;
+      border-radius: 60px;
+      padding: 1.2rem 2rem;
+      margin-bottom: 2.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
+      border: 1px solid #ffdfb0;
+      transition: 0.2s;
+    }
+
+    .progress-text {
+      font-weight: 700;
+      font-size: 1.2rem;
+      background: #fff0dd;
+      padding: 0.3rem 1.2rem;
+      border-radius: 50px;
+    }
+
+    .progress-text span {
+      color: #e67e22;
+      font-size: 1.7rem;
+      font-weight: 800;
+    }
+
+    .progress-bar-wrapper {
+      flex: 2;
+      min-width: 200px;
+    }
+
+    .progress-bar {
+      background-color: #ffeed9;
+      border-radius: 40px;
+      height: 16px;
+      overflow: hidden;
+      box-shadow: inset 0 1px 4px #0001;
+    }
+
+    .progress-fill {
+      background: linear-gradient(95deg, #f5a623, #ffce70);
+      width: 0%;
+      height: 100%;
+      border-radius: 40px;
+      transition: width 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      box-shadow: 0 0 6px #ffb347;
+    }
+
+    .reset-btn {
+      background: #fffaee;
+      border: 1px solid #f3bc6e;
+      padding: 0.65rem 1.5rem;
+      border-radius: 60px;
+      font-weight: 700;
+      color: #c46f1f;
+      cursor: pointer;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      backdrop-filter: blur(2px);
+    }
+
+    .reset-btn:hover {
+      background: #fff0df;
+      border-color: #e67e22;
+      transform: scale(0.97);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    /* kategorie - moderní karty */
+    .checklist-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(370px, 1fr));
+      gap: 2rem;
+    }
+
+    .category-card {
+      background: rgba(255, 255, 248, 0.96);
+      backdrop-filter: blur(2px);
+      border-radius: 2.2rem;
+      overflow: hidden;
+      box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.12);
+      transition: all 0.2s ease;
+      border: 1px solid #ffe6bb;
+    }
+
+    .category-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.2);
+      border-color: #ffd896;
+    }
+
+    .category-header {
+      background: linear-gradient(115deg, #fff0dc, #ffe9ce);
+      padding: 1rem 1.4rem;
+      border-bottom: 3px solid #ffd184;
+    }
+
+    .category-header h2 {
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #7e501f;
+    }
+
+    .tasks-list {
+      padding: 0.9rem 0.7rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .task-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: #ffffffdd;
+      padding: 0.7rem 1rem;
+      border-radius: 1.5rem;
+      transition: all 0.15s;
+      border: 1px solid #ffe5c2;
+      cursor: pointer;
+    }
+
+    .task-item:hover {
+      background: #fffef5;
+      border-color: #ffcd8a;
+      transform: translateX(4px);
+    }
+
+    .task-checkbox {
+      transform: scale(1.25);
+      margin-top: 3px;
+      accent-color: #f5a623;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .task-label {
+      font-size: 0.93rem;
+      line-height: 1.4;
+      font-weight: 500;
+      color: #2f281b;
+      flex: 1;
+    }
+
+    .task-label strong {
+      font-weight: 700;
+      color: #c4641a;
+    }
+
+    .task-label small {
+      font-weight: 400;
+      font-size: 0.77rem;
+      color: #bb793e;
+      margin-left: 6px;
+    }
+
+    .legend-badge {
+      background: #f5c481;
+      font-size: 0.68rem;
+      font-weight: bold;
+      padding: 0.15rem 0.65rem;
+      border-radius: 30px;
+      color: #4e2c0e;
+      margin-left: 10px;
+      display: inline-block;
+      vertical-align: middle;
+      box-shadow: inset 0 0 2px #ffefb0;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3.5rem;
+      padding: 1.2rem;
+      color: #bc7a3c;
+      font-size: 0.8rem;
+      border-top: 1px solid #ffe2bc;
+      background: #fffaf0aa;
+      border-radius: 70px;
+      backdrop-filter: blur(4px);
+    }
+
+    /* lehká responzivita */
+    @media (max-width: 780px) {
+      body {
+        padding: 1.2rem;
+      }
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .stats-card {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 1rem;
+      }
+      .task-label {
+        font-size: 0.85rem;
+      }
+      .category-header h2 {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="hero">
+    <h1>☀️ LEGENDARY SUMMER 2026 ☀️</h1>
+    <div class="sub">🎯 společná mise · общая миссия · společné vzpomínky</div>
+  </div>
+
+  <div class="stats-card">
+    <div class="progress-text">🏆 SPLNĚNO / ВЫПОЛНЕНО: <span id="completedCount">0</span> / <span id="totalCount">0</span></div>
+    <div class="progress-bar-wrapper">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+    <button class="reset-btn" id="resetAllBtn">🌀 Reset vše / Сбросить всё</button>
+  </div>
+
+  <div id="checklistRoot" class="checklist-grid"></div>
+  <footer>
+    💾 Každý splněný úkol se ti uloží v prohlížeči — tvoji kámoši vidí stejný checklist, každý má svůj postup.<br>
+    🌟 Sdílej odkaz a hurá za dobrodružstvím! 🌟
+  </footer>
+</div>
+
+<script>
+  // ============================================================
+  // MASTER TASKS — podle PDF souborů (česky + rusky)
+  // ============================================================
+  const TASKS_DATA = [
+    // ----- DOBRODRUŽSTVÍ / ПРИКЛЮЧЕНИЯ -----
+    { id: 0, cat: "adventures", cz: "Nachodit 20 000 kroků za den", ru: "Пройти 20 000 шагов за день", emoji: "👣" },
+    { id: 1, cat: "adventures", cz: "Nachodit 30 000 kroků za den", ru: "Пройти 30 000 шагов за день", emoji: "🚶‍♂️" },
+    { id: 2, cat: "adventures", cz: "Nachodit 40 000 kroků za den (Hard)", ru: "Пройти 40 000 шагов за день (Хард)", emoji: "⚡" },
+    { id: 3, cat: "adventures", cz: "Ujít 30 km za den (Legenda)", ru: "Пройти 30 км за день (Легенда)", emoji: "🏅", legendary: true },
+    { id: 4, cat: "adventures", cz: "Jít daleko od domova (15–20 km)", ru: "Уйти далеко от дома (15–20 км)", emoji: "🗺️" },
+    { id: 5, cat: "adventures", cz: "Jet na náhodné místo a prozkoumat ho", ru: "Поехать в случайное место и исследовать его", emoji: "🎲" },
+    { id: 6, cat: "adventures", cz: "Den bez plánu", ru: "День без плана", emoji: "🌀" },
+    { id: 7, cat: "adventures", cz: "Celý den jen pěšky", ru: "Целый день только пешком", emoji: "🥾" },
+    { id: 8, cat: "adventures", cz: "Celý den na kolech", ru: "Целый день на велосипедах", emoji: "🚲" },
+    { id: 9, cat: "adventures", cz: "Celodenní výlet do lesa", ru: "Поход в лес на целый день", emoji: "🌲" },
+    { id: 10, cat: "adventures", cz: "Najít nové místo, kde nikdo z vás ještě nebyl", ru: "Найти новое место, где никто из вас раньше не был", emoji: "✨" },
+    { id: 11, cat: "adventures", cz: "Prozkoumat 3 nová místa za jeden den", ru: "Исследовать 3 новых места за один день", emoji: "🔍" },
+    { id: 12, cat: "adventures", cz: "Den turisty ve vlastním městě", ru: "День туриста в своём городе", emoji: "🏙️" },
+    { id: 13, cat: "adventures", cz: "Najít nejkrásnější místo léta", ru: "Найти самое красивое место лета", emoji: "📸" },
+
+    // ----- PŘÍRODA A PŘEŽITÍ / ПРИРОДА И ВЫЖИВАНИЕ -----
+    { id: 14, cat: "nature", cz: "Postavit přístřešek (šaloun)", ru: "Построить шалаш", emoji: "🏕️" },
+    { id: 15, cat: "nature", cz: "Postavit základnu v lese a později se k ní vrátit", ru: "Построить базу в лесу и вернуться к ней позже", emoji: "🌿" },
+    { id: 16, cat: "nature", cz: "Připravit si jídlo v přírodě", ru: "Приготовить еду на природе", emoji: "🔥" },
+    { id: 17, cat: "nature", cz: "Rybaření", ru: "Рыбалка", emoji: "🎣" },
+    { id: 18, cat: "nature", cz: "Koupání v jezeře nebo řece", ru: "Купание в озере или реке", emoji: "💦" },
+    { id: 19, cat: "nature", cz: "Den lesního zálesáka", ru: "День лесного выживальщика", emoji: "🌲🪓" },
+    { id: 20, cat: "nature", cz: "Zmoknout během dobrodružství", ru: "Попасть под дождь во время приключения", emoji: "🌧️" },
+
+    // ----- VÝZVY / ЧЕЛЛЕНДЖИ -----
+    { id: 21, cat: "challenges", cz: "Začít den s 0 korunami a vydělat si na jídlo nebo pití", ru: "Начать день с 0 крон и заработать на еду или напиток", emoji: "💰" },
+    { id: 22, cat: "challenges", cz: "24 hodin bez telefonu", ru: "24 часа без телефона", emoji: "📵" },
+    { id: 23, cat: "challenges", cz: "Den náhodných rozhodnutí", ru: "День случайных решений", emoji: "🎭" },
+    { id: 24, cat: "challenges", cz: "Nespat celou noc", ru: "Не спать всю ночь", emoji: "🌙" },
+
+    // ----- NOČNÍ DOBRODRUŽSTVÍ / НОЧНЫЕ ПРИКЛЮЧЕНИЯ -----
+    { id: 25, cat: "night", cz: "Noční procházka", ru: "Ночная прогулка", emoji: "🌃" },
+    { id: 26, cat: "night", cz: "Vydat se na východ slunce", ru: "Встретить рассвет", emoji: "🌅" },
+    { id: 27, cat: "night", cz: "Noční piknik", ru: "Ночной пикник", emoji: "🧺✨" },
+    { id: 28, cat: "night", cz: "Sledování hororových videí v noci", ru: "Смотреть страшные видео ночью", emoji: "👻" },
+    { id: 29, cat: "night", cz: "Projít temnou trasu v noci", ru: "Пройти тёмный маршрут ночью", emoji: "🌑" },
+    { id: 30, cat: "night", cz: "Strašidelné příběhy v noci", ru: "Страшные истории ночью", emoji: "📖" },
+    { id: 31, cat: "night", cz: "Upřímný noční rozhovor", ru: "Ночной разговор по-честному", emoji: "💬" },
+    { id: 32, cat: "night", cz: "Vidět hvězdnou oblohu mimo město", ru: "Увидеть звёздное небо за городом", emoji: "⭐" },
+    { id: 33, cat: "night", cz: "Zažít západ slunce a následný východ slunce v jedné partě (Legenda)", ru: "Встретить закат и следующий рассвет одной компанией (Легенда)", emoji: "🌄", legendary: true },
+
+    // ----- PARTA / КОМПАНИЯ -----
+    { id: 34, cat: "group", cz: "Sejít se jako celá parta 10krát za léto", ru: "Собраться всей компанией 10 раз за лето", emoji: "👥" },
+    { id: 35, cat: "group", cz: "Strávit den bez jediné hádky", ru: "Провести день без единого спора", emoji: "🤝" },
+    { id: 36, cat: "group", cz: "Vymyslet tradici party", ru: "Придумать традицию компании", emoji: "🎉" },
+    { id: 37, cat: "group", cz: "Uspořádat fotbalový turnaj", ru: "Устроить турнир по футболу", emoji: "⚽" },
+    { id: 38, cat: "group", cz: "Sehrát zápas proti jiné partě", ru: "Сыграть матч против другой компании", emoji: "🏆" },
+    { id: 39, cat: "group", cz: "Udělat společnou fotku na začátku a na konci léta", ru: "Сделать общее фото в начале и конце лета", emoji: "📷" },
+
+    // ----- VZPOMÍNKY NA LÉTO / ПАМЯТЬ О ЛЕТЕ -----
+    { id: 40, cat: "memories", cz: "Vytvořit sbírku nejlepších fotek léta", ru: "Сделать коллекцию лучших фото лета", emoji: "🖼️" },
+    { id: 41, cat: "memories", cz: "Natočit film o létě", ru: "Снять фильм про лето", emoji: "🎬" },
+    { id: 42, cat: "memories", cz: "Podívat se na film s celou partou na konci léta", ru: "Посмотреть фильм всей компанией в конце лета", emoji: "🍿" },
+    { id: 43, cat: "memories", cz: "Vybrat nejlepší den léta", ru: "Выбрать лучший день лета", emoji: "🌟" }
+  ];
+
+  // Metadata kategorií (bilingual)
+  const CATEGORY_META = {
+    adventures: { nameCZ: "🌞 DOBRODRUŽSTVÍ", nameRU: "ПРИКЛЮЧЕНИЯ" },
+    nature: { nameCZ: "🌿 PŘÍRODA & PŘEŽITÍ", nameRU: "ПРИРОДА И ВЫЖИВАНИЕ" },
+    challenges: { nameCZ: "⚡ VÝZVY", nameRU: "ЧЕЛЛЕНДЖИ" },
+    night: { nameCZ: "🌙 NOČNÍ DOBRODRUŽSTVÍ", nameRU: "НОЧНЫЕ ПРИКЛЮЧЕНИЯ" },
+    group: { nameCZ: "🤝 PARTA", nameRU: "КОМПАНИЯ" },
+    memories: { nameCZ: "📸 VZPOMÍNKY NA LÉTO", nameRU: "ПАМЯТЬ О ЛЕТЕ" }
+  };
+
+  let totalTasks = TASKS_DATA.length;
+  let checkedState = new Array(totalTasks).fill(false);
+  const STORAGE_KEY = "legendary_summer_v2026_final";
+
+  // načtení z localStorage
+  function loadState() {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length === totalTasks) {
+          checkedState = parsed;
+        } else {
+          checkedState = new Array(totalTasks).fill(false);
+        }
+      } catch(e) {
+        checkedState = new Array(totalTasks).fill(false);
+      }
+    }
+  }
+
+  function saveState() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(checkedState));
+  }
+
+  function updateProgressUI() {
+    const completed = checkedState.filter(v => v === true).length;
+    const percent = totalTasks === 0 ? 0 : (completed / totalTasks) * 100;
+    document.getElementById("completedCount").innerText = completed;
+    document.getElementById("totalCount").innerText = totalTasks;
+    document.getElementById("progressFill").style.width = `${percent}%`;
+  }
+
+  function setTaskChecked(taskId, isChecked) {
+    if (taskId >= 0 && taskId < totalTasks) {
+      checkedState[taskId] = isChecked;
+      saveState();
+      updateProgressUI();
+    }
+  }
+
+  function renderChecklist() {
+    const root = document.getElementById("checklistRoot");
+    if (!root) return;
+
+    // seskupení podle kategorií
+    const grouped = new Map();
+    for (const task of TASKS_DATA) {
+      const cat = task.cat;
+      if (!grouped.has(cat)) grouped.set(cat, []);
+      grouped.get(cat).push(task);
+    }
+
+    root.innerHTML = "";
+    for (const [catKey, tasksArray] of grouped.entries()) {
+      const meta = CATEGORY_META[catKey];
+      const card = document.createElement("div");
+      card.className = "category-card";
+
+      const headerDiv = document.createElement("div");
+      headerDiv.className = "category-header";
+      const title = document.createElement("h2");
+      title.innerHTML = `<span>${meta.nameCZ}</span> <span style="font-size:0.9rem; font-weight:normal;">/ ${meta.nameRU}</span>`;
+      headerDiv.appendChild(title);
+      card.appendChild(headerDiv);
+
+      const tasksListDiv = document.createElement("div");
+      tasksListDiv.className = "tasks-list";
+
+      for (const task of tasksArray) {
+        const taskId = task.id;
+        const isChecked = checkedState[taskId] || false;
+
+        const taskDiv = document.createElement("div");
+        taskDiv.className = "task-item";
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.className = "task-checkbox";
+        checkbox.checked = isChecked;
+        checkbox.addEventListener("change", (e) => {
+          e.stopPropagation();
+          setTaskChecked(taskId, checkbox.checked);
+        });
+
+        const labelSpan = document.createElement("span");
+        labelSpan.className = "task-label";
+        let legendHtml = "";
+        if (task.legendary) {
+          legendHtml = `<span class="legend-badge">🏅 LEGEND</span>`;
+        }
+        labelSpan.innerHTML = `${task.emoji} <strong>${task.cz}</strong> <small>/ ${task.ru}</small> ${legendHtml}`;
+
+        taskDiv.appendChild(checkbox);
+        taskDiv.appendChild(labelSpan);
+        tasksListDiv.appendChild(taskDiv);
+      }
+      card.appendChild(tasksListDiv);
+      root.appendChild(card);
+    }
+    updateProgressUI();
+  }
+
+  function resetAllChecks() {
+    const isConfirmed = confirm("⚠️ Opravdu chceš resetovat všechny úkoly? / Точно сбросить весь прогресс?\nVšechny splněné položky se odškrtnou.");
+    if (!isConfirmed) return;
+    checkedState.fill(false);
+    saveState();
+    renderChecklist();  // překreslí a aktualizuje checkboxy
+    updateProgressUI();
+  }
+
+  function init() {
+    loadState();
+    renderChecklist();
+    const resetBtn = document.getElementById("resetAllBtn");
+    if (resetBtn) resetBtn.addEventListener("click", resetAllChecks);
+  }
+
+  document.addEventListener("DOMContentLoaded", init);
+</script>
+</body>
+</html>
