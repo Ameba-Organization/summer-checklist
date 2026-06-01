@@ -148,8 +148,27 @@
     .btn { background: #f5a623; border: none; padding: 0.4rem 1rem; border-radius: 1.5rem; cursor: pointer; margin-right: 6px; font-weight: bold; }
     .btn-secondary { background: #ddd; }
     footer { text-align: center; margin-top: 1.8rem; font-size: 0.7rem; color: #b87a3c; }
-    .chat-settings { text-align: right; margin-bottom: 8px; }
-    .chat-settings button { background: none; border: none; font-size: 0.9rem; color: #c0621a; cursor: pointer; text-decoration: underline; }
+    .chat-settings {
+      text-align: right;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .chat-settings button {
+      background: none;
+      border: none;
+      font-size: 0.9rem;
+      color: #c0621a;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    .notification-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+    }
   </style>
 </head>
 <body>
@@ -190,6 +209,9 @@
   <div id="tab-chat" class="tab-content">
     <div class="chat-settings">
       <button id="changeNameBtn">✏️ Změnit jméno</button>
+      <label class="notification-toggle">
+        <input type="checkbox" id="notificationsToggle"> 🔔 Upozornění na odpověď
+      </label>
     </div>
     <div class="chat-container" id="chatMessages">
       <div style="text-align: center; color: #b87a3c;">Načítání zpráv...</div>
@@ -242,8 +264,8 @@
   // ==================== KONFIGURACE ====================
   const BOT_TOKEN = "8613265812:AAE3uVJYnZ-t5Kd8viX4H2xGJZaqnYk6vx8";
   const CHAT_ID = "5417843713";
-  const SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbzVoKqUmT6IIhA-yHgTdxyaxqwPOxeeeD8oY5U8Z4aC8D8a2WFv3rT4TL-wGht4dCr9/exec";
-  const SHEETS_EDIT_URL = "https://docs.google.com/spreadsheets/d/16MQbz6lUd4M4m92oa9fEhbvCTzN4FmA5AWCXtCjARO4/edit";
+  const SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbygC2YOOV3kVtZKeN5U_v7yiRR3x_-GVyvvd0h2n_Zl2bxRfi9sNYBBX6yesatM0lTt-A/exec";
+  const SHEETS_EDIT_URL = "https://docs.google.com/spreadsheets/d/1IIlhuEbm1Rul9KOSW7IQBBbkOsWHOEHMKVZvrNsbe_I/edit";
   // ====================================================
 
   // ---------- SEZNAM ÚKOLŮ (PODLE PDF) ----------
@@ -337,6 +359,8 @@
   let chatInterval = null;
   let currentUserId = localStorage.getItem("chat_userId") || (Math.random().toString(36) + Date.now().toString(36));
   let currentUserName = localStorage.getItem("chat_userName") || "";
+  let notificationsEnabled = localStorage.getItem("chat_notifications") !== "false";
+  let lastAnswers = {};
 
   // ---------- CHAT FUNCTIONS ----------
   async function sendMessageToSheet(message, name, userId) {
@@ -368,6 +392,27 @@
       const res = await fetch(SHEETS_API_URL);
       return await res.json();
     } catch(e) { return []; }
+  }
+
+  async function requestNotificationPermission() {
+    if (!("Notification" in window)) return;
+    if (Notification.permission === "default") {
+      await Notification.requestPermission();
+    }
+  }
+
+  function showNotification(title, body) {
+    if (!notificationsEnabled) return;
+    if (!("Notification" in window)) return;
+    if (Notification.permission === "granted") {
+      new Notification(title, { body });
+    } else if (Notification.permission === "default") {
+      requestNotificationPermission().then(() => {
+        if (Notification.permission === "granted") {
+          new Notification(title, { body });
+        }
+      });
+    }
   }
 
   async function sendChatMessage() {
@@ -409,6 +454,15 @@
       return;
     }
     messages.sort((a,b) => new Date(a.timestamp) - new Date(b.timestamp));
+    // Kontrola nových odpovědí pro aktuálního uživatele
+    for (let msg of messages) {
+      if (msg.userId === currentUserId && msg.answer && msg.answer !== lastAnswers[msg.id]) {
+        if (lastAnswers[msg.id] !== undefined) {
+          showNotification("📬 Nová odpověď od admina", `Tvá zpráva: "${msg.message}"\nOdpověď: ${msg.answer}`);
+        }
+        lastAnswers[msg.id] = msg.answer;
+      }
+    }
     container.innerHTML = messages.map(msg => {
       const isOwner = (msg.userId === currentUserId);
       const displayMessage = msg.deleted ? "[сообщение удалено]" : msg.message;
@@ -453,7 +507,7 @@
     document.getElementById("nameModal").style.display = "flex";
   }
 
-  // ---------- CHECKLIST (STEJNÁ LOGIKA JAKO DŘÍVE) ----------
+  // ---------- CHECKLIST FUNCTIONS ----------
   function save() {
     localStorage.setItem("summer_checks", JSON.stringify(checks));
     localStorage.setItem("summer_comments", JSON.stringify(comments));
@@ -463,6 +517,7 @@
     localStorage.setItem("summer_sound", soundEnabled);
     localStorage.setItem("chat_userId", currentUserId);
     localStorage.setItem("chat_userName", currentUserName);
+    localStorage.setItem("chat_notifications", notificationsEnabled);
   }
 
   function loadData() {
@@ -474,8 +529,11 @@
     const s = localStorage.getItem("summer_sound"); if (s !== null) soundEnabled = s === "true";
     const uid = localStorage.getItem("chat_userId"); if (uid) currentUserId = uid;
     const uname = localStorage.getItem("chat_userName"); if (uname) currentUserName = uname;
+    const notif = localStorage.getItem("chat_notifications");
+    if (notif !== null) notificationsEnabled = notif === "true";
     document.getElementById("langSelect").value = lang;
     document.getElementById("soundCheck").checked = soundEnabled;
+    document.getElementById("notificationsToggle").checked = notificationsEnabled;
   }
 
   function playBeep() {
@@ -672,7 +730,7 @@
       if (tabId === 'chat') {
         renderChat();
         if (chatInterval) clearInterval(chatInterval);
-        chatInterval = setInterval(renderChat, 8000);
+        chatInterval = setInterval(() => renderChat(), 8000);
       } else {
         if (chatInterval) clearInterval(chatInterval);
       }
@@ -690,6 +748,13 @@
   document.getElementById("changeNameBtn").onclick = showNameModal;
   document.getElementById("saveNameBtn").onclick = saveUserName;
   document.getElementById("closeNameBtn").onclick = () => document.getElementById("nameModal").style.display = "none";
+  document.getElementById("notificationsToggle").onchange = (e) => {
+    notificationsEnabled = e.target.checked;
+    localStorage.setItem("chat_notifications", notificationsEnabled);
+    if (notificationsEnabled && Notification.permission === "default") {
+      requestNotificationPermission();
+    }
+  };
 
   function init() {
     loadData();
@@ -700,6 +765,16 @@
     renderCalendar();
     updateCounters();
     renderAchievements();
+    requestNotificationPermission();
+    loadMessagesFromSheet().then(messages => {
+      if (messages) {
+        for (let msg of messages) {
+          if (msg.userId === currentUserId && msg.answer) {
+            lastAnswers[msg.id] = msg.answer;
+          }
+        }
+      }
+    });
   }
   init();
 </script>
