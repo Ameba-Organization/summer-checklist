@@ -230,6 +230,42 @@
     .toast { background: var(--surface); border: 1px solid var(--border-strong); border-left: 5px solid var(--accent); border-radius: 14px; padding: 0.7rem 0.9rem; box-shadow: var(--shadow); font-size: 0.85rem; animation: toastIn 0.25s ease; }
     @keyframes toastIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 
+    /* ---------- News ---------- */
+    .admin-bar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 1rem; }
+    .admin-pill { background: linear-gradient(120deg, #ffe9b8, #ffd27a); color: #6b4a12; border-radius: var(--radius-pill); padding: 0.3rem 0.8rem; font-size: 0.74rem; font-weight: 800; }
+    [data-theme="dark"] .admin-pill { color: #1d1810; }
+    .admin-hint { font-size: 0.78rem; color: var(--muted); }
+    .news-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-sm); padding: 1rem; margin-bottom: 1rem; }
+    .news-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+    .news-title { font-size: 1.05rem; font-weight: 800; color: var(--accent-strong); word-break: break-word; }
+    .news-date { font-size: 0.66rem; color: var(--muted); margin-top: 2px; }
+    .news-body { margin-top: 0.5rem; white-space: pre-wrap; word-break: break-word; font-size: 0.9rem; }
+    .reactions { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 0.8rem; }
+    .reaction-btn { background: var(--surface-2); border: 1px solid var(--border-strong); border-radius: var(--radius-pill); padding: 0.25rem 0.6rem; font-size: 0.95rem; cursor: pointer; color: var(--text); display: inline-flex; gap: 5px; align-items: center; transition: transform 0.1s, background 0.15s; }
+    .reaction-btn:hover { transform: translateY(-1px); background: var(--surface-3); }
+    .reaction-btn.reacted { background: var(--accent); color: var(--accent-contrast); border-color: var(--accent); }
+    .reaction-count { font-size: 0.74rem; font-weight: 700; }
+    .icon-action { background: none; border: none; cursor: pointer; font-size: 1rem; opacity: 0.6; color: inherit; padding: 2px 4px; }
+    .icon-action:hover { opacity: 1; }
+
+    /* ---------- Polls ---------- */
+    .poll-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-sm); padding: 1rem; margin-bottom: 1rem; }
+    .poll-head { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; }
+    .poll-question { font-size: 1rem; font-weight: 800; word-break: break-word; }
+    .poll-meta { font-size: 0.66rem; color: var(--muted); margin: 2px 0 0.7rem; }
+    .poll-option { margin-bottom: 0.5rem; border-radius: var(--radius-pill); }
+    .poll-option.votable { cursor: pointer; }
+    .poll-option.votable:hover .poll-bar { border-color: var(--accent); }
+    .poll-option-row { display: flex; justify-content: space-between; gap: 10px; font-size: 0.84rem; font-weight: 600; margin-bottom: 3px; }
+    .poll-bar { background: var(--surface-3); border-radius: var(--radius-pill); height: 22px; overflow: hidden; border: 1px solid var(--border); transition: border-color 0.15s; }
+    .poll-bar-fill { background: linear-gradient(90deg, var(--accent), var(--accent-strong)); height: 100%; width: 0%; border-radius: var(--radius-pill); transition: width 0.4s ease; }
+    .poll-option.chosen .poll-option-row { color: var(--accent-strong); }
+    .poll-total { font-size: 0.72rem; color: var(--muted); margin-top: 0.5rem; }
+    .poll-closed-tag { background: var(--danger); color: #fff; border-radius: var(--radius-pill); padding: 0.05rem 0.5rem; font-size: 0.62rem; font-weight: 800; margin-left: 6px; white-space: nowrap; }
+    .option-input-row { display: flex; gap: 8px; align-items: center; margin-bottom: 6px; }
+    .option-input-row input { margin: 0; }
+    .option-input-row button { flex-shrink: 0; }
+
     footer { text-align: center; margin-top: 1.8rem; font-size: 0.72rem; color: var(--muted); }
 
     @media (max-width: 520px) {
@@ -259,6 +295,8 @@
 
   <nav class="tabs" role="tablist">
     <button class="tab-btn active" data-tab="checklist" role="tab" aria-selected="true">📋 Checklist</button>
+    <button class="tab-btn" data-tab="news" role="tab" aria-selected="false">📰 Novinky</button>
+    <button class="tab-btn" data-tab="polls" role="tab" aria-selected="false">🗳️ Hlasování</button>
     <button class="tab-btn" data-tab="chat" role="tab" aria-selected="false">💬 Chat s adminem</button>
   </nav>
 
@@ -311,6 +349,37 @@
     </div>
   </section>
 
+  <section id="tab-news" class="tab-content" role="tabpanel">
+    <div class="admin-bar">
+      <span class="admin-pill" id="newsAdminPill" hidden>🔐 Admin</span>
+      <span class="admin-hint" id="newsHint"></span>
+    </div>
+    <div class="card" id="newsForm" hidden>
+      <div class="panel-title" id="newsFormTitle">📝 Nová novinka</div>
+      <input type="text" id="newsTitleInput" maxlength="120" placeholder="Nadpis">
+      <textarea id="newsBodyInput" rows="3" placeholder="Text novinky..."></textarea>
+      <button class="btn" id="publishNewsBtn">📢 Zveřejnit</button>
+      <div class="chat-status" id="newsStatus"></div>
+    </div>
+    <div id="newsList" aria-live="polite"><div class="empty-state" id="newsLoading">Načítání...</div></div>
+  </section>
+
+  <section id="tab-polls" class="tab-content" role="tabpanel">
+    <div class="admin-bar">
+      <span class="admin-pill" id="pollsAdminPill" hidden>🔐 Admin</span>
+      <span class="admin-hint" id="pollsHint"></span>
+    </div>
+    <div class="card" id="pollForm" hidden>
+      <div class="panel-title" id="pollFormTitle">🗳️ Nové hlasování</div>
+      <input type="text" id="pollQuestionInput" maxlength="160" placeholder="Otázka">
+      <div id="pollOptionsWrap"></div>
+      <button class="btn-secondary btn" id="addOptionBtn" type="button">➕ Přidat možnost</button>
+      <div style="margin-top: 10px;"><button class="btn" id="createPollBtn">🗳️ Vytvořit hlasování</button></div>
+      <div class="chat-status" id="pollStatus"></div>
+    </div>
+    <div id="pollsList" aria-live="polite"><div class="empty-state" id="pollsLoading">Načítání...</div></div>
+  </section>
+
   <footer id="footerText">💾 vše se ukládá v prohlížeči · komentáře · chat s adminem</footer>
 </div>
 
@@ -331,6 +400,14 @@
       <input type="checkbox" id="themeCheck">
       <label for="themeCheck" id="themeLabel">🌙 Tmavý režim</label>
     </div>
+    <hr>
+    <label id="adminSectionLabel">🔐 Admin režim (jen pro tebe):</label>
+    <input type="password" id="adminKeyInput" placeholder="Admin klíč" autocomplete="off">
+    <div class="modal-actions">
+      <button id="adminLoginBtn" class="btn">Přihlásit jako admin</button>
+      <button id="adminLogoutBtn" class="btn-secondary btn" hidden>Odhlásit admina</button>
+    </div>
+    <div class="chat-status" id="adminStatus" style="text-align: left;"></div>
     <hr>
     <div class="modal-actions">
       <button id="resetAchBtn" class="btn-secondary btn">🏅 Resetovat achievements</button>
@@ -442,10 +519,10 @@ const translations = {
     calendarTitle: "📅 Aktivita (den s odškrtnutím)", footer: "💾 vše se ukládá v prohlížeči · komentáře · chat s adminem",
     commentTitle: "📝 Komentář k úkolu", save: "Uložit", cancel: "Zrušit",
     settingsTitle: "⚙️ Nastavení", langLabel: "Jazyk / Language:", soundLabel: "🔊 Zvuk při odškrtnutí",
-    themeLabel: "🌙 Tmavý režim", resetAch: "🏅 Resetovat achievements", close: "Zavřít",
+    themeLabel: "🌙 Tmavý režim", resetAch: "🏅 Resetovat úspěchy", close: "Zavřít",
     summerLabel: "🌞 Léto: <b>{total}</b> dní · zbývá <b>{left}</b>", vacLabel: "🏖️ Prázdniny: <b>{total}</b> dní · zbývá <b>{left}</b>",
     achNames: { first: "První krev", half: "50%", full: "100%", nature: "Les", night: "Noc", group: "Parta", legend: "Legenda" },
-    achNew: "🏆 NOVÝ ÚSPĚCH!", confirmReset: "Opravdu resetovat všechny úkoly?", confirmResetAch: "Opravdu resetovat achievements?",
+    achNew: "🏆 NOVÝ ÚSPĚCH!", confirmReset: "Opravdu resetovat všechny úkoly?", confirmResetAch: "Opravdu resetovat úspěchy?",
     confirmDelete: "Opravdu smazat tuto zprávu?",
     chatPlaceholder: "Napiš svůj dotaz nebo nápad...", sendBtn: "📤 Odeslat zprávu",
     changeName: "✏️ Změnit jméno", notifLabel: "🔔 Upozornění na odpověď", nameTitle: "👤 Tvé jméno v chatu",
@@ -454,7 +531,16 @@ const translations = {
     loading: "Načítání zpráv...", noMessages: "Zatím žádné zprávy. Napiš první!",
     deletedMsg: "[zpráva smazána]", adminAnswer: "Odpověď admina:", noAnswer: "Zatím bez odpovědi...",
     sending: "Odesílání...", sent: "✅ Odesláno!", sendError: "❌ Chyba odeslání, zkus to znovu.",
-    newAnswer: "📬 Nová odpověď od admina", monthNames: ["Červen","Červenec","Srpen"]
+    newAnswer: "📬 Nová odpověď od admina", monthNames: ["Červen","Červenec","Srpen"],
+    tabChecklist: "📋 Checklist", tabChat: "💬 Chat s adminem", tabNews: "📰 Novinky", tabPolls: "🗳️ Hlasování",
+    loadError: "⚠️ Nepodařilo se načíst data.",
+    newsFormTitle: "📝 Nová novinka", newsTitlePh: "Nadpis", newsBodyPh: "Text novinky...", publishBtn: "📢 Zveřejnit",
+    noNews: "Zatím žádné novinky.", newsHint: "Novinky píše jen admin. Můžeš na ně reagovat 👍",
+    pollFormTitle: "🗳️ Nové hlasování", pollQuestionPh: "Otázka", optionPh: "Možnost", addOption: "➕ Přidat možnost",
+    createPollBtn: "🗳️ Vytvořit hlasování", pollNeed: "Zadej otázku a aspoň 2 možnosti.", noPolls: "Zatím žádné hlasování.",
+    pollsHint: "Hlasování vytváří admin. Hlasovat může každý 🗳️", totalVotes: "Hlasů celkem", closedTag: "UZAVŘENO",
+    adminSection: "🔐 Admin režim (jen pro tebe):", adminKeyPh: "Admin klíč", adminLogin: "Přihlásit jako admin",
+    adminLogout: "Odhlásit admina", checking: "Ověřuji...", adminOk: "✅ Jsi přihlášen jako admin.", adminBad: "❌ Špatný klíč."
   },
   ru: {
     progress: "🏆 Выполнено:", resetBtn: "🌀 Сбросить всё", achievementsTitle: "🏅 Достижения",
@@ -473,7 +559,16 @@ const translations = {
     loading: "Загрузка сообщений...", noMessages: "Пока нет сообщений. Напиши первым!",
     deletedMsg: "[сообщение удалено]", adminAnswer: "Ответ админа:", noAnswer: "Пока без ответа...",
     sending: "Отправка...", sent: "✅ Отправлено!", sendError: "❌ Ошибка отправки, попробуй ещё раз.",
-    newAnswer: "📬 Новый ответ от админа", monthNames: ["Июнь","Июль","Август"]
+    newAnswer: "📬 Новый ответ от админа", monthNames: ["Июнь","Июль","Август"],
+    tabChecklist: "📋 Чек-лист", tabChat: "💬 Чат с админом", tabNews: "📰 Новости", tabPolls: "🗳️ Голосование",
+    loadError: "⚠️ Не удалось загрузить данные.",
+    newsFormTitle: "📝 Новая новость", newsTitlePh: "Заголовок", newsBodyPh: "Текст новости...", publishBtn: "📢 Опубликовать",
+    noNews: "Пока новостей нет.", newsHint: "Новости пишет только админ. Ты можешь ставить реакции 👍",
+    pollFormTitle: "🗳️ Новое голосование", pollQuestionPh: "Вопрос", optionPh: "Вариант", addOption: "➕ Добавить вариант",
+    createPollBtn: "🗳️ Создать голосование", pollNeed: "Введи вопрос и минимум 2 варианта.", noPolls: "Пока голосований нет.",
+    pollsHint: "Голосования создаёт админ. Голосовать может каждый 🗳️", totalVotes: "Всего голосов", closedTag: "ЗАКРЫТО",
+    adminSection: "🔐 Режим админа (только для тебя):", adminKeyPh: "Ключ админа", adminLogin: "Войти как админ",
+    adminLogout: "Выйти из админа", checking: "Проверяю...", adminOk: "✅ Ты вошёл как админ.", adminBad: "❌ Неверный ключ."
   }
 };
 
@@ -492,6 +587,9 @@ let notificationsEnabled = localStorage.getItem("chat_notifications") !== "false
 let lastAnswers = {};
 let filterMode = "all";
 let searchTerm = "";
+let adminKey = localStorage.getItem("admin_key") || "";
+let isAdmin = false;
+const REACTIONS = ["👍", "❤️", "🔥", "😂", "😮"];
 
 const $ = (id) => document.getElementById(id);
 const t = () => translations[lang];
@@ -677,6 +775,215 @@ async function renderChat() {
     btn.addEventListener("click", (e) => { e.stopPropagation(); deleteMessage(btn.getAttribute("data-id")); });
   });
   container.scrollTop = container.scrollHeight;
+}
+
+/* ---------- generic API ---------- */
+async function apiGet(type, params) {
+  try {
+    let url = SHEETS_API_URL;
+    const q = [];
+    if (type) q.push("type=" + encodeURIComponent(type));
+    if (params) Object.keys(params).forEach(k => q.push(k + "=" + encodeURIComponent(params[k])));
+    if (q.length) url += "?" + q.join("&");
+    const res = await fetch(url);
+    return await res.json();
+  } catch (e) { return null; }
+}
+
+async function apiPost(payload) {
+  try {
+    await fetch(SHEETS_API_URL, {
+      method: "POST", mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+    return true;
+  } catch (e) { return false; }
+}
+
+/* ---------- admin mode ---------- */
+async function verifyAdmin(key) {
+  const d = await apiGet("verify", { key });
+  return !!(d && d.admin);
+}
+
+async function adminLogin() {
+  const key = $("adminKeyInput").value.trim();
+  if (!key) return;
+  $("adminStatus").textContent = t().checking;
+  const ok = await verifyAdmin(key);
+  if (ok) {
+    adminKey = key; isAdmin = true;
+    localStorage.setItem("admin_key", key);
+    $("adminStatus").textContent = t().adminOk;
+    applyAdminUI();
+  } else {
+    $("adminStatus").textContent = t().adminBad;
+  }
+}
+
+function adminLogout() {
+  adminKey = ""; isAdmin = false;
+  localStorage.removeItem("admin_key");
+  $("adminKeyInput").value = "";
+  $("adminStatus").textContent = "";
+  applyAdminUI();
+}
+
+function applyAdminUI() {
+  $("newsForm").hidden = !isAdmin;
+  $("pollForm").hidden = !isAdmin;
+  $("newsAdminPill").hidden = !isAdmin;
+  $("pollsAdminPill").hidden = !isAdmin;
+  $("adminLoginBtn").hidden = isAdmin;
+  $("adminLogoutBtn").hidden = !isAdmin;
+  $("newsHint").textContent = isAdmin ? "" : t().newsHint;
+  $("pollsHint").textContent = isAdmin ? "" : t().pollsHint;
+  renderNews();
+  renderPolls();
+}
+
+/* ---------- news ---------- */
+async function renderNews() {
+  const list = $("newsList");
+  const data = await apiGet("news");
+  if (data === null) { list.innerHTML = `<div class="empty-state">${t().loadError}</div>`; return; }
+  if (!data.length) { list.innerHTML = `<div class="empty-state">${t().noNews}</div>`; return; }
+  data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+  list.innerHTML = data.map(n => {
+    const reactions = n.reactions || {};
+    const reactHtml = REACTIONS.map(em => {
+      const arr = reactions[em] || [];
+      const mine = arr.indexOf(currentUserId) >= 0;
+      return `<button class="reaction-btn ${mine ? "reacted" : ""}" data-news="${escapeHtml(n.id)}" data-emoji="${em}">${em}${arr.length ? `<span class="reaction-count">${arr.length}</span>` : ""}</button>`;
+    }).join("");
+    return `
+      <div class="news-item">
+        <div class="news-head">
+          <div>
+            <div class="news-title">${escapeHtml(n.title || "")}</div>
+            <div class="news-date">${n.timestamp ? new Date(n.timestamp).toLocaleString() : ""}</div>
+          </div>
+          ${isAdmin ? `<button class="icon-action" data-delnews="${escapeHtml(n.id)}" aria-label="Smazat">🗑️</button>` : ""}
+        </div>
+        ${n.body ? `<div class="news-body">${escapeHtml(n.body)}</div>` : ""}
+        <div class="reactions">${reactHtml}</div>
+      </div>`;
+  }).join("");
+  list.querySelectorAll(".reaction-btn").forEach(b => b.addEventListener("click", () => reactToNews(b.getAttribute("data-news"), b.getAttribute("data-emoji"))));
+  list.querySelectorAll("[data-delnews]").forEach(b => b.addEventListener("click", () => deleteNews(b.getAttribute("data-delnews"))));
+}
+
+async function reactToNews(id, emoji) {
+  await apiPost({ type: "news", action: "react", id, emoji, userId: currentUserId });
+  setTimeout(renderNews, 600);
+}
+
+async function publishNews() {
+  const title = $("newsTitleInput").value.trim();
+  const body = $("newsBodyInput").value.trim();
+  if (!title && !body) return;
+  $("newsStatus").textContent = t().sending;
+  await apiPost({ type: "news", action: "create", title, body, adminKey });
+  $("newsTitleInput").value = ""; $("newsBodyInput").value = "";
+  $("newsStatus").textContent = t().sent;
+  setTimeout(() => { $("newsStatus").textContent = ""; }, 2500);
+  setTimeout(renderNews, 900);
+}
+
+async function deleteNews(id) {
+  if (!confirm(t().confirmDelete)) return;
+  await apiPost({ type: "news", action: "delete", id, adminKey });
+  setTimeout(renderNews, 700);
+}
+
+/* ---------- polls ---------- */
+async function renderPolls() {
+  const list = $("pollsList");
+  const data = await apiGet("polls");
+  if (data === null) { list.innerHTML = `<div class="empty-state">${t().loadError}</div>`; return; }
+  if (!data.length) { list.innerHTML = `<div class="empty-state">${t().noPolls}</div>`; return; }
+  data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+  list.innerHTML = data.map(p => {
+    const options = Array.isArray(p.options) ? p.options : [];
+    const votes = p.votes || {};
+    let total = 0;
+    const counts = options.map((_, i) => { const c = (votes[String(i)] || []).length; total += c; return c; });
+    let myVote = null;
+    Object.keys(votes).forEach(k => { if ((votes[k] || []).indexOf(currentUserId) >= 0) myVote = k; });
+    const closed = p.closed === true || String(p.closed).toLowerCase() === "true";
+    const votable = !closed;
+    const optHtml = options.map((opt, i) => {
+      const c = counts[i];
+      const pct = total ? Math.round((c / total) * 100) : 0;
+      const chosen = String(i) === myVote;
+      return `
+        <div class="poll-option ${chosen ? "chosen" : ""} ${votable ? "votable" : ""}" ${votable ? `data-poll="${escapeHtml(p.id)}" data-opt="${i}"` : ""}>
+          <div class="poll-option-row"><span>${chosen ? "✅ " : ""}${escapeHtml(opt)}</span><span>${pct}% · ${c}</span></div>
+          <div class="poll-bar"><div class="poll-bar-fill" style="width:${pct}%"></div></div>
+        </div>`;
+    }).join("");
+    return `
+      <div class="poll-item">
+        <div class="poll-head">
+          <div class="poll-question">${escapeHtml(p.question || "")}${closed ? `<span class="poll-closed-tag">${t().closedTag}</span>` : ""}</div>
+          ${isAdmin ? `<div>${closed ? "" : `<button class="icon-action" data-closepoll="${escapeHtml(p.id)}" aria-label="Close" title="Close">⏹️</button>`}<button class="icon-action" data-delpoll="${escapeHtml(p.id)}" aria-label="Smazat">🗑️</button></div>` : ""}
+        </div>
+        <div class="poll-meta">${p.timestamp ? new Date(p.timestamp).toLocaleString() : ""}</div>
+        ${optHtml}
+        <div class="poll-total">${t().totalVotes}: ${total}</div>
+      </div>`;
+  }).join("");
+  list.querySelectorAll(".poll-option.votable").forEach(o => o.addEventListener("click", () => castVote(o.getAttribute("data-poll"), Number(o.getAttribute("data-opt")))));
+  list.querySelectorAll("[data-delpoll]").forEach(b => b.addEventListener("click", () => deletePoll(b.getAttribute("data-delpoll"))));
+  list.querySelectorAll("[data-closepoll]").forEach(b => b.addEventListener("click", () => closePollById(b.getAttribute("data-closepoll"))));
+}
+
+async function castVote(id, optionIndex) {
+  await apiPost({ type: "poll", action: "vote", id, optionIndex, userId: currentUserId });
+  setTimeout(renderPolls, 600);
+}
+
+function addOptionInput(value) {
+  const wrap = $("pollOptionsWrap");
+  const row = document.createElement("div");
+  row.className = "option-input-row";
+  const input = document.createElement("input");
+  input.type = "text"; input.maxLength = 80; input.placeholder = t().optionPh;
+  if (value) input.value = value;
+  const btn = document.createElement("button");
+  btn.type = "button"; btn.className = "btn-danger btn"; btn.textContent = "✕";
+  btn.onclick = () => row.remove();
+  row.appendChild(input); row.appendChild(btn);
+  wrap.appendChild(row);
+}
+
+function initPollForm() {
+  $("pollOptionsWrap").innerHTML = "";
+  addOptionInput(); addOptionInput();
+}
+
+async function createPoll() {
+  const question = $("pollQuestionInput").value.trim();
+  const options = Array.from($("pollOptionsWrap").querySelectorAll("input")).map(i => i.value.trim()).filter(Boolean);
+  if (!question || options.length < 2) { $("pollStatus").textContent = t().pollNeed; return; }
+  $("pollStatus").textContent = t().sending;
+  await apiPost({ type: "poll", action: "create", question, options, adminKey });
+  $("pollQuestionInput").value = ""; initPollForm();
+  $("pollStatus").textContent = t().sent;
+  setTimeout(() => { $("pollStatus").textContent = ""; }, 2500);
+  setTimeout(renderPolls, 900);
+}
+
+async function deletePoll(id) {
+  if (!confirm(t().confirmDelete)) return;
+  await apiPost({ type: "poll", action: "delete", id, adminKey });
+  setTimeout(renderPolls, 700);
+}
+
+async function closePollById(id) {
+  await apiPost({ type: "poll", action: "close", id, adminKey });
+  setTimeout(renderPolls, 700);
 }
 
 /* ---------- name modal ---------- */
@@ -877,6 +1184,24 @@ function applyLanguage() {
     const f = btn.getAttribute("data-filter");
     btn.textContent = f === "all" ? t().fAll : f === "active" ? t().fActive : t().fDone;
   });
+  document.querySelector('[data-tab="checklist"]').textContent = t().tabChecklist;
+  document.querySelector('[data-tab="chat"]').textContent = t().tabChat;
+  document.querySelector('[data-tab="news"]').textContent = t().tabNews;
+  document.querySelector('[data-tab="polls"]').textContent = t().tabPolls;
+  $("newsFormTitle").textContent = t().newsFormTitle;
+  $("newsTitleInput").placeholder = t().newsTitlePh;
+  $("newsBodyInput").placeholder = t().newsBodyPh;
+  $("publishNewsBtn").textContent = t().publishBtn;
+  $("pollFormTitle").textContent = t().pollFormTitle;
+  $("pollQuestionInput").placeholder = t().pollQuestionPh;
+  $("addOptionBtn").textContent = t().addOption;
+  $("createPollBtn").textContent = t().createPollBtn;
+  $("adminSectionLabel").textContent = t().adminSection;
+  $("adminKeyInput").placeholder = t().adminKeyPh;
+  $("adminLoginBtn").textContent = t().adminLogin;
+  $("adminLogoutBtn").textContent = t().adminLogout;
+  document.querySelectorAll("#pollOptionsWrap input").forEach(i => { i.placeholder = t().optionPh; });
+  if (!isAdmin) { $("newsHint").textContent = t().newsHint; $("pollsHint").textContent = t().pollsHint; }
   updateCounters();
   renderAchievements();
   renderCalendar();
@@ -896,6 +1221,12 @@ function bindEvents() {
       if (tabId === "chat") {
         renderChat();
         chatInterval = setInterval(renderChat, CHAT_POLL_MS);
+      } else if (tabId === "news") {
+        renderNews();
+        chatInterval = setInterval(renderNews, CHAT_POLL_MS);
+      } else if (tabId === "polls") {
+        renderPolls();
+        chatInterval = setInterval(renderPolls, CHAT_POLL_MS);
       }
     });
   });
@@ -931,6 +1262,12 @@ function bindEvents() {
     if (notificationsEnabled) requestNotificationPermission();
   };
 
+  $("publishNewsBtn").onclick = publishNews;
+  $("createPollBtn").onclick = createPoll;
+  $("addOptionBtn").onclick = () => addOptionInput();
+  $("adminLoginBtn").onclick = adminLogin;
+  $("adminLogoutBtn").onclick = adminLogout;
+
   $("searchInput").addEventListener("input", (e) => { searchTerm = e.target.value.trim().toLowerCase(); renderChecklist(); });
   document.querySelectorAll("#filterGroup .filter-btn").forEach(btn => {
     btn.addEventListener("click", () => {
@@ -958,6 +1295,15 @@ function init() {
   updateCounters();
   if (!currentUserName) setTimeout(showNameModal, 600);
   requestNotificationPermission();
+  initPollForm();
+  applyAdminUI();
+  if (adminKey) {
+    verifyAdmin(adminKey).then(ok => {
+      isAdmin = ok;
+      if (!ok) { adminKey = ""; localStorage.removeItem("admin_key"); }
+      applyAdminUI();
+    });
+  }
   loadMessagesFromSheet().then(messages => {
     for (const msg of messages) {
       if (msg.userId === currentUserId && msg.answer) lastAnswers[msg.id] = msg.answer;

@@ -11,6 +11,9 @@ Bez build kroku — stačí otevřít `index.html` nebo nasadit na GitHub Pages.
 - 🏅 **Achievementy**, 📅 **kalendář aktivity**, 🏆 **progress bar** + konfety.
 - 🌙 **Světlý / tmavý režim**, 🔊 zvuk, 🔔 notifikace odpovědí.
 - 💬 **Chat s adminem** přes Google Sheets, s upozorněním do Telegramu.
+- 📰 **Novinky** — píše jen admin, čtou všichni; každý může přidat emoji reakce.
+- 🗳️ **Hlasování** — ankety vytváří admin, hlasovat může každý (1 hlas, lze přehlasovat).
+- 🔐 **Admin režim** — chráněný klíčem (`ADMIN_KEY`), který je uložen jen v Apps Scriptu.
 - 💾 Vše se ukládá lokálně v prohlížeči (`localStorage`).
 
 ## Konfigurace
@@ -35,11 +38,20 @@ Kód a postup jsou v [`apps-script/Code.gs`](apps-script/Code.gs). Stručně:
 2. **Project Settings → Script properties**:
    - `BOT_TOKEN` = nový token z @BotFather
    - `CHAT_ID` = chat id admina
+   - `ADMIN_KEY` = libovolné tajné heslo — zadáš ho na webu (⚙️ Nastavení → Admin režim) pro psaní novinek a anket
    - `SHEET_EDIT_URL` = odkaz na tabulku (volitelné)
 3. **Deploy → New deployment → Web app** (Execute as: *Me*, Access: *Anyone*).
 4. `/exec` URL vlož do `SHEETS_API_URL` v `index.html`.
 
-Admin odpovídá tak, že vyplní sloupec `answer` v tabulce.
+Listů `Messages`, `News` a `Polls` se vytvoří automaticky při prvním použití.
+Admin odpovídá na chat tak, že vyplní sloupec `answer` v tabulce.
+
+### Admin režim (novinky + hlasování)
+
+Psát novinky a vytvářet ankety může jen admin. Na webu otevři **⚙️ Nastavení →
+Admin režim**, zadej `ADMIN_KEY` a přihlas se. Klíč se ověřuje na serveru
+(Apps Script) — ve zdrojovém kódu stránky není. Ostatní návštěvníci novinky a
+ankety jen vidí, mohou hlasovat a přidávat reakce.
 
 ## Lokální spuštění
 
