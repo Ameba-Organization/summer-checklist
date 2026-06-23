@@ -1,462 +1,289 @@
 <!DOCTYPE html>
-<html lang="cs" data-theme="light">
+<html lang="cs">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Legendary Summer 2026 — checklist dobrodružství, achievementy a chat s adminem.">
-  <meta name="theme-color" content="#f5a623">
-  <title>☀️ Legendary Summer 2026 — Checklist &amp; Chat</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%98%80%EF%B8%8F%3C/text%3E%3C/svg%3E">
-  <style>
-    :root {
-      --bg-1: #fff9e8;
-      --bg-2: #fee6c5;
-      --surface: #ffffff;
-      --surface-2: #fffef5;
-      --surface-3: #fff0dd;
-      --border: #ffe0b3;
-      --border-strong: #ffd184;
-      --text: #2a241a;
-      --text-soft: #8a6d44;
-      --muted: #b87a3c;
-      --accent: #f5a623;
-      --accent-strong: #e67e22;
-      --accent-contrast: #ffffff;
-      --danger: #e2614a;
-      --shadow: 0 6px 24px rgba(170, 110, 30, 0.12);
-      --shadow-sm: 0 2px 8px rgba(170, 110, 30, 0.08);
-      --radius: 18px;
-      --radius-lg: 28px;
-      --radius-pill: 999px;
-    }
-    [data-theme="dark"] {
-      --bg-1: #1d1810;
-      --bg-2: #14110b;
-      --surface: #2a241a;
-      --surface-2: #322a1d;
-      --surface-3: #3b3122;
-      --border: #4a3d29;
-      --border-strong: #6b562f;
-      --text: #f4ecdc;
-      --text-soft: #cdb487;
-      --muted: #d2a865;
-      --accent: #f5a623;
-      --accent-strong: #ffb74d;
-      --accent-contrast: #1d1810;
-      --danger: #ff7a63;
-      --shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
-      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.35);
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>✨ Legendární léto 2026 ✨</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --accent:#e67e22;--accent-light:#f39c12;--accent-dark:#d35400;
+  --bg:#f5f7fa;--card:#ffffff;--card-border:rgba(255,255,255,0.7);
+  --text:#1a1a2e;--text-sec:#555;--shadow:0 8px 32px rgba(0,0,0,0.08);
+  --glass:rgba(255,255,255,0.65);--glass-border:rgba(255,255,255,0.3);
+  --radius:16px;--radius-sm:10px;
+}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6;overflow-x:hidden}
+body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 30% 20%,rgba(230,126,34,0.08) 0%,transparent 50%),radial-gradient(circle at 70% 80%,rgba(52,152,219,0.06) 0%,transparent 50%);z-index:-1}
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      background: linear-gradient(145deg, var(--bg-1) 0%, var(--bg-2) 100%);
-      background-attachment: fixed;
-      font-family: 'Segoe UI', system-ui, 'Inter', -apple-system, sans-serif;
-      padding: 1rem;
-      color: var(--text);
-      min-height: 100vh;
-      line-height: 1.45;
-      transition: background 0.3s, color 0.3s;
-    }
-    .container { max-width: 1300px; margin: 0 auto; }
+.container{max-width:800px;margin:0 auto;padding:16px}
+h1{text-align:center;font-size:2rem;font-weight:800;margin:24px 0 8px;background:linear-gradient(135deg,var(--accent),var(--accent-dark));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.subtitle{text-align:center;color:var(--text-sec);margin-bottom:20px;font-size:0.95rem}
 
-    :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+/* glass card */
+.glass{background:var(--glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--glass-border);border-radius:var(--radius);padding:20px;margin-bottom:16px;box-shadow:var(--shadow)}
 
-    /* ---------- Top bar ---------- */
-    .topbar { display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 1rem; }
-    .icon-btn {
-      background: var(--surface);
-      border: 1px solid var(--border-strong);
-      border-radius: var(--radius-pill);
-      width: 46px; height: 46px;
-      display: inline-flex; align-items: center; justify-content: center;
-      font-size: 1.4rem; cursor: pointer; color: var(--text);
-      box-shadow: var(--shadow-sm);
-      transition: transform 0.15s, background 0.2s;
-    }
-    .icon-btn:hover { transform: translateY(-2px); background: var(--surface-3); }
-    .icon-btn:active { transform: translateY(0); }
+/* tabs */
+.tabs{display:flex;gap:6px;margin-bottom:16px;overflow-x:auto;padding-bottom:4px}
+.tab-btn{flex:1;min-width:0;padding:10px 8px;border:none;border-radius:var(--radius-sm);background:var(--glass);backdrop-filter:blur(8px);cursor:pointer;font-size:0.82rem;font-weight:600;color:var(--text-sec);transition:all .2s;white-space:nowrap;position:relative}
+.tab-btn.active{background:var(--accent);color:#fff;box-shadow:0 4px 16px rgba(230,126,34,0.3)}
+.tab-btn:hover:not(.active){background:rgba(230,126,34,0.1)}
+.tab-content{display:none}.tab-content.active{display:block}
 
-    /* ---------- Hero ---------- */
-    .hero {
-      text-align: center;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 1.4rem 1rem;
-      margin-bottom: 1.4rem;
-      box-shadow: var(--shadow);
-    }
-    .hero h1 {
-      font-size: clamp(1.5rem, 4vw, 2.4rem);
-      background: linear-gradient(125deg, var(--accent-strong), var(--accent));
-      -webkit-background-clip: text; background-clip: text;
-      color: transparent;
-      letter-spacing: 0.5px;
-    }
-    .counters { display: flex; justify-content: center; gap: 0.8rem; flex-wrap: wrap; margin-top: 0.9rem; }
-    .counter {
-      background: var(--surface-3); border-radius: var(--radius-pill);
-      padding: 0.35rem 1rem; font-size: 0.82rem; font-weight: 600; color: var(--text-soft);
-    }
-    .counter b { color: var(--accent-strong); }
+/* notification badge */
+.badge{position:absolute;top:4px;right:4px;width:10px;height:10px;background:#e74c3c;border-radius:50%;display:none}
+.badge.show{display:block}
 
-    /* ---------- Tabs ---------- */
-    .tabs {
-      display: flex; gap: 8px; margin-bottom: 1.2rem;
-      border-bottom: 2px solid var(--border-strong); padding-bottom: 6px;
-    }
-    .tab-btn {
-      background: var(--surface-2); border: 1px solid transparent;
-      padding: 0.55rem 1.3rem; border-radius: var(--radius-pill);
-      font-weight: 700; cursor: pointer; font-size: 0.9rem; color: var(--text-soft);
-      transition: background 0.2s, color 0.2s;
-    }
-    .tab-btn:hover { background: var(--surface-3); }
-    .tab-btn.active { background: var(--accent); color: var(--accent-contrast); }
-    .tab-content { display: none; animation: fade 0.25s ease; }
-    .tab-content.active { display: block; }
-    @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+/* progress */
+.progress-wrap{margin-bottom:16px}
+.progress-bar{height:12px;background:rgba(0,0,0,0.06);border-radius:6px;overflow:hidden;position:relative}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-light));border-radius:6px;transition:width .4s ease}
+.progress-text{text-align:center;font-size:0.85rem;font-weight:600;margin-top:6px;color:var(--text-sec)}
 
-    /* ---------- Cards ---------- */
-    .card {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--radius); box-shadow: var(--shadow-sm);
-      padding: 0.9rem 1rem; margin-bottom: 1.2rem;
-    }
-    .stats-card { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
-    .progress-text { background: var(--surface-3); padding: 0.3rem 1rem; border-radius: var(--radius-pill); font-weight: 700; font-size: 0.9rem; white-space: nowrap; }
-    .progress-bar { background: var(--surface-3); border-radius: var(--radius-pill); height: 12px; flex: 2; min-width: 120px; overflow: hidden; }
-    .progress-fill { background: linear-gradient(90deg, var(--accent), var(--accent-strong)); width: 0%; height: 100%; border-radius: var(--radius-pill); transition: width 0.35s ease; }
+/* achievements */
+.achievements{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.ach{padding:6px 12px;border-radius:20px;font-size:0.78rem;font-weight:600;background:rgba(0,0,0,0.04);color:var(--text-sec);transition:all .3s}
+.ach.unlocked{background:linear-gradient(135deg,var(--accent),var(--accent-light));color:#fff;box-shadow:0 3px 12px rgba(230,126,34,0.3)}
 
-    .btn {
-      background: var(--accent); color: var(--accent-contrast); border: none;
-      padding: 0.5rem 1.1rem; border-radius: var(--radius-pill); cursor: pointer;
-      font-weight: 700; font-size: 0.85rem; transition: filter 0.15s, transform 0.15s;
-    }
-    .btn:hover { filter: brightness(1.05); transform: translateY(-1px); }
-    .btn:active { transform: translateY(0); }
-    .btn-secondary { background: var(--surface-3); color: var(--text); border: 1px solid var(--border-strong); }
-    .btn-danger { background: var(--danger); color: #fff; }
+/* filter */
+.filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.filter-btn{padding:6px 12px;border:none;border-radius:20px;font-size:0.78rem;font-weight:600;background:rgba(0,0,0,0.04);color:var(--text-sec);cursor:pointer;transition:all .2s}
+.filter-btn.active{background:var(--accent);color:#fff}
 
-    .panel-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 0.6rem; color: var(--text); }
-    .badge-list { display: flex; flex-wrap: wrap; gap: 8px; }
-    .badge { background: var(--surface-3); border-radius: var(--radius-pill); padding: 0.3rem 0.8rem; font-size: 0.74rem; font-weight: 600; }
-    .badge.locked { opacity: 0.4; }
-    .badge.unlocked { background: linear-gradient(120deg, #ffe9b8, #ffd27a); color: #6b4a12; }
-    [data-theme="dark"] .badge.unlocked { color: #1d1810; }
+/* task list */
+.task-item{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:var(--radius-sm);margin-bottom:8px;background:var(--card);border:1px solid rgba(0,0,0,0.04);transition:all .2s;cursor:pointer}
+.task-item:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,0.06)}
+.task-item.done{opacity:0.6;text-decoration:line-through}
+.task-emoji{font-size:1.4rem;flex-shrink:0}
+.task-text{flex:1;font-size:0.9rem;font-weight:500}
+.task-check{width:22px;height:22px;border-radius:6px;border:2px solid #ccc;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.task-item.done .task-check{background:var(--accent);border-color:var(--accent);color:#fff}
+.task-comment-btn{background:none;border:none;font-size:1rem;cursor:pointer;opacity:0.4;transition:opacity .2s}
+.task-comment-btn:hover{opacity:1}
+.task-comment-btn.has-comment{opacity:1}
 
-    .calendar-grid { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
-    .cal-month-label { width: 100%; font-size: 0.72rem; color: var(--muted); font-weight: 700; margin-top: 6px; }
-    .cal-day { width: 30px; height: 30px; background: var(--surface-3); border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 0.68rem; font-weight: 700; color: var(--text-soft); }
-    .cal-day.active { background: var(--accent); color: var(--accent-contrast); }
-    .cal-day.today { box-shadow: 0 0 0 2px var(--accent-strong); }
+/* calendar */
+.calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:8px}
+.cal-header{font-size:0.7rem;font-weight:700;text-align:center;color:var(--text-sec);padding:4px 0}
+.cal-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:500;border-radius:8px;background:rgba(0,0,0,0.02);color:var(--text-sec)}
+.cal-day.active{background:rgba(230,126,34,0.15);color:var(--accent);font-weight:700}
+.cal-day.today{border:2px solid var(--accent)}
+.cal-day.empty{background:transparent}
+.cal-month{font-size:0.85rem;font-weight:700;margin:12px 0 6px;color:var(--text)}
 
-    /* ---------- Controls (search/filter) ---------- */
-    .controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
-    .search-wrap { position: relative; flex: 1; min-width: 200px; }
-    .search-wrap span { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); opacity: 0.6; }
-    .search-wrap input { padding-left: 34px; margin: 0; }
-    .filter-group { display: flex; gap: 6px; flex-wrap: wrap; }
-    .filter-btn {
-      background: var(--surface-2); border: 1px solid var(--border-strong); color: var(--text-soft);
-      padding: 0.4rem 0.9rem; border-radius: var(--radius-pill); font-size: 0.78rem; font-weight: 600; cursor: pointer;
-    }
-    .filter-btn.active { background: var(--accent); color: var(--accent-contrast); border-color: var(--accent); }
+/* chat */
+.chat-messages{max-height:400px;overflow-y:auto;margin-bottom:12px}
+.msg-item{padding:10px 14px;border-radius:var(--radius-sm);margin-bottom:8px;background:rgba(0,0,0,0.02)}
+.msg-item.mine{background:rgba(230,126,34,0.08);border-left:3px solid var(--accent)}
+.msg-name{font-weight:700;font-size:0.82rem;color:var(--accent)}
+.msg-text{font-size:0.88rem;margin:4px 0}
+.msg-answer{font-size:0.85rem;color:#27ae60;margin-top:4px;padding:6px 10px;background:rgba(39,174,96,0.08);border-radius:8px}
+.msg-meta{font-size:0.72rem;color:var(--text-sec);display:flex;justify-content:space-between;align-items:center;margin-top:4px}
+.msg-del{background:none;border:none;color:#e74c3c;cursor:pointer;font-size:0.75rem;font-weight:600}
+.chat-input-row{display:flex;gap:8px}
+.chat-input-row input{flex:1;padding:10px 14px;border:1px solid rgba(0,0,0,0.1);border-radius:var(--radius-sm);font-size:0.9rem;font-family:inherit}
+.chat-input-row input:focus{outline:none;border-color:var(--accent)}
 
-    /* ---------- Checklist ---------- */
-    .checklist-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.2rem; }
-    .category-card { background: var(--surface); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
-    .category-card.is-empty { display: none; }
-    .category-header { background: var(--surface-3); padding: 0.6rem 0.9rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border-strong); }
-    .category-header h3 { font-size: 0.95rem; }
-    .cat-stats { font-size: 0.78rem; font-weight: 700; color: var(--accent-strong); background: var(--surface); padding: 0.15rem 0.6rem; border-radius: var(--radius-pill); }
-    .tasks-list { padding: 0.6rem; display: flex; flex-direction: column; gap: 0.45rem; }
-    .task-item { display: flex; gap: 10px; background: var(--surface-2); padding: 0.5rem 0.6rem; border-radius: 14px; border: 1px solid var(--border); align-items: flex-start; transition: border-color 0.15s, background 0.15s; }
-    .task-item:hover { border-color: var(--border-strong); }
-    .task-item.done { opacity: 0.62; }
-    .task-item.done .task-text strong { text-decoration: line-through; text-decoration-color: var(--accent); }
-    .task-item.hidden { display: none; }
-    .task-checkbox { flex-shrink: 0; width: 20px; height: 20px; margin-top: 2px; accent-color: var(--accent); cursor: pointer; }
-    .task-text { flex: 1; font-size: 0.84rem; line-height: 1.35; word-break: break-word; }
-    .comment-icon { cursor: pointer; opacity: 0.7; font-size: 0.85rem; margin-left: 4px; background: none; border: none; color: inherit; }
-    .comment-icon:hover { opacity: 1; }
-    .comment-preview { font-size: 0.68rem; color: var(--muted); margin-top: 3px; }
-    .legend-badge { background: linear-gradient(120deg, #ffd27a, #f5a623); color: #6b4a12; border-radius: var(--radius-pill); padding: 0.05rem 0.45rem; font-size: 0.6rem; font-weight: 800; margin-left: 6px; white-space: nowrap; }
-    .empty-state { text-align: center; color: var(--muted); padding: 2rem; font-size: 0.9rem; grid-column: 1 / -1; }
+/* news */
+.news-item{padding:16px;border-radius:var(--radius-sm);margin-bottom:12px;background:var(--card);border:1px solid rgba(0,0,0,0.04)}
+.news-title{font-weight:700;font-size:1rem;margin-bottom:4px}
+.news-date{font-size:0.72rem;color:var(--text-sec);margin-bottom:8px}
+.news-body{font-size:0.9rem;line-height:1.5}
+.news-img{width:100%;max-height:300px;object-fit:cover;border-radius:var(--radius-sm);margin-top:10px}
 
-    /* ---------- Chat ---------- */
-    .chat-settings { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
-    .link-btn { background: none; border: none; font-size: 0.85rem; color: var(--accent-strong); cursor: pointer; text-decoration: underline; }
-    .notification-toggle { display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--text-soft); }
-    .notification-toggle input { width: auto; margin: 0; }
-    .chat-container { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; margin-bottom: 1rem; max-height: 520px; overflow-y: auto; box-shadow: var(--shadow-sm); }
-    .chat-message { background: var(--surface-2); border-radius: 14px; padding: 0.75rem 0.85rem; margin-bottom: 0.9rem; border-left: 4px solid var(--accent); position: relative; }
-    .chat-message.mine { border-left-color: var(--accent-strong); }
-    .chat-name { font-weight: 700; color: var(--accent-strong); margin-right: 8px; }
-    .chat-date { font-size: 0.62rem; color: var(--muted); }
-    .delete-msg { position: absolute; top: 8px; right: 10px; background: none; border: none; cursor: pointer; font-size: 1rem; opacity: 0.5; color: inherit; }
-    .delete-msg:hover { opacity: 1; }
-    .chat-question { margin-top: 5px; word-break: break-word; }
-    .chat-question.deleted { font-style: italic; color: var(--muted); }
-    .chat-answer { margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px dashed var(--border-strong); color: var(--accent-strong); font-size: 0.88rem; }
-    .chat-form { display: flex; flex-direction: column; gap: 10px; background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; }
-    .chat-form textarea { resize: vertical; min-height: 52px; }
-    .chat-status { font-size: 0.74rem; color: var(--muted); text-align: center; min-height: 1em; }
+/* polls */
+.poll-item{padding:16px;border-radius:var(--radius-sm);margin-bottom:12px;background:var(--card);border:1px solid rgba(0,0,0,0.04)}
+.poll-question{font-weight:700;font-size:1rem;margin-bottom:10px}
+.poll-option{padding:10px 14px;border-radius:8px;margin-bottom:6px;background:rgba(0,0,0,0.03);cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.poll-option:hover{background:rgba(230,126,34,0.08)}
+.poll-option.voted{border:2px solid var(--accent);background:rgba(230,126,34,0.06)}
+.poll-option-bar{position:absolute;top:0;left:0;height:100%;background:rgba(230,126,34,0.12);transition:width .4s;border-radius:8px}
+.poll-option-content{position:relative;display:flex;justify-content:space-between;align-items:center;font-size:0.88rem;font-weight:500}
+.poll-stats{font-size:0.8rem;color:var(--text-sec);margin-top:8px;text-align:right}
 
-    /* ---------- Forms ---------- */
-    label { display: block; font-size: 0.85rem; color: var(--text-soft); }
-    input, textarea, select {
-      width: 100%; border-radius: 12px; border: 1px solid var(--border-strong);
-      padding: 0.55rem 0.7rem; margin: 0.4rem 0; font-size: 0.88rem;
-      background: var(--surface-2); color: var(--text); font-family: inherit;
-    }
-    input[type="checkbox"] { width: auto; }
-    input::placeholder, textarea::placeholder { color: var(--muted); opacity: 0.7; }
+/* buttons */
+.btn{padding:10px 20px;border:none;border-radius:var(--radius-sm);font-size:0.88rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:inherit}
+.btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent-light));color:#fff;box-shadow:0 4px 16px rgba(230,126,34,0.3)}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(230,126,34,0.4)}
+.btn-secondary{background:rgba(0,0,0,0.05);color:var(--text)}
+.btn-secondary:hover{background:rgba(0,0,0,0.1)}
+.btn-small{padding:6px 12px;font-size:0.78rem}
 
-    /* ---------- Modal ---------- */
-    .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); align-items: center; justify-content: center; z-index: 1000; padding: 1rem; }
-    .modal.open { display: flex; }
-    .modal-content { background: var(--surface); max-width: 460px; width: 100%; border-radius: var(--radius); padding: 1.3rem; box-shadow: var(--shadow); border: 1px solid var(--border); }
-    .modal-content h3 { margin-bottom: 0.6rem; }
-    .modal-content hr { border: none; border-top: 1px solid var(--border); margin: 0.9rem 0; }
-    .modal-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 0.8rem; }
-    .switch-row { display: flex; align-items: center; gap: 10px; margin: 0.7rem 0; }
+/* settings */
+.setting-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(0,0,0,0.05)}
+.setting-row:last-child{border-bottom:none}
+.setting-label{font-size:0.9rem;font-weight:500}
+.toggle{width:44px;height:24px;border-radius:12px;background:rgba(0,0,0,0.1);position:relative;cursor:pointer;transition:background .2s}
+.toggle.on{background:var(--accent)}
+.toggle::after{content:'';position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:transform .2s;box-shadow:0 2px 4px rgba(0,0,0,0.1)}
+.toggle.on::after{transform:translateX(20px)}
 
-    /* ---------- Toast ---------- */
-    .toast-wrap { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; gap: 8px; z-index: 1100; width: min(92vw, 380px); }
-    .toast { background: var(--surface); border: 1px solid var(--border-strong); border-left: 5px solid var(--accent); border-radius: 14px; padding: 0.7rem 0.9rem; box-shadow: var(--shadow); font-size: 0.85rem; animation: toastIn 0.25s ease; }
-    @keyframes toastIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+/* about */
+.about-stat{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(0,0,0,0.04)}
+.about-stat:last-child{border-bottom:none}
+.storage-bar{height:8px;background:rgba(0,0,0,0.06);border-radius:4px;overflow:hidden;margin-top:8px}
+.storage-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-light));border-radius:4px;transition:width .3s}
 
-    /* ---------- News ---------- */
-    .admin-bar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 1rem; }
-    .admin-pill { background: linear-gradient(120deg, #ffe9b8, #ffd27a); color: #6b4a12; border-radius: var(--radius-pill); padding: 0.3rem 0.8rem; font-size: 0.74rem; font-weight: 800; }
-    [data-theme="dark"] .admin-pill { color: #1d1810; }
-    .admin-hint { font-size: 0.78rem; color: var(--muted); }
-    .news-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-sm); padding: 1rem; margin-bottom: 1rem; }
-    .news-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
-    .news-title { font-size: 1.05rem; font-weight: 800; color: var(--accent-strong); word-break: break-word; }
-    .news-date { font-size: 0.66rem; color: var(--muted); margin-top: 2px; }
-    .news-body { margin-top: 0.5rem; white-space: pre-wrap; word-break: break-word; font-size: 0.9rem; }
-    .reactions { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 0.8rem; }
-    .reaction-btn { background: var(--surface-2); border: 1px solid var(--border-strong); border-radius: var(--radius-pill); padding: 0.25rem 0.6rem; font-size: 0.95rem; cursor: pointer; color: var(--text); display: inline-flex; gap: 5px; align-items: center; transition: transform 0.1s, background 0.15s; }
-    .reaction-btn:hover { transform: translateY(-1px); background: var(--surface-3); }
-    .reaction-btn.reacted { background: var(--accent); color: var(--accent-contrast); border-color: var(--accent); }
-    .reaction-count { font-size: 0.74rem; font-weight: 700; }
-    .icon-action { background: none; border: none; cursor: pointer; font-size: 1rem; opacity: 0.6; color: inherit; padding: 2px 4px; }
-    .icon-action:hover { opacity: 1; }
+/* modal */
+.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.4);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;z-index:1000;padding:16px}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:var(--radius);padding:24px;max-width:440px;width:100%;max-height:80vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.15)}
+.modal h3{margin-bottom:12px;font-size:1.1rem}
+.modal textarea{width:100%;min-height:80px;padding:10px;border:1px solid rgba(0,0,0,0.1);border-radius:8px;font-family:inherit;font-size:0.9rem;resize:vertical}
+.modal textarea:focus{outline:none;border-color:var(--accent)}
 
-    /* ---------- Polls ---------- */
-    .poll-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-sm); padding: 1rem; margin-bottom: 1rem; }
-    .poll-head { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; }
-    .poll-question { font-size: 1rem; font-weight: 800; word-break: break-word; }
-    .poll-meta { font-size: 0.66rem; color: var(--muted); margin: 2px 0 0.7rem; }
-    .poll-option { margin-bottom: 0.5rem; border-radius: var(--radius-pill); }
-    .poll-option.votable { cursor: pointer; }
-    .poll-option.votable:hover .poll-bar { border-color: var(--accent); }
-    .poll-option-row { display: flex; justify-content: space-between; gap: 10px; font-size: 0.84rem; font-weight: 600; margin-bottom: 3px; }
-    .poll-bar { background: var(--surface-3); border-radius: var(--radius-pill); height: 22px; overflow: hidden; border: 1px solid var(--border); transition: border-color 0.15s; }
-    .poll-bar-fill { background: linear-gradient(90deg, var(--accent), var(--accent-strong)); height: 100%; width: 0%; border-radius: var(--radius-pill); transition: width 0.4s ease; }
-    .poll-option.chosen .poll-option-row { color: var(--accent-strong); }
-    .poll-total { font-size: 0.72rem; color: var(--muted); margin-top: 0.5rem; }
-    .poll-closed-tag { background: var(--danger); color: #fff; border-radius: var(--radius-pill); padding: 0.05rem 0.5rem; font-size: 0.62rem; font-weight: 800; margin-left: 6px; white-space: nowrap; }
-    .option-input-row { display: flex; gap: 8px; align-items: center; margin-bottom: 6px; }
-    .option-input-row input { margin: 0; }
-    .option-input-row button { flex-shrink: 0; }
+/* toast */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--text);color:#fff;padding:12px 24px;border-radius:var(--radius-sm);font-size:0.88rem;font-weight:500;opacity:0;transition:all .3s;z-index:2000;pointer-events:none}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 
-    footer { text-align: center; margin-top: 1.8rem; font-size: 0.72rem; color: var(--muted); }
+/* name input */
+.name-prompt{text-align:center;padding:40px 20px}
+.name-prompt input{padding:12px 16px;border:1px solid rgba(0,0,0,0.1);border-radius:var(--radius-sm);font-size:1rem;font-family:inherit;width:100%;max-width:280px;margin:12px 0}
 
-    @media (max-width: 520px) {
-      body { padding: 0.7rem; }
-      .checklist-grid { grid-template-columns: 1fr; }
-      .tab-btn { padding: 0.5rem 1rem; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation: none !important; transition: none !important; }
-    }
-  </style>
+/* responsive */
+@media(max-width:600px){
+  .container{padding:12px}
+  h1{font-size:1.6rem}
+  .tab-btn{padding:8px 6px;font-size:0.75rem}
+  .task-item{padding:10px 12px;gap:10px}
+  .glass{padding:16px}
+}
+/* news bell modal */
+.news-bell-list .news-item{border:none;padding:10px 0;border-bottom:1px solid rgba(0,0,0,0.05)}
+</style>
 </head>
 <body>
+
 <div class="container">
-  <div class="topbar">
-    <button class="icon-btn" id="themeBtn" aria-label="Přepnout téma" title="Téma">🌙</button>
-    <button class="icon-btn" id="settingsBtn" aria-label="Nastavení" title="Nastavení">⚙️</button>
+  <h1>✨ Legendární léto 2026 ✨</h1>
+  <p class="subtitle" id="subtitleText"></p>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="checklist" id="tabChecklist">📋</button>
+    <button class="tab-btn" data-tab="chat" id="tabChat">💬</button>
+    <button class="tab-btn" data-tab="news" id="tabNews">📰 <span class="badge" id="newsBadge"></span></button>
+    <button class="tab-btn" data-tab="settings" id="tabSettings">⚙️</button>
+    <button class="tab-btn" data-tab="about" id="tabAbout">ℹ️</button>
   </div>
 
-  <header class="hero">
-    <h1>☀️ LEGENDARY SUMMER 2026 ☀️</h1>
-    <div class="counters">
-      <div class="counter" id="summerCounter">🌞 Léto: <b id="summerTotal">0</b> dní · zbývá <b id="summerLeft">0</b></div>
-      <div class="counter" id="vacCounter">🏖️ Prázdniny: <b id="vacTotal">0</b> dní · zbývá <b id="vacLeft">0</b></div>
-    </div>
-  </header>
-
-  <nav class="tabs" role="tablist">
-    <button class="tab-btn active" data-tab="checklist" role="tab" aria-selected="true">📋 Checklist</button>
-    <button class="tab-btn" data-tab="news" role="tab" aria-selected="false">📰 Novinky</button>
-    <button class="tab-btn" data-tab="polls" role="tab" aria-selected="false">🗳️ Hlasování</button>
-    <button class="tab-btn" data-tab="chat" role="tab" aria-selected="false">💬 Chat s adminem</button>
-  </nav>
-
-  <section id="tab-checklist" class="tab-content active" role="tabpanel">
-    <div class="card stats-card">
-      <div class="progress-text" id="progressLabel">🏆 Splněno: 0/0</div>
+  <!-- CHECKLIST TAB -->
+  <div class="tab-content active" id="content-checklist">
+    <div class="glass progress-wrap">
       <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-      <button class="btn-secondary btn" id="resetAllBtn">🌀 Reset vše</button>
+      <div class="progress-text" id="progressText"></div>
     </div>
-
-    <div class="card">
-      <div class="panel-title" id="achievementsTitle">🏅 Dosažené úspěchy</div>
-      <div class="badge-list" id="badgeList"></div>
+    <div class="achievements" id="achievementsWrap"></div>
+    <div class="filter-row" id="filterRow"></div>
+    <div id="taskList"></div>
+    <div class="glass" style="margin-top:16px">
+      <div id="calendarWrap"></div>
     </div>
+  </div>
 
-    <div class="card">
-      <div class="panel-title" id="calendarTitle">📅 Aktivita (den s odškrtnutím)</div>
-      <div id="calendarGrid" class="calendar-grid"></div>
-    </div>
-
-    <div class="card controls">
-      <div class="search-wrap">
-        <span>🔍</span>
-        <input type="search" id="searchInput" placeholder="Hledat úkol...">
+  <!-- CHAT TAB -->
+  <div class="tab-content" id="content-chat">
+    <div class="glass" id="chatArea">
+      <div id="chatNamePrompt" class="name-prompt" style="display:none">
+        <p id="chatNameLabel"></p>
+        <input type="text" id="chatNameInput" maxlength="30">
+        <br><button class="btn btn-primary" id="chatNameSave"></button>
       </div>
-      <div class="filter-group" id="filterGroup">
-        <button class="filter-btn active" data-filter="all">Vše</button>
-        <button class="filter-btn" data-filter="active">Nesplněné</button>
-        <button class="filter-btn" data-filter="done">Splněné</button>
+      <div id="chatMain" style="display:none">
+        <div class="chat-messages" id="chatMessages"></div>
+        <div class="chat-input-row">
+          <input type="text" id="chatInput" maxlength="500">
+          <button class="btn btn-primary" id="chatSendBtn">→</button>
+        </div>
+        <div style="margin-top:8px;text-align:right">
+          <button class="btn btn-secondary btn-small" id="chatChangeName"></button>
+        </div>
       </div>
     </div>
+  </div>
 
-    <div id="checklistRoot" class="checklist-grid"></div>
-  </section>
+  <!-- NEWS TAB -->
+  <div class="tab-content" id="content-news">
+    <div id="newsList"></div>
+    <div id="pollsList"></div>
+  </div>
 
-  <section id="tab-chat" class="tab-content" role="tabpanel">
-    <div class="chat-settings">
-      <button id="changeNameBtn" class="link-btn">✏️ Změnit jméno</button>
-      <label class="notification-toggle">
-        <input type="checkbox" id="notificationsToggle"> 🔔 Upozornění na odpověď
-      </label>
+  <!-- SETTINGS TAB -->
+  <div class="tab-content" id="content-settings">
+    <div class="glass">
+      <div class="setting-row">
+        <span class="setting-label" id="langLabel"></span>
+        <button class="btn btn-secondary btn-small" id="langToggle"></button>
+      </div>
+      <div class="setting-row">
+        <span class="setting-label" id="soundLabel"></span>
+        <div class="toggle" id="soundToggle"></div>
+      </div>
+      <div class="setting-row">
+        <span class="setting-label" id="notifLabel"></span>
+        <div class="toggle" id="notifToggle"></div>
+      </div>
+      <div class="setting-row">
+        <button class="btn btn-secondary btn-small" id="resetAchBtn"></button>
+      </div>
     </div>
-    <div class="chat-container" id="chatMessages" aria-live="polite">
-      <div class="empty-state">Načítání zpráv...</div>
-    </div>
-    <div class="chat-form">
-      <textarea id="chatMessageInput" rows="2" placeholder="Napiš svůj dotaz nebo nápad..."></textarea>
-      <button id="sendChatMsgBtn" class="btn">📤 Odeslat zprávu</button>
-      <div class="chat-status" id="chatStatus"></div>
-    </div>
-  </section>
+  </div>
 
-  <section id="tab-news" class="tab-content" role="tabpanel">
-    <div class="admin-bar">
-      <span class="admin-pill" id="newsAdminPill" hidden>🔐 Admin</span>
-      <span class="admin-hint" id="newsHint"></span>
-    </div>
-    <div class="card" id="newsForm" hidden>
-      <div class="panel-title" id="newsFormTitle">📝 Nová novinka</div>
-      <input type="text" id="newsTitleInput" maxlength="120" placeholder="Nadpis">
-      <textarea id="newsBodyInput" rows="3" placeholder="Text novinky..."></textarea>
-      <button class="btn" id="publishNewsBtn">📢 Zveřejnit</button>
-      <div class="chat-status" id="newsStatus"></div>
-    </div>
-    <div id="newsList" aria-live="polite"><div class="empty-state" id="newsLoading">Načítání...</div></div>
-  </section>
-
-  <section id="tab-polls" class="tab-content" role="tabpanel">
-    <div class="admin-bar">
-      <span class="admin-pill" id="pollsAdminPill" hidden>🔐 Admin</span>
-      <span class="admin-hint" id="pollsHint"></span>
-    </div>
-    <div class="card" id="pollForm" hidden>
-      <div class="panel-title" id="pollFormTitle">🗳️ Nové hlasování</div>
-      <input type="text" id="pollQuestionInput" maxlength="160" placeholder="Otázka">
-      <div id="pollOptionsWrap"></div>
-      <button class="btn-secondary btn" id="addOptionBtn" type="button">➕ Přidat možnost</button>
-      <div style="margin-top: 10px;"><button class="btn" id="createPollBtn">🗳️ Vytvořit hlasování</button></div>
-      <div class="chat-status" id="pollStatus"></div>
-    </div>
-    <div id="pollsList" aria-live="polite"><div class="empty-state" id="pollsLoading">Načítání...</div></div>
-  </section>
-
-  <footer id="footerText">💾 vše se ukládá v prohlížeči · komentáře · chat s adminem</footer>
-</div>
-
-<!-- Settings modal -->
-<div id="settingsModal" class="modal">
-  <div class="modal-content">
-    <h3 id="setTitle">⚙️ Nastavení</h3>
-    <label for="langSelect" id="langLabel">Jazyk / Language:</label>
-    <select id="langSelect">
-      <option value="cs">🇨🇿 Čeština</option>
-      <option value="ru">🇷🇺 Русский</option>
-    </select>
-    <div class="switch-row">
-      <input type="checkbox" id="soundCheck">
-      <label for="soundCheck" id="soundLabel">🔊 Zvuk při odškrtnutí</label>
-    </div>
-    <div class="switch-row">
-      <input type="checkbox" id="themeCheck">
-      <label for="themeCheck" id="themeLabel">🌙 Tmavý režim</label>
-    </div>
-    <hr>
-    <label id="adminSectionLabel">🔐 Admin režim (jen pro tebe):</label>
-    <input type="password" id="adminKeyInput" placeholder="Admin klíč" autocomplete="off">
-    <div class="modal-actions">
-      <button id="adminLoginBtn" class="btn">Přihlásit jako admin</button>
-      <button id="adminLogoutBtn" class="btn-secondary btn" hidden>Odhlásit admina</button>
-    </div>
-    <div class="chat-status" id="adminStatus" style="text-align: left;"></div>
-    <hr>
-    <div class="modal-actions">
-      <button id="resetAchBtn" class="btn-secondary btn">🏅 Resetovat achievements</button>
-      <button id="closeSetBtn" class="btn">Zavřít</button>
+  <!-- ABOUT TAB -->
+  <div class="tab-content" id="content-about">
+    <div class="glass">
+      <h3 id="aboutTitle"></h3>
+      <p id="aboutDesc" style="font-size:0.9rem;color:var(--text-sec);margin-bottom:16px"></p>
+      <div class="about-stat"><span id="countSummerLabel"></span><span id="countSummer" style="font-weight:700;color:var(--accent)"></span></div>
+      <div class="about-stat"><span id="countVacLabel"></span><span id="countVac" style="font-weight:700;color:var(--accent)"></span></div>
+      <div style="margin-top:16px">
+        <span id="storageLabel" style="font-size:0.85rem;font-weight:600"></span>
+        <div class="storage-bar"><div class="storage-fill" id="storageFill"></div></div>
+        <div style="font-size:0.75rem;color:var(--text-sec);margin-top:4px" id="storageText"></div>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- Comment modal -->
-<div id="commentModal" class="modal">
-  <div class="modal-content">
-    <h3 id="commentTitle">📝 Komentář k úkolu</h3>
-    <textarea id="commentText" rows="3"></textarea>
-    <div class="modal-actions">
-      <button id="saveCommentBtn" class="btn">Uložit</button>
-      <button id="closeCommentBtn" class="btn-secondary btn">Zrušit</button>
+<!-- Comment Modal -->
+<div class="modal-overlay" id="commentModal">
+  <div class="modal">
+    <h3 id="commentModalTitle"></h3>
+    <textarea id="commentInput"></textarea>
+    <div style="display:flex;gap:8px;margin-top:12px;justify-content:flex-end">
+      <button class="btn btn-secondary" id="commentCancel"></button>
+      <button class="btn btn-primary" id="commentSave"></button>
     </div>
   </div>
 </div>
 
-<!-- Name modal -->
-<div id="nameModal" class="modal">
-  <div class="modal-content">
-    <h3 id="nameTitle">👤 Tvé jméno v chatu</h3>
-    <input type="text" id="userNameInput" placeholder="Zadej přezdívku" maxlength="40">
-    <div class="modal-actions">
-      <button id="saveNameBtn" class="btn">Uložit</button>
-      <button id="closeNameBtn" class="btn-secondary btn">Zrušit</button>
+<!-- News Bell Modal -->
+<div class="modal-overlay" id="newsBellModal">
+  <div class="modal">
+    <h3 id="bellModalTitle"></h3>
+    <div class="news-bell-list" id="bellNewsList"></div>
+    <div style="text-align:right;margin-top:12px">
+      <button class="btn btn-secondary" id="bellClose"></button>
     </div>
   </div>
 </div>
 
-<div class="toast-wrap" id="toastWrap" aria-live="polite"></div>
+<!-- Toast -->
+<div class="toast" id="toast"></div>
 
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 <script>
-"use strict";
-
-/* ==================== CONFIG ====================
-   POZOR: token Telegram bota NIKDY nedávej do tohoto souboru!
-   Stránka je veřejná a token by se dal odcizit.
-   Odeslání zprávy do Telegramu řeší Google Apps Script (server),
-   kde je token uložen v Script Properties. Viz apps-script/Code.gs.
-*/
+/* ═══════════════════════════════════════════
+   CONFIG — Replace with your own values
+   ═══════════════════════════════════════════ */
 const SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbxzgZt55aJr1Z0GAktDR-ebYAXgh7aDpRsMuMHSUYS5Azk_EaapfEjxCRUCt0hdKOtMeA/exec";
 const SHEETS_EDIT_URL = "https://docs.google.com/spreadsheets/d/1POSfjJEYIBsbxE5suYjUlJCxjHC13Qm7131ffkN2wwU/edit";
-const CHAT_POLL_MS = 8000;
-/* ================================================ */
 
+/* ═══════════════════════════════════════════
+   TASKS
+   ═══════════════════════════════════════════ */
 const TASKS = [
   { id:0, cat:"adventures", cz:"Nachodit 20 000 kroků za den", ru:"Пройти 20 000 шагов за день", emoji:"👣" },
   { id:1, cat:"adventures", cz:"Nachodit 30 000 kroků za den", ru:"Пройти 30 000 шагов за день", emoji:"🚶" },
@@ -504,814 +331,711 @@ const TASKS = [
   { id:43, cat:"memories", cz:"Vybrat nejlepší den léta", ru:"Выбрать лучший день лета", emoji:"🌟" }
 ];
 
-const categories = {
-  adventures: { cs: "🌞 Dobrodružství", ru: "🌞 Приключения" },
-  nature: { cs: "🌿 Příroda & přežití", ru: "🌿 Природа и выживание" },
-  challenges: { cs: "⚡ Výzvy", ru: "⚡ Челленджи" },
-  night: { cs: "🌙 Noční dobrodružství", ru: "🌙 Ночные приключения" },
-  group: { cs: "🤝 Parta", ru: "🤝 Компания" },
-  memories: { cs: "📸 Vzpomínky na léto", ru: "📸 Память о лете" }
-};
-
-const translations = {
-  cs: {
-    progress: "🏆 Splněno:", resetBtn: "🌀 Reset vše", achievementsTitle: "🏅 Dosažené úspěchy",
-    calendarTitle: "📅 Aktivita (den s odškrtnutím)", footer: "💾 vše se ukládá v prohlížeči · komentáře · chat s adminem",
-    commentTitle: "📝 Komentář k úkolu", save: "Uložit", cancel: "Zrušit",
-    settingsTitle: "⚙️ Nastavení", langLabel: "Jazyk / Language:", soundLabel: "🔊 Zvuk při odškrtnutí",
-    themeLabel: "🌙 Tmavý režim", resetAch: "🏅 Resetovat úspěchy", close: "Zavřít",
-    summerLabel: "🌞 Léto: <b>{total}</b> dní · zbývá <b>{left}</b>", vacLabel: "🏖️ Prázdniny: <b>{total}</b> dní · zbývá <b>{left}</b>",
-    achNames: { first: "První krev", half: "50%", full: "100%", nature: "Les", night: "Noc", group: "Parta", legend: "Legenda" },
-    achNew: "🏆 NOVÝ ÚSPĚCH!", confirmReset: "Opravdu resetovat všechny úkoly?", confirmResetAch: "Opravdu resetovat úspěchy?",
-    confirmDelete: "Opravdu smazat tuto zprávu?",
-    chatPlaceholder: "Napiš svůj dotaz nebo nápad...", sendBtn: "📤 Odeslat zprávu",
-    changeName: "✏️ Změnit jméno", notifLabel: "🔔 Upozornění na odpověď", nameTitle: "👤 Tvé jméno v chatu",
-    namePlaceholder: "Zadej přezdívku", searchPlaceholder: "Hledat úkol...",
-    fAll: "Vše", fActive: "Nesplněné", fDone: "Splněné",
-    loading: "Načítání zpráv...", noMessages: "Zatím žádné zprávy. Napiš první!",
-    deletedMsg: "[zpráva smazána]", adminAnswer: "Odpověď admina:", noAnswer: "Zatím bez odpovědi...",
-    sending: "Odesílání...", sent: "✅ Odesláno!", sendError: "❌ Chyba odeslání, zkus to znovu.",
-    newAnswer: "📬 Nová odpověď od admina", monthNames: ["Červen","Červenec","Srpen"],
-    tabChecklist: "📋 Checklist", tabChat: "💬 Chat s adminem", tabNews: "📰 Novinky", tabPolls: "🗳️ Hlasování",
-    loadError: "⚠️ Nepodařilo se načíst data.",
-    newsFormTitle: "📝 Nová novinka", newsTitlePh: "Nadpis", newsBodyPh: "Text novinky...", publishBtn: "📢 Zveřejnit",
-    noNews: "Zatím žádné novinky.", newsHint: "Novinky píše jen admin. Můžeš na ně reagovat 👍",
-    pollFormTitle: "🗳️ Nové hlasování", pollQuestionPh: "Otázka", optionPh: "Možnost", addOption: "➕ Přidat možnost",
-    createPollBtn: "🗳️ Vytvořit hlasování", pollNeed: "Zadej otázku a aspoň 2 možnosti.", noPolls: "Zatím žádné hlasování.",
-    pollsHint: "Hlasování vytváří admin. Hlasovat může každý 🗳️", totalVotes: "Hlasů celkem", closedTag: "UZAVŘENO",
-    adminSection: "🔐 Admin režim (jen pro tebe):", adminKeyPh: "Admin klíč", adminLogin: "Přihlásit jako admin",
-    adminLogout: "Odhlásit admina", checking: "Ověřuji...", adminOk: "✅ Jsi přihlášen jako admin.", adminBad: "❌ Špatný klíč."
+/* ═══════════════════════════════════════════
+   i18n
+   ═══════════════════════════════════════════ */
+const I18N = {
+  cz: {
+    subtitle: "Čeklist 44 letních dobrodružství pro partu kamarádů",
+    tabChecklist: "📋 Checklist", tabChat: "💬 Chat", tabNews: "📰 Novinky", tabSettings: "⚙️", tabAbout: "ℹ️ O webu",
+    progress: "{done} z {total} splněno ({pct}%)",
+    filterAll: "Vše", filterUndone: "Nesplněno", filterDone: "Splněno",
+    catAdventures: "Dobrodružství", catNature: "Příroda", catChallenges: "Výzvy", catNight: "Noční", catGroup: "Skupinové", catMemories: "Vzpomínky",
+    achFirst: "První krev", achHalf: "Půlka", achFull: "Legenda léta", achNature: "Zálesák", achNight: "Noční tvor", achGroup: "Parta", achLegend: "Legendární úkol",
+    chatNameLabel: "Jak ti budeme říkat v chatu?", chatNameSave: "Uložit", chatChangeName: "Změnit jméno",
+    chatPlaceholder: "Napiš zprávu...", chatSend: "→",
+    adminAnswer: "Odpověď admina:", msgDeleted: "[zpráva smazána]", deleteBtn: "Smazat",
+    settingsLang: "Jazyk", settingsSound: "Zvuk při odškrtnutí", settingsNotif: "Upozornění na nové zprávy", settingsReset: "Resetovat ačivky",
+    aboutTitle: "O webu", aboutDesc: "Webová aplikace pro sledování letních dobrodružství vaší party. Všechna data se ukládají lokálně v prohlížeči a na Google Sheets.",
+    countSummer: "Dní do konce léta (31.8.):", countVac: "Dní od začátku prázdnin (1.7.):",
+    storageLabel: "Využití localStorage:", storageText: "{used} KB z ~5120 KB",
+    commentTitle: "Komentář k úkolu", commentCancel: "Zrušit", commentSave: "Uložit",
+    bellTitle: "Nové novinky", bellClose: "Zavřít",
+    noNews: "Zatím žádné novinky.", noPolls: "Zatím žádná hlasování.",
+    voteCount: "{n} hlasů", votePct: "{pct}%",
+    toastChecked: "Splněno!", toastUnchecked: "Odškrtnuto", toastReset: "Ačivky resetovány",
+    newsSection: "Novinky", pollsSection: "Hlasování",
+    notifNewMsg: "Nová odpověď v chatu!", notifNewNews: "Nová novinka!",
+    confirmReset: "Opravdu chceš resetovat ačivky?"
   },
   ru: {
-    progress: "🏆 Выполнено:", resetBtn: "🌀 Сбросить всё", achievementsTitle: "🏅 Достижения",
-    calendarTitle: "📅 Активность (день с отметкой)", footer: "💾 всё сохраняется в браузере · комментарии · чат с админом",
-    commentTitle: "📝 Комментарий к задаче", save: "Сохранить", cancel: "Отмена",
-    settingsTitle: "⚙️ Настройки", langLabel: "Язык / Language:", soundLabel: "🔊 Звук при отметке",
-    themeLabel: "🌙 Тёмная тема", resetAch: "🏅 Сбросить достижения", close: "Закрыть",
-    summerLabel: "🌞 Лето: <b>{total}</b> дн. · осталось <b>{left}</b>", vacLabel: "🏖️ Каникулы: <b>{total}</b> дн. · осталось <b>{left}</b>",
-    achNames: { first: "Первая кровь", half: "50%", full: "100%", nature: "Лес", night: "Ночь", group: "Компания", legend: "Легенда" },
-    achNew: "🏆 НОВОЕ ДОСТИЖЕНИЕ!", confirmReset: "Точно сбросить все задачи?", confirmResetAch: "Точно сбросить достижения?",
-    confirmDelete: "Точно удалить это сообщение?",
-    chatPlaceholder: "Напиши свой вопрос или идею...", sendBtn: "📤 Отправить сообщение",
-    changeName: "✏️ Изменить имя", notifLabel: "🔔 Уведомления об ответе", nameTitle: "👤 Твоё имя в чате",
-    namePlaceholder: "Введи никнейм", searchPlaceholder: "Искать задачу...",
-    fAll: "Все", fActive: "Невыполненные", fDone: "Выполненные",
-    loading: "Загрузка сообщений...", noMessages: "Пока нет сообщений. Напиши первым!",
-    deletedMsg: "[сообщение удалено]", adminAnswer: "Ответ админа:", noAnswer: "Пока без ответа...",
-    sending: "Отправка...", sent: "✅ Отправлено!", sendError: "❌ Ошибка отправки, попробуй ещё раз.",
-    newAnswer: "📬 Новый ответ от админа", monthNames: ["Июнь","Июль","Август"],
-    tabChecklist: "📋 Чек-лист", tabChat: "💬 Чат с админом", tabNews: "📰 Новости", tabPolls: "🗳️ Голосование",
-    loadError: "⚠️ Не удалось загрузить данные.",
-    newsFormTitle: "📝 Новая новость", newsTitlePh: "Заголовок", newsBodyPh: "Текст новости...", publishBtn: "📢 Опубликовать",
-    noNews: "Пока новостей нет.", newsHint: "Новости пишет только админ. Ты можешь ставить реакции 👍",
-    pollFormTitle: "🗳️ Новое голосование", pollQuestionPh: "Вопрос", optionPh: "Вариант", addOption: "➕ Добавить вариант",
-    createPollBtn: "🗳️ Создать голосование", pollNeed: "Введи вопрос и минимум 2 варианта.", noPolls: "Пока голосований нет.",
-    pollsHint: "Голосования создаёт админ. Голосовать может каждый 🗳️", totalVotes: "Всего голосов", closedTag: "ЗАКРЫТО",
-    adminSection: "🔐 Режим админа (только для тебя):", adminKeyPh: "Ключ админа", adminLogin: "Войти как админ",
-    adminLogout: "Выйти из админа", checking: "Проверяю...", adminOk: "✅ Ты вошёл как админ.", adminBad: "❌ Неверный ключ."
+    subtitle: "Чек-лист 44 летних приключений для компании друзей",
+    tabChecklist: "📋 Чек-лист", tabChat: "💬 Чат", tabNews: "📰 Новости", tabSettings: "⚙️", tabAbout: "ℹ️ О сайте",
+    progress: "{done} из {total} выполнено ({pct}%)",
+    filterAll: "Все", filterUndone: "Не выполнено", filterDone: "Выполнено",
+    catAdventures: "Приключения", catNature: "Природа", catChallenges: "Вызовы", catNight: "Ночные", catGroup: "Групповые", catMemories: "Воспоминания",
+    achFirst: "Первая кровь", achHalf: "Половина", achFull: "Легенда лета", achNature: "Выживальщик", achNight: "Ночной зверь", achGroup: "Компания", achLegend: "Легендарный квест",
+    chatNameLabel: "Как тебя называть в чате?", chatNameSave: "Сохранить", chatChangeName: "Сменить имя",
+    chatPlaceholder: "Напиши сообщение...", chatSend: "→",
+    adminAnswer: "Ответ админа:", msgDeleted: "[сообщение удалено]", deleteBtn: "Удалить",
+    settingsLang: "Язык", settingsSound: "Звук при отметке", settingsNotif: "Уведомления о новых сообщениях", settingsReset: "Сбросить ачивки",
+    aboutTitle: "О сайте", aboutDesc: "Веб-приложение для отслеживания летних приключений вашей компании. Все данные хранятся локально в браузере и на Google Sheets.",
+    countSummer: "Дней до конца лета (31.8.):", countVac: "Дней с начала каникул (1.7.):",
+    storageLabel: "Использование localStorage:", storageText: "{used} КБ из ~5120 КБ",
+    commentTitle: "Комментарий к заданию", commentCancel: "Отмена", commentSave: "Сохранить",
+    bellTitle: "Новые новости", bellClose: "Закрыть",
+    noNews: "Пока новостей нет.", noPolls: "Пока голосований нет.",
+    voteCount: "{n} голосов", votePct: "{pct}%",
+    toastChecked: "Выполнено!", toastUnchecked: "Отменено", toastReset: "Ачивки сброшены",
+    newsSection: "Новости", pollsSection: "Голосование",
+    notifNewMsg: "Новый ответ в чате!", notifNewNews: "Новая новость!",
+    confirmReset: "Точно сбросить ачивки?"
   }
 };
 
-/* ---------- state ---------- */
-let lang = "cs";
-let theme = "light";
-let checks = new Array(TASKS.length).fill(false);
-let comments = {};
-let achievements = [];
-let activity = {};
-let soundEnabled = true;
+/* ═══════════════════════════════════════════
+   STATE
+   ═══════════════════════════════════════════ */
+let lang = localStorage.getItem("summer_lang") || "cz";
+let checks = JSON.parse(localStorage.getItem("summer_checks") || "{}");
+let comments = JSON.parse(localStorage.getItem("summer_comments") || "{}");
+let activity = JSON.parse(localStorage.getItem("summer_activity") || "{}");
+let achievements = JSON.parse(localStorage.getItem("summer_achievements") || "{}");
+let soundEnabled = localStorage.getItem("summer_sound") !== "false";
+let notifEnabled = localStorage.getItem("chat_notifications") !== "false";
+let userName = localStorage.getItem("chat_userName") || "";
+let userId = localStorage.getItem("chat_userId");
+if (!userId) { userId = "u_" + Math.random().toString(36).substring(2, 10) + Date.now().toString(36); localStorage.setItem("chat_userId", userId); }
+let lastNewsSeen = localStorage.getItem("lastNewsSeen") || "";
+let currentFilter = "all";
+let currentCatFilter = null;
 let chatInterval = null;
-let currentUserId = localStorage.getItem("chat_userId") || (Math.random().toString(36).slice(2) + Date.now().toString(36));
-let currentUserName = localStorage.getItem("chat_userName") || "";
-let notificationsEnabled = localStorage.getItem("chat_notifications") !== "false";
-let lastAnswers = {};
-let filterMode = "all";
-let searchTerm = "";
-let adminKey = localStorage.getItem("admin_key") || "";
-let isAdmin = false;
-const REACTIONS = ["👍", "❤️", "🔥", "😂", "😮"];
+let newsInterval = null;
+let editingCommentId = null;
 
-const $ = (id) => document.getElementById(id);
-const t = () => translations[lang];
+function t() { return I18N[lang]; }
+function $(id) { return document.getElementById(id); }
 
-/* ---------- persistence ---------- */
-function save() {
-  localStorage.setItem("summer_checks", JSON.stringify(checks));
-  localStorage.setItem("summer_comments", JSON.stringify(comments));
-  localStorage.setItem("summer_achievements", JSON.stringify(achievements));
-  localStorage.setItem("summer_activity", JSON.stringify(activity));
-  localStorage.setItem("summer_lang", lang);
-  localStorage.setItem("summer_theme", theme);
-  localStorage.setItem("summer_sound", String(soundEnabled));
-  localStorage.setItem("chat_userId", currentUserId);
-  localStorage.setItem("chat_userName", currentUserName);
-  localStorage.setItem("chat_notifications", String(notificationsEnabled));
-}
-
-function safeParse(key, fallback) {
-  try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; }
-  catch (e) { return fallback; }
-}
-
-function loadData() {
-  const c = safeParse("summer_checks", null); if (Array.isArray(c)) checks = c.slice(0, TASKS.length).concat(new Array(Math.max(0, TASKS.length - c.length)).fill(false));
-  comments = safeParse("summer_comments", {}) || {};
-  achievements = safeParse("summer_achievements", []) || [];
-  activity = safeParse("summer_activity", {}) || {};
-  const l = localStorage.getItem("summer_lang"); if (l === "cs" || l === "ru") lang = l;
-  const th = localStorage.getItem("summer_theme"); if (th === "light" || th === "dark") theme = th;
-  const s = localStorage.getItem("summer_sound"); if (s !== null) soundEnabled = s === "true";
-  const uid = localStorage.getItem("chat_userId"); if (uid) currentUserId = uid;
-  const uname = localStorage.getItem("chat_userName"); if (uname) currentUserName = uname;
-  const notif = localStorage.getItem("chat_notifications"); if (notif !== null) notificationsEnabled = notif === "true";
-
-  $("langSelect").value = lang;
-  $("soundCheck").checked = soundEnabled;
-  $("themeCheck").checked = theme === "dark";
-  $("notificationsToggle").checked = notificationsEnabled;
-}
-
-/* ---------- theme ---------- */
-function applyTheme() {
-  document.documentElement.setAttribute("data-theme", theme);
-  $("themeBtn").textContent = theme === "dark" ? "☀️" : "🌙";
-  $("themeCheck").checked = theme === "dark";
-}
-
-/* ---------- helpers ---------- */
-function escapeHtml(str) {
-  return String(str == null ? "" : str).replace(/[&<>"]/g, m => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[m]));
-}
-
-function toast(message) {
-  const el = document.createElement("div");
-  el.className = "toast";
-  el.innerHTML = message;
-  $("toastWrap").appendChild(el);
-  setTimeout(() => { el.style.opacity = "0"; el.style.transition = "opacity .3s"; setTimeout(() => el.remove(), 300); }, 3500);
-}
-
-function fireConfetti(opts) {
-  if (typeof confetti === "function") confetti(opts);
-}
-
-function playBeep() {
+/* ═══════════════════════════════════════════
+   AUDIO
+   ═══════════════════════════════════════════ */
+let audioCtx = null;
+function playTick() {
   if (!soundEnabled) return;
   try {
-    const AudioCtx = window.AudioContext || window.webkitAudioContext;
-    const ctx = new AudioCtx();
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-    osc.connect(gain); gain.connect(ctx.destination);
-    osc.frequency.value = 880; gain.gain.value = 0.1;
-    osc.start();
-    gain.gain.exponentialRampToValueAtTime(0.00001, ctx.currentTime + 0.3);
-    osc.stop(ctx.currentTime + 0.3);
-  } catch (e) { /* no audio */ }
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    var osc = audioCtx.createOscillator();
+    var gain = audioCtx.createGain();
+    osc.connect(gain); gain.connect(audioCtx.destination);
+    osc.frequency.value = 880;
+    gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
+    osc.start(); osc.stop(audioCtx.currentTime + 0.1);
+  } catch (e) {}
 }
 
-/* ---------- chat backend ---------- */
-async function sendMessageToSheet(message, name, userId) {
-  try {
-    await fetch(SHEETS_API_URL, {
-      method: "POST", mode: "no-cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message, name, userId })
-    });
-    return true;
-  } catch (e) { return false; }
+/* ═══════════════════════════════════════════
+   TOAST
+   ═══════════════════════════════════════════ */
+function showToast(msg) {
+  var el = $("toast");
+  if (el) { el.textContent = msg; el.classList.add("show"); setTimeout(function() { el.classList.remove("show"); }, 2500); }
 }
 
-async function deleteMessageFromSheet(msgId, userId) {
-  try {
-    await fetch(SHEETS_API_URL, {
-      method: "POST", mode: "no-cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ action: "delete", id: msgId, userId })
-    });
-    return true;
-  } catch (e) { return false; }
+/* ═══════════════════════════════════════════
+   ESCAPING
+   ═══════════════════════════════════════════ */
+function escapeHtml(str) {
+  var div = document.createElement("div");
+  div.appendChild(document.createTextNode(str || ""));
+  return div.innerHTML;
 }
 
-async function loadMessagesFromSheet() {
-  try {
-    const res = await fetch(SHEETS_API_URL);
-    const data = await res.json();
-    return Array.isArray(data) ? data : [];
-  } catch (e) { return []; }
-}
+/* ═══════════════════════════════════════════
+   TABS
+   ═══════════════════════════════════════════ */
+function switchTab(tabId) {
+  document.querySelectorAll(".tab-btn").forEach(function(b) { b.classList.remove("active"); });
+  document.querySelectorAll(".tab-content").forEach(function(c) { c.classList.remove("active"); });
+  var btn = document.querySelector('[data-tab="' + tabId + '"]');
+  if (btn) btn.classList.add("active");
+  var content = $("content-" + tabId);
+  if (content) content.classList.add("active");
 
-/* ---------- notifications ---------- */
-async function requestNotificationPermission() {
-  if (!("Notification" in window)) return;
-  if (Notification.permission === "default") {
-    try { await Notification.requestPermission(); } catch (e) {}
+  if (chatInterval) { clearInterval(chatInterval); chatInterval = null; }
+  if (newsInterval) { clearInterval(newsInterval); newsInterval = null; }
+
+  if (tabId === "chat") {
+    loadChat();
+    chatInterval = setInterval(loadChat, 5000);
+  } else if (tabId === "news") {
+    loadNewsAndPolls();
+    newsInterval = setInterval(loadNewsAndPolls, 5000);
+    markNewsSeen();
+  } else if (tabId === "about") {
+    renderAbout();
   }
 }
 
-function showNotification(title, body) {
-  if (!notificationsEnabled || !("Notification" in window)) return;
-  if (Notification.permission === "granted") new Notification(title, { body });
-}
-
-/* ---------- chat UI ---------- */
-async function sendChatMessage() {
-  const input = $("chatMessageInput");
-  const msg = input.value.trim();
-  if (!msg) return;
-  if (!currentUserName) { showNameModal(); return; }
-  const status = $("chatStatus");
-  status.textContent = t().sending;
-  input.value = "";
-  const ok = await sendMessageToSheet(msg, currentUserName, currentUserId);
-  if (ok) {
-    status.textContent = t().sent;
-    setTimeout(() => { status.textContent = ""; }, 2500);
-    setTimeout(renderChat, 1000);
-  } else {
-    status.textContent = t().sendError;
-    input.value = msg;
-  }
-}
-
-async function deleteMessage(msgId) {
-  if (confirm(t().confirmDelete)) {
-    await deleteMessageFromSheet(msgId, currentUserId);
-    setTimeout(renderChat, 800);
-  }
-}
-
-async function renderChat() {
-  const container = $("chatMessages");
-  const messages = await loadMessagesFromSheet();
-  if (!messages.length) {
-    container.innerHTML = `<div class="empty-state">${t().noMessages}</div>`;
-    return;
-  }
-  messages.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
-  for (const msg of messages) {
-    if (msg.userId === currentUserId && msg.answer && msg.answer !== lastAnswers[msg.id]) {
-      if (lastAnswers[msg.id] !== undefined) {
-        showNotification(t().newAnswer, `${msg.message} → ${msg.answer}`);
-      }
-      lastAnswers[msg.id] = msg.answer;
-    }
-  }
-  container.innerHTML = messages.map(msg => {
-    const isOwner = msg.userId === currentUserId;
-    const displayMessage = msg.deleted ? t().deletedMsg : msg.message;
-    return `
-      <div class="chat-message ${isOwner ? "mine" : ""}">
-        <div>
-          <span class="chat-name">${escapeHtml(msg.name)}</span>
-          <span class="chat-date">${msg.timestamp ? new Date(msg.timestamp).toLocaleString() : ""}</span>
-          ${isOwner && !msg.deleted ? `<button class="delete-msg" data-id="${escapeHtml(msg.id)}" aria-label="Smazat">🗑️</button>` : ""}
-        </div>
-        <div class="chat-question ${msg.deleted ? "deleted" : ""}">${escapeHtml(displayMessage)}</div>
-        <div class="chat-answer">✏️ <strong>${t().adminAnswer}</strong> ${msg.answer ? escapeHtml(msg.answer) : `<em>${t().noAnswer}</em>`}</div>
-      </div>`;
-  }).join("");
-  container.querySelectorAll(".delete-msg").forEach(btn => {
-    btn.addEventListener("click", (e) => { e.stopPropagation(); deleteMessage(btn.getAttribute("data-id")); });
-  });
-  container.scrollTop = container.scrollHeight;
-}
-
-/* ---------- generic API ---------- */
-async function apiGet(type, params) {
-  try {
-    let url = SHEETS_API_URL;
-    const q = [];
-    if (type) q.push("type=" + encodeURIComponent(type));
-    if (params) Object.keys(params).forEach(k => q.push(k + "=" + encodeURIComponent(params[k])));
-    if (q.length) url += "?" + q.join("&");
-    const res = await fetch(url);
-    return await res.json();
-  } catch (e) { return null; }
-}
-
-async function apiPost(payload) {
-  try {
-    await fetch(SHEETS_API_URL, {
-      method: "POST", mode: "no-cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
-    return true;
-  } catch (e) { return false; }
-}
-
-/* ---------- admin mode ---------- */
-async function verifyAdmin(key) {
-  const d = await apiGet("verify", { key });
-  return !!(d && d.admin);
-}
-
-async function adminLogin() {
-  const key = $("adminKeyInput").value.trim();
-  if (!key) return;
-  $("adminStatus").textContent = t().checking;
-  const ok = await verifyAdmin(key);
-  if (ok) {
-    adminKey = key; isAdmin = true;
-    localStorage.setItem("admin_key", key);
-    $("adminStatus").textContent = t().adminOk;
-    applyAdminUI();
-  } else {
-    $("adminStatus").textContent = t().adminBad;
-  }
-}
-
-function adminLogout() {
-  adminKey = ""; isAdmin = false;
-  localStorage.removeItem("admin_key");
-  $("adminKeyInput").value = "";
-  $("adminStatus").textContent = "";
-  applyAdminUI();
-}
-
-function applyAdminUI() {
-  $("newsForm").hidden = !isAdmin;
-  $("pollForm").hidden = !isAdmin;
-  $("newsAdminPill").hidden = !isAdmin;
-  $("pollsAdminPill").hidden = !isAdmin;
-  $("adminLoginBtn").hidden = isAdmin;
-  $("adminLogoutBtn").hidden = !isAdmin;
-  $("newsHint").textContent = isAdmin ? "" : t().newsHint;
-  $("pollsHint").textContent = isAdmin ? "" : t().pollsHint;
-  renderNews();
-  renderPolls();
-}
-
-/* ---------- news ---------- */
-async function renderNews() {
-  const list = $("newsList");
-  const data = await apiGet("news");
-  if (data === null) { list.innerHTML = `<div class="empty-state">${t().loadError}</div>`; return; }
-  if (!data.length) { list.innerHTML = `<div class="empty-state">${t().noNews}</div>`; return; }
-  data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-  list.innerHTML = data.map(n => {
-    const reactions = n.reactions || {};
-    const reactHtml = REACTIONS.map(em => {
-      const arr = reactions[em] || [];
-      const mine = arr.indexOf(currentUserId) >= 0;
-      return `<button class="reaction-btn ${mine ? "reacted" : ""}" data-news="${escapeHtml(n.id)}" data-emoji="${em}">${em}${arr.length ? `<span class="reaction-count">${arr.length}</span>` : ""}</button>`;
-    }).join("");
-    return `
-      <div class="news-item">
-        <div class="news-head">
-          <div>
-            <div class="news-title">${escapeHtml(n.title || "")}</div>
-            <div class="news-date">${n.timestamp ? new Date(n.timestamp).toLocaleString() : ""}</div>
-          </div>
-          ${isAdmin ? `<button class="icon-action" data-delnews="${escapeHtml(n.id)}" aria-label="Smazat">🗑️</button>` : ""}
-        </div>
-        ${n.body ? `<div class="news-body">${escapeHtml(n.body)}</div>` : ""}
-        <div class="reactions">${reactHtml}</div>
-      </div>`;
-  }).join("");
-  list.querySelectorAll(".reaction-btn").forEach(b => b.addEventListener("click", () => reactToNews(b.getAttribute("data-news"), b.getAttribute("data-emoji"))));
-  list.querySelectorAll("[data-delnews]").forEach(b => b.addEventListener("click", () => deleteNews(b.getAttribute("data-delnews"))));
-}
-
-async function reactToNews(id, emoji) {
-  await apiPost({ type: "news", action: "react", id, emoji, userId: currentUserId });
-  setTimeout(renderNews, 600);
-}
-
-async function publishNews() {
-  const title = $("newsTitleInput").value.trim();
-  const body = $("newsBodyInput").value.trim();
-  if (!title && !body) return;
-  $("newsStatus").textContent = t().sending;
-  await apiPost({ type: "news", action: "create", title, body, adminKey });
-  $("newsTitleInput").value = ""; $("newsBodyInput").value = "";
-  $("newsStatus").textContent = t().sent;
-  setTimeout(() => { $("newsStatus").textContent = ""; }, 2500);
-  setTimeout(renderNews, 900);
-}
-
-async function deleteNews(id) {
-  if (!confirm(t().confirmDelete)) return;
-  await apiPost({ type: "news", action: "delete", id, adminKey });
-  setTimeout(renderNews, 700);
-}
-
-/* ---------- polls ---------- */
-async function renderPolls() {
-  const list = $("pollsList");
-  const data = await apiGet("polls");
-  if (data === null) { list.innerHTML = `<div class="empty-state">${t().loadError}</div>`; return; }
-  if (!data.length) { list.innerHTML = `<div class="empty-state">${t().noPolls}</div>`; return; }
-  data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-  list.innerHTML = data.map(p => {
-    const options = Array.isArray(p.options) ? p.options : [];
-    const votes = p.votes || {};
-    let total = 0;
-    const counts = options.map((_, i) => { const c = (votes[String(i)] || []).length; total += c; return c; });
-    let myVote = null;
-    Object.keys(votes).forEach(k => { if ((votes[k] || []).indexOf(currentUserId) >= 0) myVote = k; });
-    const closed = p.closed === true || String(p.closed).toLowerCase() === "true";
-    const votable = !closed;
-    const optHtml = options.map((opt, i) => {
-      const c = counts[i];
-      const pct = total ? Math.round((c / total) * 100) : 0;
-      const chosen = String(i) === myVote;
-      return `
-        <div class="poll-option ${chosen ? "chosen" : ""} ${votable ? "votable" : ""}" ${votable ? `data-poll="${escapeHtml(p.id)}" data-opt="${i}"` : ""}>
-          <div class="poll-option-row"><span>${chosen ? "✅ " : ""}${escapeHtml(opt)}</span><span>${pct}% · ${c}</span></div>
-          <div class="poll-bar"><div class="poll-bar-fill" style="width:${pct}%"></div></div>
-        </div>`;
-    }).join("");
-    return `
-      <div class="poll-item">
-        <div class="poll-head">
-          <div class="poll-question">${escapeHtml(p.question || "")}${closed ? `<span class="poll-closed-tag">${t().closedTag}</span>` : ""}</div>
-          ${isAdmin ? `<div>${closed ? "" : `<button class="icon-action" data-closepoll="${escapeHtml(p.id)}" aria-label="Close" title="Close">⏹️</button>`}<button class="icon-action" data-delpoll="${escapeHtml(p.id)}" aria-label="Smazat">🗑️</button></div>` : ""}
-        </div>
-        <div class="poll-meta">${p.timestamp ? new Date(p.timestamp).toLocaleString() : ""}</div>
-        ${optHtml}
-        <div class="poll-total">${t().totalVotes}: ${total}</div>
-      </div>`;
-  }).join("");
-  list.querySelectorAll(".poll-option.votable").forEach(o => o.addEventListener("click", () => castVote(o.getAttribute("data-poll"), Number(o.getAttribute("data-opt")))));
-  list.querySelectorAll("[data-delpoll]").forEach(b => b.addEventListener("click", () => deletePoll(b.getAttribute("data-delpoll"))));
-  list.querySelectorAll("[data-closepoll]").forEach(b => b.addEventListener("click", () => closePollById(b.getAttribute("data-closepoll"))));
-}
-
-async function castVote(id, optionIndex) {
-  await apiPost({ type: "poll", action: "vote", id, optionIndex, userId: currentUserId });
-  setTimeout(renderPolls, 600);
-}
-
-function addOptionInput(value) {
-  const wrap = $("pollOptionsWrap");
-  const row = document.createElement("div");
-  row.className = "option-input-row";
-  const input = document.createElement("input");
-  input.type = "text"; input.maxLength = 80; input.placeholder = t().optionPh;
-  if (value) input.value = value;
-  const btn = document.createElement("button");
-  btn.type = "button"; btn.className = "btn-danger btn"; btn.textContent = "✕";
-  btn.onclick = () => row.remove();
-  row.appendChild(input); row.appendChild(btn);
-  wrap.appendChild(row);
-}
-
-function initPollForm() {
-  $("pollOptionsWrap").innerHTML = "";
-  addOptionInput(); addOptionInput();
-}
-
-async function createPoll() {
-  const question = $("pollQuestionInput").value.trim();
-  const options = Array.from($("pollOptionsWrap").querySelectorAll("input")).map(i => i.value.trim()).filter(Boolean);
-  if (!question || options.length < 2) { $("pollStatus").textContent = t().pollNeed; return; }
-  $("pollStatus").textContent = t().sending;
-  await apiPost({ type: "poll", action: "create", question, options, adminKey });
-  $("pollQuestionInput").value = ""; initPollForm();
-  $("pollStatus").textContent = t().sent;
-  setTimeout(() => { $("pollStatus").textContent = ""; }, 2500);
-  setTimeout(renderPolls, 900);
-}
-
-async function deletePoll(id) {
-  if (!confirm(t().confirmDelete)) return;
-  await apiPost({ type: "poll", action: "delete", id, adminKey });
-  setTimeout(renderPolls, 700);
-}
-
-async function closePollById(id) {
-  await apiPost({ type: "poll", action: "close", id, adminKey });
-  setTimeout(renderPolls, 700);
-}
-
-/* ---------- name modal ---------- */
-function saveUserName() {
-  const newName = $("userNameInput").value.trim();
-  if (newName) {
-    currentUserName = newName;
-    save();
-    closeModal("nameModal");
-  }
-}
-function showNameModal() {
-  $("userNameInput").value = currentUserName;
-  openModal("nameModal");
-  setTimeout(() => $("userNameInput").focus(), 50);
-}
-
-/* ---------- checklist ---------- */
-function recordActivity() {
-  activity[new Date().toISOString().slice(0, 10)] = true;
-  renderCalendar();
-}
-
-function checkAchievements() {
-  const total = TASKS.length;
-  const doneTotal = checks.filter(Boolean).length;
-  const catDone = {};
-  for (const task of TASKS) {
-    if (!catDone[task.cat]) catDone[task.cat] = { total: 0, done: 0 };
-    catDone[task.cat].total++;
-    if (checks[task.id]) catDone[task.cat].done++;
-  }
-  const newA = [];
-  const add = (key, cond) => { if (cond && !achievements.includes(key)) newA.push(key); };
-  add("first", doneTotal >= 1);
-  add("half", doneTotal >= total / 2);
-  add("full", doneTotal === total);
-  add("nature", catDone.nature && catDone.nature.done === catDone.nature.total);
-  add("night", catDone.night && catDone.night.done === catDone.night.total);
-  add("group", catDone.group && catDone.group.done === catDone.group.total);
-  add("legend", TASKS.some(task => task.leg && checks[task.id]));
-  for (const a of newA) {
-    achievements.push(a);
-    if (soundEnabled) playBeep();
-    toast(`${t().achNew} <b>${t().achNames[a]}</b>`);
-  }
-  if (newA.length) save();
-  renderAchievements();
-}
-
-function renderAchievements() {
-  const all = ["first", "half", "full", "nature", "night", "group", "legend"];
-  $("badgeList").innerHTML = all.map(a => {
-    const unlocked = achievements.includes(a);
-    return `<div class="badge ${unlocked ? "unlocked" : "locked"}">${unlocked ? "🏅" : "🔒"} ${t().achNames[a]}</div>`;
-  }).join("");
-}
-
-function renderCalendar() {
-  const today = new Date().toISOString().slice(0, 10);
-  let html = "";
-  for (let m = 5; m <= 7; m++) {
-    html += `<div class="cal-month-label">${t().monthNames[m - 5]}</div>`;
-    const days = new Date(2026, m + 1, 0).getDate();
-    for (let d = 1; d <= days; d++) {
-      const date = `2026-${String(m + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
-      const cls = `cal-day ${activity[date] ? "active" : ""} ${date === today ? "today" : ""}`.trim();
-      html += `<div class="${cls}">${d}</div>`;
-    }
-  }
-  $("calendarGrid").innerHTML = html;
-}
-
-function daysBetween(a, b) { return Math.ceil((b - a) / 864e5); }
-
-function updateCounters() {
-  const today = new Date();
-  const june1 = new Date(2026, 5, 1), aug31 = new Date(2026, 7, 31), july1 = new Date(2026, 6, 1);
-  const totalS = daysBetween(june1, aug31) + 1, leftS = Math.max(0, daysBetween(today, aug31));
-  const totalV = daysBetween(july1, aug31) + 1, leftV = Math.max(0, daysBetween(today, aug31));
-  $("summerCounter").innerHTML = t().summerLabel.replace("{total}", totalS).replace("{left}", leftS);
-  $("vacCounter").innerHTML = t().vacLabel.replace("{total}", totalV).replace("{left}", leftV);
-}
-
-function updateProgress() {
-  const done = checks.filter(Boolean).length;
-  const total = TASKS.length;
-  $("progressLabel").innerHTML = `${t().progress} ${done}/${total}`;
-  $("progressFill").style.width = `${(done / total) * 100}%`;
-}
-
-function taskVisible(task) {
-  if (filterMode === "active" && checks[task.id]) return false;
-  if (filterMode === "done" && !checks[task.id]) return false;
-  if (searchTerm) {
-    const hay = `${task.cz} ${task.ru}`.toLowerCase();
-    if (!hay.includes(searchTerm)) return false;
-  }
-  return true;
-}
-
+/* ═══════════════════════════════════════════
+   CHECKLIST
+   ═══════════════════════════════════════════ */
 function renderChecklist() {
-  const root = $("checklistRoot");
-  root.innerHTML = "";
-  let anyVisible = false;
-  for (const cat of Object.keys(categories)) {
-    const tasks = TASKS.filter(task => task.cat === cat);
-    const visibleTasks = tasks.filter(taskVisible);
-    const doneInCat = tasks.filter(task => checks[task.id]).length;
-    const card = document.createElement("div");
-    card.className = "category-card" + (visibleTasks.length ? "" : " is-empty");
-    card.innerHTML = `
-      <div class="category-header">
-        <h3>${categories[cat][lang]}</h3>
-        <div class="cat-stats">${doneInCat}/${tasks.length}</div>
-      </div>
-      <div class="tasks-list"></div>`;
-    const listDiv = card.querySelector(".tasks-list");
-    visibleTasks.forEach(task => {
-      anyVisible = true;
-      const checked = checks[task.id];
-      const comment = comments[task.id] || "";
-      const text = lang === "cs" ? task.cz : task.ru;
-      const taskDiv = document.createElement("div");
-      taskDiv.className = "task-item" + (checked ? " done" : "");
-      taskDiv.innerHTML = `
-        <input type="checkbox" class="task-checkbox" ${checked ? "checked" : ""} aria-label="${escapeHtml(text)}">
-        <div class="task-text">
-          <strong>${task.emoji} ${escapeHtml(text)}</strong> ${task.leg ? '<span class="legend-badge">🏅 LEGEND</span>' : ""}
-          <button class="comment-icon" aria-label="Komentář">💬 ${comment ? "✏️" : ""}</button>
-          ${comment ? `<div class="comment-preview">📌 ${escapeHtml(comment.slice(0, 60))}${comment.length > 60 ? "…" : ""}</div>` : ""}
-        </div>`;
-      taskDiv.querySelector("input").addEventListener("change", (e) => onToggleTask(task.id, e.target.checked));
-      taskDiv.querySelector(".comment-icon").addEventListener("click", (e) => { e.stopPropagation(); openComment(task.id); });
-      listDiv.appendChild(taskDiv);
-    });
-    root.appendChild(card);
-  }
-  if (!anyVisible) {
-    root.innerHTML = `<div class="empty-state">🤷 ${lang === "cs" ? "Nic nenalezeno" : "Ничего не найдено"}</div>`;
-  }
-  updateProgress();
-}
-
-function onToggleTask(id, checked) {
-  checks[id] = checked;
-  if (checked) recordActivity();
-  save();
-  updateProgress();
-  checkAchievements();
-  renderChecklist();
-  if (soundEnabled && checked) playBeep();
-  if (checks.filter(Boolean).length === TASKS.length) {
-    fireConfetti({ particleCount: 300, spread: 90, origin: { y: 0.6 } });
-  } else if (checked) {
-    fireConfetti({ particleCount: 40, spread: 55, origin: { y: 0.7 } });
-  }
-}
-
-/* ---------- comment modal ---------- */
-let currentTask = null;
-function openComment(id) {
-  currentTask = id;
-  $("commentText").value = comments[id] || "";
-  openModal("commentModal");
-  setTimeout(() => $("commentText").focus(), 50);
-}
-
-/* ---------- modal helpers ---------- */
-function openModal(id) { $(id).classList.add("open"); }
-function closeModal(id) { $(id).classList.remove("open"); }
-
-/* ---------- language ---------- */
-function applyLanguage() {
-  document.documentElement.lang = lang;
-  $("achievementsTitle").textContent = t().achievementsTitle;
-  $("calendarTitle").textContent = t().calendarTitle;
-  $("footerText").textContent = t().footer;
-  $("commentTitle").textContent = t().commentTitle;
-  $("saveCommentBtn").textContent = t().save;
-  $("closeCommentBtn").textContent = t().cancel;
-  $("setTitle").textContent = t().settingsTitle;
-  $("langLabel").textContent = t().langLabel;
-  $("soundLabel").textContent = t().soundLabel;
-  $("themeLabel").textContent = t().themeLabel;
-  $("resetAchBtn").textContent = t().resetAch;
-  $("closeSetBtn").textContent = t().close;
-  $("resetAllBtn").textContent = t().resetBtn;
-  $("chatMessageInput").placeholder = t().chatPlaceholder;
-  $("sendChatMsgBtn").textContent = t().sendBtn;
-  $("changeNameBtn").textContent = t().changeName;
-  $("nameTitle").textContent = t().nameTitle;
-  $("userNameInput").placeholder = t().namePlaceholder;
-  $("searchInput").placeholder = t().searchPlaceholder;
-  $("saveNameBtn").textContent = t().save;
-  $("closeNameBtn").textContent = t().cancel;
-  document.querySelectorAll("#filterGroup .filter-btn").forEach(btn => {
-    const f = btn.getAttribute("data-filter");
-    btn.textContent = f === "all" ? t().fAll : f === "active" ? t().fActive : t().fDone;
+  var list = $("taskList");
+  if (!list) return;
+  var filtered = TASKS.filter(function(task) {
+    if (currentFilter === "done" && !checks[task.id]) return false;
+    if (currentFilter === "undone" && checks[task.id]) return false;
+    if (currentCatFilter && task.cat !== currentCatFilter) return false;
+    return true;
   });
-  document.querySelector('[data-tab="checklist"]').textContent = t().tabChecklist;
-  document.querySelector('[data-tab="chat"]').textContent = t().tabChat;
-  document.querySelector('[data-tab="news"]').textContent = t().tabNews;
-  document.querySelector('[data-tab="polls"]').textContent = t().tabPolls;
-  $("newsFormTitle").textContent = t().newsFormTitle;
-  $("newsTitleInput").placeholder = t().newsTitlePh;
-  $("newsBodyInput").placeholder = t().newsBodyPh;
-  $("publishNewsBtn").textContent = t().publishBtn;
-  $("pollFormTitle").textContent = t().pollFormTitle;
-  $("pollQuestionInput").placeholder = t().pollQuestionPh;
-  $("addOptionBtn").textContent = t().addOption;
-  $("createPollBtn").textContent = t().createPollBtn;
-  $("adminSectionLabel").textContent = t().adminSection;
-  $("adminKeyInput").placeholder = t().adminKeyPh;
-  $("adminLoginBtn").textContent = t().adminLogin;
-  $("adminLogoutBtn").textContent = t().adminLogout;
-  document.querySelectorAll("#pollOptionsWrap input").forEach(i => { i.placeholder = t().optionPh; });
-  if (!isAdmin) { $("newsHint").textContent = t().newsHint; $("pollsHint").textContent = t().pollsHint; }
-  updateCounters();
+  list.innerHTML = filtered.map(function(task) {
+    var done = checks[task.id] ? "done" : "";
+    var hasComment = comments[task.id] ? "has-comment" : "";
+    var text = lang === "ru" ? task.ru : task.cz;
+    return '<div class="task-item ' + done + '" data-id="' + task.id + '">' +
+      '<span class="task-emoji">' + task.emoji + '</span>' +
+      '<span class="task-text">' + escapeHtml(text) + '</span>' +
+      '<button class="task-comment-btn ' + hasComment + '" data-comment="' + task.id + '" title="💬">💬</button>' +
+      '<div class="task-check">' + (checks[task.id] ? "✓" : "") + '</div>' +
+      '</div>';
+  }).join("");
+
+  list.querySelectorAll(".task-item").forEach(function(el) {
+    el.addEventListener("click", function(e) {
+      if (e.target.closest(".task-comment-btn")) return;
+      var id = Number(el.getAttribute("data-id"));
+      toggleTask(id);
+    });
+  });
+  list.querySelectorAll(".task-comment-btn").forEach(function(btn) {
+    btn.addEventListener("click", function(e) {
+      e.stopPropagation();
+      openCommentModal(Number(btn.getAttribute("data-comment")));
+    });
+  });
+  renderProgress();
   renderAchievements();
+}
+
+function toggleTask(id) {
+  if (checks[id]) {
+    delete checks[id];
+    showToast(t().toastUnchecked);
+  } else {
+    checks[id] = true;
+    playTick();
+    showToast(t().toastChecked);
+    var today = new Date().toISOString().split("T")[0];
+    activity[today] = true;
+    localStorage.setItem("summer_activity", JSON.stringify(activity));
+  }
+  localStorage.setItem("summer_checks", JSON.stringify(checks));
+  renderChecklist();
   renderCalendar();
+  checkConfetti();
+}
+
+function renderProgress() {
+  var done = Object.keys(checks).length;
+  var total = TASKS.length;
+  var pct = Math.round((done / total) * 100);
+  var fill = $("progressFill");
+  var text = $("progressText");
+  if (fill) fill.style.width = pct + "%";
+  if (text) text.textContent = t().progress.replace("{done}", done).replace("{total}", total).replace("{pct}", pct);
+}
+
+function checkConfetti() {
+  var done = Object.keys(checks).length;
+  if (done === TASKS.length) {
+    if (typeof confetti === "function") {
+      confetti({ particleCount: 200, spread: 90, origin: { y: 0.6 } });
+    }
+  }
+}
+
+/* ═══════════════════════════════════════════
+   ACHIEVEMENTS
+   ═══════════════════════════════════════════ */
+function renderAchievements() {
+  var wrap = $("achievementsWrap");
+  if (!wrap) return;
+  var done = Object.keys(checks).length;
+  var catDone = {};
+  TASKS.forEach(function(task) { if (checks[task.id]) { catDone[task.cat] = (catDone[task.cat] || 0) + 1; } });
+  var catTotal = {};
+  TASKS.forEach(function(task) { catTotal[task.cat] = (catTotal[task.cat] || 0) + 1; });
+  var hasLeg = TASKS.some(function(task) { return task.leg && checks[task.id]; });
+
+  var achs = [
+    { key: "first", unlocked: done >= 1 },
+    { key: "half", unlocked: done >= 22 },
+    { key: "full", unlocked: done >= 44 },
+    { key: "nature", unlocked: catDone.nature === catTotal.nature },
+    { key: "night", unlocked: catDone.night === catTotal.night },
+    { key: "group", unlocked: catDone.group === catTotal.group },
+    { key: "legend", unlocked: hasLeg }
+  ];
+
+  wrap.innerHTML = achs.map(function(a) {
+    var label = t()["ach" + a.key.charAt(0).toUpperCase() + a.key.slice(1)];
+    if (a.unlocked && !achievements[a.key]) {
+      achievements[a.key] = true;
+      localStorage.setItem("summer_achievements", JSON.stringify(achievements));
+    }
+    return '<span class="ach ' + (a.unlocked ? "unlocked" : "") + '">' + label + '</span>';
+  }).join("");
+}
+
+/* ═══════════════════════════════════════════
+   FILTERS
+   ═══════════════════════════════════════════ */
+function renderFilters() {
+  var row = $("filterRow");
+  if (!row) return;
+  var cats = ["adventures", "nature", "challenges", "night", "group", "memories"];
+  var catLabels = { adventures: t().catAdventures, nature: t().catNature, challenges: t().catChallenges, night: t().catNight, group: t().catGroup, memories: t().catMemories };
+  var html = '<button class="filter-btn ' + (currentFilter === "all" && !currentCatFilter ? "active" : "") + '" data-filter="all">' + t().filterAll + '</button>';
+  html += '<button class="filter-btn ' + (currentFilter === "undone" ? "active" : "") + '" data-filter="undone">' + t().filterUndone + '</button>';
+  html += '<button class="filter-btn ' + (currentFilter === "done" ? "active" : "") + '" data-filter="done">' + t().filterDone + '</button>';
+  cats.forEach(function(c) {
+    html += '<button class="filter-btn ' + (currentCatFilter === c ? "active" : "") + '" data-cat="' + c + '">' + catLabels[c] + '</button>';
+  });
+  row.innerHTML = html;
+  row.querySelectorAll("[data-filter]").forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      currentFilter = btn.getAttribute("data-filter");
+      currentCatFilter = null;
+      renderFilters();
+      renderChecklist();
+    });
+  });
+  row.querySelectorAll("[data-cat]").forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      currentCatFilter = btn.getAttribute("data-cat");
+      currentFilter = "all";
+      renderFilters();
+      renderChecklist();
+    });
+  });
+}
+
+/* ═══════════════════════════════════════════
+   CALENDAR
+   ═══════════════════════════════════════════ */
+function renderCalendar() {
+  var wrap = $("calendarWrap");
+  if (!wrap) return;
+  var months = [
+    { year: 2026, month: 5, name: lang === "ru" ? "Июнь 2026" : "Červen 2026" },
+    { year: 2026, month: 6, name: lang === "ru" ? "Июль 2026" : "Červenec 2026" },
+    { year: 2026, month: 7, name: lang === "ru" ? "Август 2026" : "Srpen 2026" }
+  ];
+  var dayNames = lang === "ru" ? ["Пн","Вт","Ср","Чт","Пт","Сб","Вс"] : ["Po","Út","St","Čt","Pá","So","Ne"];
+  var today = new Date(); var todayStr = today.toISOString().split("T")[0];
+  var html = "";
+  months.forEach(function(m) {
+    html += '<div class="cal-month">' + m.name + '</div>';
+    html += '<div class="calendar-grid">';
+    dayNames.forEach(function(d) { html += '<div class="cal-header">' + d + '</div>'; });
+    var first = new Date(m.year, m.month, 1);
+    var startDay = (first.getDay() + 6) % 7;
+    var daysInMonth = new Date(m.year, m.month + 1, 0).getDate();
+    for (var i = 0; i < startDay; i++) html += '<div class="cal-day empty"></div>';
+    for (var d = 1; d <= daysInMonth; d++) {
+      var dateStr = m.year + "-" + String(m.month + 1).padStart(2, "0") + "-" + String(d).padStart(2, "0");
+      var isActive = activity[dateStr] ? "active" : "";
+      var isToday = dateStr === todayStr ? "today" : "";
+      html += '<div class="cal-day ' + isActive + ' ' + isToday + '">' + d + '</div>';
+    }
+    html += '</div>';
+  });
+  wrap.innerHTML = html;
+}
+
+/* ═══════════════════════════════════════════
+   COMMENTS MODAL
+   ═══════════════════════════════════════════ */
+function openCommentModal(taskId) {
+  editingCommentId = taskId;
+  var modal = $("commentModal");
+  var input = $("commentInput");
+  if (modal) modal.classList.add("open");
+  if (input) input.value = comments[taskId] || "";
+}
+function closeCommentModal() {
+  var modal = $("commentModal");
+  if (modal) modal.classList.remove("open");
+  editingCommentId = null;
+}
+function saveComment() {
+  if (editingCommentId === null) return;
+  var val = $("commentInput").value.trim();
+  if (val) { comments[editingCommentId] = val; } else { delete comments[editingCommentId]; }
+  localStorage.setItem("summer_comments", JSON.stringify(comments));
+  closeCommentModal();
   renderChecklist();
 }
 
-/* ---------- events ---------- */
-function bindEvents() {
-  document.querySelectorAll(".tab-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      document.querySelectorAll(".tab-btn").forEach(b => { b.classList.remove("active"); b.setAttribute("aria-selected", "false"); });
-      btn.classList.add("active"); btn.setAttribute("aria-selected", "true");
-      const tabId = btn.getAttribute("data-tab");
-      document.querySelectorAll(".tab-content").forEach(tab => tab.classList.remove("active"));
-      $(`tab-${tabId}`).classList.add("active");
-      if (chatInterval) { clearInterval(chatInterval); chatInterval = null; }
-      if (tabId === "chat") {
-        renderChat();
-        chatInterval = setInterval(renderChat, CHAT_POLL_MS);
-      } else if (tabId === "news") {
-        renderNews();
-        chatInterval = setInterval(renderNews, CHAT_POLL_MS);
-      } else if (tabId === "polls") {
-        renderPolls();
-        chatInterval = setInterval(renderPolls, CHAT_POLL_MS);
-      }
-    });
-  });
-
-  $("themeBtn").onclick = () => { theme = theme === "dark" ? "light" : "dark"; applyTheme(); save(); };
-  $("themeCheck").onchange = (e) => { theme = e.target.checked ? "dark" : "light"; applyTheme(); save(); };
-
-  $("settingsBtn").onclick = () => openModal("settingsModal");
-  $("closeSetBtn").onclick = () => closeModal("settingsModal");
-  $("langSelect").onchange = (e) => { lang = e.target.value; save(); applyLanguage(); };
-  $("soundCheck").onchange = (e) => { soundEnabled = e.target.checked; save(); };
-  $("resetAchBtn").onclick = () => { if (confirm(t().confirmResetAch)) { achievements = []; save(); renderAchievements(); } };
-  $("resetAllBtn").onclick = () => { if (confirm(t().confirmReset)) { checks.fill(false); save(); renderChecklist(); checkAchievements(); } };
-
-  $("saveCommentBtn").onclick = () => {
-    if (currentTask !== null) {
-      const val = $("commentText").value.trim();
-      if (val) comments[currentTask] = val; else delete comments[currentTask];
-      save();
-      renderChecklist();
-    }
-    closeModal("commentModal");
-  };
-  $("closeCommentBtn").onclick = () => closeModal("commentModal");
-
-  $("sendChatMsgBtn").onclick = sendChatMessage;
-  $("changeNameBtn").onclick = showNameModal;
-  $("saveNameBtn").onclick = saveUserName;
-  $("closeNameBtn").onclick = () => closeModal("nameModal");
-  $("notificationsToggle").onchange = (e) => {
-    notificationsEnabled = e.target.checked;
-    save();
-    if (notificationsEnabled) requestNotificationPermission();
-  };
-
-  $("publishNewsBtn").onclick = publishNews;
-  $("createPollBtn").onclick = createPoll;
-  $("addOptionBtn").onclick = () => addOptionInput();
-  $("adminLoginBtn").onclick = adminLogin;
-  $("adminLogoutBtn").onclick = adminLogout;
-
-  $("searchInput").addEventListener("input", (e) => { searchTerm = e.target.value.trim().toLowerCase(); renderChecklist(); });
-  document.querySelectorAll("#filterGroup .filter-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      document.querySelectorAll("#filterGroup .filter-btn").forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-      filterMode = btn.getAttribute("data-filter");
-      renderChecklist();
-    });
-  });
-
-  document.querySelectorAll(".modal").forEach(modal => {
-    modal.addEventListener("click", (e) => { if (e.target === modal) modal.classList.remove("open"); });
-  });
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") document.querySelectorAll(".modal.open").forEach(m => m.classList.remove("open"));
-  });
-}
-
-/* ---------- init ---------- */
-function init() {
-  loadData();
-  bindEvents();
-  applyTheme();
-  applyLanguage();
-  updateCounters();
-  if (!currentUserName) setTimeout(showNameModal, 600);
-  requestNotificationPermission();
-  initPollForm();
-  applyAdminUI();
-  if (adminKey) {
-    verifyAdmin(adminKey).then(ok => {
-      isAdmin = ok;
-      if (!ok) { adminKey = ""; localStorage.removeItem("admin_key"); }
-      applyAdminUI();
-    });
+/* ═══════════════════════════════════════════
+   CHAT
+   ═══════════════════════════════════════════ */
+function initChat() {
+  var prompt = $("chatNamePrompt");
+  var main = $("chatMain");
+  if (!userName) {
+    if (prompt) prompt.style.display = "block";
+    if (main) main.style.display = "none";
+  } else {
+    if (prompt) prompt.style.display = "none";
+    if (main) main.style.display = "block";
   }
-  loadMessagesFromSheet().then(messages => {
-    for (const msg of messages) {
-      if (msg.userId === currentUserId && msg.answer) lastAnswers[msg.id] = msg.answer;
+}
+
+function saveChatName() {
+  var val = $("chatNameInput").value.trim();
+  if (!val) return;
+  userName = val;
+  localStorage.setItem("chat_userName", userName);
+  initChat();
+  loadChat();
+}
+
+function changeChatName() {
+  var prompt = $("chatNamePrompt");
+  var main = $("chatMain");
+  var input = $("chatNameInput");
+  if (prompt) prompt.style.display = "block";
+  if (main) main.style.display = "none";
+  if (input) input.value = userName;
+}
+
+var lastMsgCount = 0;
+async function loadChat() {
+  try {
+    var res = await fetch(SHEETS_API_URL);
+    var data = await res.json();
+    var messages = data.messages || [];
+    renderChatMessages(messages);
+    if (messages.length > lastMsgCount && lastMsgCount > 0) {
+      var last = messages[messages.length - 1];
+      if (last.userId !== userId && last.answer && notifEnabled) {
+        sendNotification(t().notifNewMsg, last.answer);
+      }
     }
+    lastMsgCount = messages.length;
+  } catch (e) {}
+}
+
+function renderChatMessages(messages) {
+  var wrap = $("chatMessages");
+  if (!wrap) return;
+  if (!messages.length) { wrap.innerHTML = '<p style="text-align:center;color:var(--text-sec);font-size:0.88rem">—</p>'; return; }
+  wrap.innerHTML = messages.map(function(m) {
+    var mine = m.userId === userId;
+    var time = m.timestamp ? new Date(m.timestamp).toLocaleString() : "";
+    var html = '<div class="msg-item ' + (mine ? "mine" : "") + '">';
+    html += '<div class="msg-name">' + escapeHtml(m.name) + '</div>';
+    html += '<div class="msg-text">' + escapeHtml(m.message) + '</div>';
+    if (m.answer) html += '<div class="msg-answer">' + t().adminAnswer + ' ' + escapeHtml(m.answer) + '</div>';
+    html += '<div class="msg-meta"><span>' + time + '</span>';
+    if (mine) html += '<button class="msg-del" data-delid="' + escapeHtml(m.id) + '">' + t().deleteBtn + '</button>';
+    html += '</div></div>';
+    return html;
+  }).join("");
+  wrap.scrollTop = wrap.scrollHeight;
+  wrap.querySelectorAll(".msg-del").forEach(function(btn) {
+    btn.addEventListener("click", function() { deleteMessage(btn.getAttribute("data-delid")); });
   });
 }
 
-init();
+async function sendChatMessage() {
+  var input = $("chatInput");
+  var msg = input.value.trim();
+  if (!msg) return;
+  input.value = "";
+  try {
+    await fetch(SHEETS_API_URL, {
+      method: "POST", mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action: "newMessage", name: userName, message: msg, userId: userId })
+    });
+    setTimeout(loadChat, 1000);
+  } catch (e) {}
+}
+
+async function deleteMessage(id) {
+  try {
+    await fetch(SHEETS_API_URL, {
+      method: "POST", mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action: "delete", id: id, userId: userId })
+    });
+    setTimeout(loadChat, 800);
+  } catch (e) {}
+}
+
+/* ═══════════════════════════════════════════
+   NEWS & POLLS
+   ═══════════════════════════════════════════ */
+var cachedNews = [];
+async function loadNewsAndPolls() {
+  try {
+    var res = await fetch(SHEETS_API_URL);
+    var data = await res.json();
+    cachedNews = data.news || [];
+    renderNews(cachedNews.filter(function(n) { return n.type === "news"; }));
+    renderPolls(cachedNews.filter(function(n) { return n.type === "poll"; }));
+    checkNewsBadge(cachedNews);
+  } catch (e) {}
+}
+
+function renderNews(items) {
+  var wrap = $("newsList");
+  if (!wrap) return;
+  if (!items.length) { wrap.innerHTML = '<div class="glass"><p style="text-align:center;color:var(--text-sec)">' + t().noNews + '</p></div>'; return; }
+  items.sort(function(a, b) { return new Date(b.timestamp) - new Date(a.timestamp); });
+  wrap.innerHTML = '<h3 style="margin-bottom:12px">' + t().newsSection + '</h3>' + items.map(function(n) {
+    var date = n.timestamp ? new Date(n.timestamp).toLocaleDateString() : "";
+    var html = '<div class="news-item">';
+    html += '<div class="news-title">' + escapeHtml(n.title) + '</div>';
+    html += '<div class="news-date">' + date + '</div>';
+    if (n.content) html += '<div class="news-body">' + escapeHtml(n.content) + '</div>';
+    if (n.image) html += '<img class="news-img" src="' + escapeHtml(n.image) + '" alt="">';
+    html += '</div>';
+    return html;
+  }).join("");
+}
+
+function renderPolls(items) {
+  var wrap = $("pollsList");
+  if (!wrap) return;
+  if (!items.length) { wrap.innerHTML = '<div class="glass" style="margin-top:16px"><p style="text-align:center;color:var(--text-sec)">' + t().noPolls + '</p></div>'; return; }
+  items.sort(function(a, b) { return new Date(b.timestamp) - new Date(a.timestamp); });
+  var html = '<h3 style="margin:20px 0 12px">' + t().pollsSection + '</h3>';
+  html += items.map(function(p) {
+    var options = Array.isArray(p.options) ? p.options : [];
+    var votes = p.votes || {};
+    var total = Object.keys(votes).length;
+    var myVote = votes[userId] || null;
+    var voteCounts = {};
+    Object.values(votes).forEach(function(v) { voteCounts[v] = (voteCounts[v] || 0) + 1; });
+
+    var pollHtml = '<div class="poll-item">';
+    pollHtml += '<div class="poll-question">' + escapeHtml(p.title || p.content) + '</div>';
+    pollHtml += options.map(function(opt) {
+      var c = voteCounts[opt] || 0;
+      var pct = total ? Math.round((c / total) * 100) : 0;
+      var isVoted = myVote === opt;
+      return '<div class="poll-option ' + (isVoted ? "voted" : "") + '" data-poll-title="' + escapeHtml(p.title) + '" data-option="' + escapeHtml(opt) + '">' +
+        '<div class="poll-option-bar" style="width:' + pct + '%"></div>' +
+        '<div class="poll-option-content"><span>' + (isVoted ? "✅ " : "") + escapeHtml(opt) + '</span><span>' + pct + '% (' + c + ')</span></div>' +
+        '</div>';
+    }).join("");
+    pollHtml += '<div class="poll-stats">' + t().voteCount.replace("{n}", total) + '</div>';
+    pollHtml += '</div>';
+    return pollHtml;
+  }).join("");
+  wrap.innerHTML = html;
+
+  wrap.querySelectorAll(".poll-option").forEach(function(opt) {
+    opt.addEventListener("click", function() {
+      var title = opt.getAttribute("data-poll-title");
+      var option = opt.getAttribute("data-option");
+      castVote(title, option);
+    });
+  });
+}
+
+async function castVote(pollTitle, option) {
+  try {
+    await fetch(SHEETS_API_URL, {
+      method: "POST", mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action: "vote", pollTitle: pollTitle, option: option, userId: userId })
+    });
+    setTimeout(loadNewsAndPolls, 1000);
+  } catch (e) {}
+}
+
+/* ═══════════════════════════════════════════
+   NEWS BADGE
+   ═══════════════════════════════════════════ */
+function checkNewsBadge(newsItems) {
+  if (!lastNewsSeen) { markNewsSeen(); return; }
+  var hasNew = newsItems.some(function(n) { return new Date(n.timestamp) > new Date(lastNewsSeen); });
+  var badge = $("newsBadge");
+  if (badge) { badge.classList.toggle("show", hasNew); }
+  if (hasNew && notifEnabled) {
+    sendNotification(t().notifNewNews, "");
+  }
+}
+
+function markNewsSeen() {
+  lastNewsSeen = new Date().toISOString();
+  localStorage.setItem("lastNewsSeen", lastNewsSeen);
+  var badge = $("newsBadge");
+  if (badge) badge.classList.remove("show");
+}
+
+/* ═══════════════════════════════════════════
+   NOTIFICATIONS
+   ═══════════════════════════════════════════ */
+function sendNotification(title, body) {
+  if (!("Notification" in window)) return;
+  if (Notification.permission === "granted") {
+    new Notification(title, { body: body });
+  } else if (Notification.permission !== "denied") {
+    Notification.requestPermission();
+  }
+}
+
+/* ═══════════════════════════════════════════
+   SETTINGS
+   ═══════════════════════════════════════════ */
+function renderSettings() {
+  var langLabel = $("langLabel");
+  var langBtn = $("langToggle");
+  var soundLbl = $("soundLabel");
+  var soundTgl = $("soundToggle");
+  var notifLbl = $("notifLabel");
+  var notifTgl = $("notifToggle");
+  var resetBtn = $("resetAchBtn");
+
+  if (langLabel) langLabel.textContent = t().settingsLang;
+  if (langBtn) langBtn.textContent = lang === "cz" ? "🇷🇺 Русский" : "🇨🇿 Česky";
+  if (soundLbl) soundLbl.textContent = t().settingsSound;
+  if (soundTgl) soundTgl.classList.toggle("on", soundEnabled);
+  if (notifLbl) notifLbl.textContent = t().settingsNotif;
+  if (notifTgl) notifTgl.classList.toggle("on", notifEnabled);
+  if (resetBtn) resetBtn.textContent = t().settingsReset;
+}
+
+/* ═══════════════════════════════════════════
+   ABOUT
+   ═══════════════════════════════════════════ */
+function renderAbout() {
+  var titleEl = $("aboutTitle");
+  var descEl = $("aboutDesc");
+  var sumLabel = $("countSummerLabel");
+  var sumVal = $("countSummer");
+  var vacLabel = $("countVacLabel");
+  var vacVal = $("countVac");
+  var stLabel = $("storageLabel");
+  var stFill = $("storageFill");
+  var stText = $("storageText");
+
+  if (titleEl) titleEl.textContent = t().aboutTitle;
+  if (descEl) descEl.textContent = t().aboutDesc;
+  if (sumLabel) sumLabel.textContent = t().countSummer;
+  if (vacLabel) vacLabel.textContent = t().countVac;
+
+  var now = new Date();
+  var endSummer = new Date(2026, 7, 31);
+  var startVac = new Date(2026, 6, 1);
+  var daysToEnd = Math.max(0, Math.ceil((endSummer - now) / 86400000));
+  var daysSinceVac = Math.max(0, Math.ceil((now - startVac) / 86400000));
+  if (sumVal) sumVal.textContent = daysToEnd;
+  if (vacVal) vacVal.textContent = daysSinceVac;
+
+  if (stLabel) stLabel.textContent = t().storageLabel;
+  var used = 0;
+  try { for (var k in localStorage) { if (localStorage.hasOwnProperty(k)) used += localStorage[k].length; } } catch (e) {}
+  var usedKB = Math.round(used / 1024);
+  var pct = Math.min(100, Math.round((usedKB / 5120) * 100));
+  if (stFill) stFill.style.width = pct + "%";
+  if (stText) stText.textContent = t().storageText.replace("{used}", usedKB);
+}
+
+/* ═══════════════════════════════════════════
+   APPLY LANGUAGE
+   ═══════════════════════════════════════════ */
+function applyLang() {
+  var sub = $("subtitleText");
+  if (sub) sub.textContent = t().subtitle;
+  var tabC = $("tabChecklist"); if (tabC) tabC.innerHTML = t().tabChecklist;
+  var tabCh = $("tabChat"); if (tabCh) tabCh.innerHTML = t().tabChat;
+  var tabN = $("tabNews"); if (tabN) tabN.innerHTML = t().tabNews + ' <span class="badge" id="newsBadge"></span>';
+  var tabS = $("tabSettings"); if (tabS) tabS.textContent = t().tabSettings;
+  var tabA = $("tabAbout"); if (tabA) tabA.textContent = t().tabAbout;
+
+  var chatLabel = $("chatNameLabel"); if (chatLabel) chatLabel.textContent = t().chatNameLabel;
+  var chatSave = $("chatNameSave"); if (chatSave) chatSave.textContent = t().chatNameSave;
+  var chatChange = $("chatChangeName"); if (chatChange) chatChange.textContent = t().chatChangeName;
+  var chatInput = $("chatInput"); if (chatInput) chatInput.placeholder = t().chatPlaceholder;
+
+  var cmTitle = $("commentModalTitle"); if (cmTitle) cmTitle.textContent = t().commentTitle;
+  var cmCancel = $("commentCancel"); if (cmCancel) cmCancel.textContent = t().commentCancel;
+  var cmSave = $("commentSave"); if (cmSave) cmSave.textContent = t().commentSave;
+
+  var bellTitle = $("bellModalTitle"); if (bellTitle) bellTitle.textContent = t().bellTitle;
+  var bellClose = $("bellClose"); if (bellClose) bellClose.textContent = t().bellClose;
+
+  renderSettings();
+  renderFilters();
+  renderChecklist();
+  renderCalendar();
+}
+
+/* ═══════════════════════════════════════════
+   INIT
+   ═══════════════════════════════════════════ */
+document.addEventListener("DOMContentLoaded", function() {
+  applyLang();
+  initChat();
+
+  // Tab clicks
+  document.querySelectorAll(".tab-btn").forEach(function(btn) {
+    btn.addEventListener("click", function() { switchTab(btn.getAttribute("data-tab")); });
+  });
+
+  // Chat
+  var chatSendBtn = $("chatSendBtn");
+  if (chatSendBtn) chatSendBtn.addEventListener("click", sendChatMessage);
+  var chatInput = $("chatInput");
+  if (chatInput) chatInput.addEventListener("keydown", function(e) { if (e.key === "Enter") sendChatMessage(); });
+  var chatNameSave = $("chatNameSave");
+  if (chatNameSave) chatNameSave.addEventListener("click", saveChatName);
+  var chatNameInput = $("chatNameInput");
+  if (chatNameInput) chatNameInput.addEventListener("keydown", function(e) { if (e.key === "Enter") saveChatName(); });
+  var chatChangeName = $("chatChangeName");
+  if (chatChangeName) chatChangeName.addEventListener("click", changeChatName);
+
+  // Comment modal
+  var commentCancel = $("commentCancel");
+  if (commentCancel) commentCancel.addEventListener("click", closeCommentModal);
+  var commentSave = $("commentSave");
+  if (commentSave) commentSave.addEventListener("click", saveComment);
+  var commentModal = $("commentModal");
+  if (commentModal) commentModal.addEventListener("click", function(e) { if (e.target === commentModal) closeCommentModal(); });
+
+  // Bell modal
+  var bellClose = $("bellClose");
+  if (bellClose) bellClose.addEventListener("click", function() { $("newsBellModal").classList.remove("open"); });
+
+  // Settings
+  var langToggle = $("langToggle");
+  if (langToggle) langToggle.addEventListener("click", function() {
+    lang = lang === "cz" ? "ru" : "cz";
+    localStorage.setItem("summer_lang", lang);
+    applyLang();
+  });
+  var soundToggle = $("soundToggle");
+  if (soundToggle) soundToggle.addEventListener("click", function() {
+    soundEnabled = !soundEnabled;
+    localStorage.setItem("summer_sound", soundEnabled);
+    soundToggle.classList.toggle("on", soundEnabled);
+  });
+  var notifToggle = $("notifToggle");
+  if (notifToggle) notifToggle.addEventListener("click", function() {
+    notifEnabled = !notifEnabled;
+    localStorage.setItem("chat_notifications", notifEnabled);
+    notifToggle.classList.toggle("on", notifEnabled);
+    if (notifEnabled && "Notification" in window) Notification.requestPermission();
+  });
+  var resetBtn = $("resetAchBtn");
+  if (resetBtn) resetBtn.addEventListener("click", function() {
+    if (!confirm(t().confirmReset)) return;
+    achievements = {};
+    localStorage.setItem("summer_achievements", JSON.stringify(achievements));
+    renderAchievements();
+    showToast(t().toastReset);
+  });
+
+  // Load news badge on start
+  loadNewsAndPolls();
+});
 </script>
 </body>
 </html>
