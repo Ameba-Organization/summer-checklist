@@ -1,782 +1,971 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="cs" data-theme="light">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>✨ Legendární léto 2026 ✨ Chat + Checklist</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Legendary Summer 2026 — checklist dobrodružství, achievementy a chat s adminem.">
+  <meta name="theme-color" content="#f5a623">
+  <title>☀️ Legendary Summer 2026 — Checklist &amp; Chat</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%98%80%EF%B8%8F%3C/text%3E%3C/svg%3E">
   <style>
+    :root {
+      --bg-1: #fff9e8;
+      --bg-2: #fee6c5;
+      --surface: #ffffff;
+      --surface-2: #fffef5;
+      --surface-3: #fff0dd;
+      --border: #ffe0b3;
+      --border-strong: #ffd184;
+      --text: #2a241a;
+      --text-soft: #8a6d44;
+      --muted: #b87a3c;
+      --accent: #f5a623;
+      --accent-strong: #e67e22;
+      --accent-contrast: #ffffff;
+      --danger: #e2614a;
+      --shadow: 0 6px 24px rgba(170, 110, 30, 0.12);
+      --shadow-sm: 0 2px 8px rgba(170, 110, 30, 0.08);
+      --radius: 18px;
+      --radius-lg: 28px;
+      --radius-pill: 999px;
+    }
+    [data-theme="dark"] {
+      --bg-1: #1d1810;
+      --bg-2: #14110b;
+      --surface: #2a241a;
+      --surface-2: #322a1d;
+      --surface-3: #3b3122;
+      --border: #4a3d29;
+      --border-strong: #6b562f;
+      --text: #f4ecdc;
+      --text-soft: #cdb487;
+      --muted: #d2a865;
+      --accent: #f5a623;
+      --accent-strong: #ffb74d;
+      --accent-contrast: #1d1810;
+      --danger: #ff7a63;
+      --shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.35);
+    }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      background: linear-gradient(145deg, #fff9e8 0%, #fee6c5 100%);
-      font-family: 'Segoe UI', system-ui, 'Inter', sans-serif;
+      background: linear-gradient(145deg, var(--bg-1) 0%, var(--bg-2) 100%);
+      background-attachment: fixed;
+      font-family: 'Segoe UI', system-ui, 'Inter', -apple-system, sans-serif;
       padding: 1rem;
-      color: #2a241a;
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.45;
+      transition: background 0.3s, color 0.3s;
     }
     .container { max-width: 1300px; margin: 0 auto; }
-    .tabs {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 1rem;
-      border-bottom: 2px solid #ffd184;
-      padding-bottom: 6px;
-    }
-    .tab-btn {
-      background: #fff9ef;
-      border: none;
-      padding: 0.5rem 1.2rem;
-      border-radius: 30px;
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 0.9rem;
-    }
-    .tab-btn.active { background: #f5a623; color: white; }
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
-    .header-row { display: flex; justify-content: flex-end; gap: 12px; margin-bottom: 1rem; }
+
+    :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+
+    /* ---------- Top bar ---------- */
+    .topbar { display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 1rem; }
     .icon-btn {
-      background: #fff9ef;
-      border: 1px solid #f3bc6e;
-      border-radius: 50px;
-      width: 44px;
-      height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      cursor: pointer;
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-pill);
+      width: 46px; height: 46px;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; cursor: pointer; color: var(--text);
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.15s, background 0.2s;
     }
+    .icon-btn:hover { transform: translateY(-2px); background: var(--surface-3); }
+    .icon-btn:active { transform: translateY(0); }
+
+    /* ---------- Hero ---------- */
     .hero {
       text-align: center;
-      background: #fffcf0cc;
-      border-radius: 2.5rem;
-      padding: 1rem;
-      margin-bottom: 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.4rem 1rem;
+      margin-bottom: 1.4rem;
+      box-shadow: var(--shadow);
     }
     .hero h1 {
-      font-size: 1.9rem;
-      background: linear-gradient(125deg, #e67e22, #f7b731);
-      background-clip: text;
-      -webkit-background-clip: text;
+      font-size: clamp(1.5rem, 4vw, 2.4rem);
+      background: linear-gradient(125deg, var(--accent-strong), var(--accent));
+      -webkit-background-clip: text; background-clip: text;
       color: transparent;
+      letter-spacing: 0.5px;
     }
-    .counters { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 0.5rem; }
-    .counter { background: #fff0dd; border-radius: 40px; padding: 0.2rem 1rem; font-size: 0.8rem; }
-    .stats-card {
-      background: white;
-      border-radius: 2rem;
-      padding: 0.8rem 1rem;
-      margin-bottom: 1.5rem;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
+    .counters { display: flex; justify-content: center; gap: 0.8rem; flex-wrap: wrap; margin-top: 0.9rem; }
+    .counter {
+      background: var(--surface-3); border-radius: var(--radius-pill);
+      padding: 0.35rem 1rem; font-size: 0.82rem; font-weight: 600; color: var(--text-soft);
     }
-    .progress-text { background: #fff0dd; padding: 0.2rem 0.9rem; border-radius: 30px; font-weight: bold; font-size: 0.9rem; white-space: nowrap; }
-    .progress-bar { background: #ffeed9; border-radius: 30px; height: 10px; flex: 2; min-width: 100px; }
-    .progress-fill { background: #f5a623; width: 0%; height: 100%; border-radius: 30px; transition: width 0.2s; }
-    .reset-btn { background: #fff0dd; border: 1px solid #f3bc6e; padding: 0.3rem 0.9rem; border-radius: 30px; font-weight: bold; cursor: pointer; }
-    .achievements-panel, .calendar-mini {
-      background: #fffef5;
-      border-radius: 1.5rem;
-      padding: 0.6rem 0.8rem;
-      margin-bottom: 1.2rem;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 10px;
+    .counter b { color: var(--accent-strong); }
+
+    /* ---------- Tabs ---------- */
+    .tabs {
+      display: flex; gap: 8px; margin-bottom: 1.2rem;
+      border-bottom: 2px solid var(--border-strong); padding-bottom: 6px;
     }
-    .badge-list { display: flex; flex-wrap: wrap; gap: 6px; }
-    .badge { background: #ffefcf; border-radius: 30px; padding: 0.2rem 0.7rem; font-size: 0.7rem; }
+    .tab-btn {
+      background: var(--surface-2); border: 1px solid transparent;
+      padding: 0.55rem 1.3rem; border-radius: var(--radius-pill);
+      font-weight: 700; cursor: pointer; font-size: 0.9rem; color: var(--text-soft);
+      transition: background 0.2s, color 0.2s;
+    }
+    .tab-btn:hover { background: var(--surface-3); }
+    .tab-btn.active { background: var(--accent); color: var(--accent-contrast); }
+    .tab-content { display: none; animation: fade 0.25s ease; }
+    .tab-content.active { display: block; }
+    @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+    /* ---------- Cards ---------- */
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); box-shadow: var(--shadow-sm);
+      padding: 0.9rem 1rem; margin-bottom: 1.2rem;
+    }
+    .stats-card { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+    .progress-text { background: var(--surface-3); padding: 0.3rem 1rem; border-radius: var(--radius-pill); font-weight: 700; font-size: 0.9rem; white-space: nowrap; }
+    .progress-bar { background: var(--surface-3); border-radius: var(--radius-pill); height: 12px; flex: 2; min-width: 120px; overflow: hidden; }
+    .progress-fill { background: linear-gradient(90deg, var(--accent), var(--accent-strong)); width: 0%; height: 100%; border-radius: var(--radius-pill); transition: width 0.35s ease; }
+
+    .btn {
+      background: var(--accent); color: var(--accent-contrast); border: none;
+      padding: 0.5rem 1.1rem; border-radius: var(--radius-pill); cursor: pointer;
+      font-weight: 700; font-size: 0.85rem; transition: filter 0.15s, transform 0.15s;
+    }
+    .btn:hover { filter: brightness(1.05); transform: translateY(-1px); }
+    .btn:active { transform: translateY(0); }
+    .btn-secondary { background: var(--surface-3); color: var(--text); border: 1px solid var(--border-strong); }
+    .btn-danger { background: var(--danger); color: #fff; }
+
+    .panel-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 0.6rem; color: var(--text); }
+    .badge-list { display: flex; flex-wrap: wrap; gap: 8px; }
+    .badge { background: var(--surface-3); border-radius: var(--radius-pill); padding: 0.3rem 0.8rem; font-size: 0.74rem; font-weight: 600; }
     .badge.locked { opacity: 0.4; }
+    .badge.unlocked { background: linear-gradient(120deg, #ffe9b8, #ffd27a); color: #6b4a12; }
+    [data-theme="dark"] .badge.unlocked { color: #1d1810; }
+
     .calendar-grid { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
-    .cal-day { width: 30px; height: 30px; background: #ffe2bc; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: bold; }
-    .cal-day.active { background: #f5a623; color: white; }
+    .cal-month-label { width: 100%; font-size: 0.72rem; color: var(--muted); font-weight: 700; margin-top: 6px; }
+    .cal-day { width: 30px; height: 30px; background: var(--surface-3); border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 0.68rem; font-weight: 700; color: var(--text-soft); }
+    .cal-day.active { background: var(--accent); color: var(--accent-contrast); }
+    .cal-day.today { box-shadow: 0 0 0 2px var(--accent-strong); }
+
+    /* ---------- Controls (search/filter) ---------- */
+    .controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+    .search-wrap { position: relative; flex: 1; min-width: 200px; }
+    .search-wrap span { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); opacity: 0.6; }
+    .search-wrap input { padding-left: 34px; margin: 0; }
+    .filter-group { display: flex; gap: 6px; flex-wrap: wrap; }
+    .filter-btn {
+      background: var(--surface-2); border: 1px solid var(--border-strong); color: var(--text-soft);
+      padding: 0.4rem 0.9rem; border-radius: var(--radius-pill); font-size: 0.78rem; font-weight: 600; cursor: pointer;
+    }
+    .filter-btn.active { background: var(--accent); color: var(--accent-contrast); border-color: var(--accent); }
+
+    /* ---------- Checklist ---------- */
     .checklist-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.2rem; }
-    .category-card { background: white; border-radius: 1.2rem; overflow: hidden; border: 1px solid #ffe6bb; }
-    .category-header { background: #fff0dc; padding: 0.5rem 0.8rem; display: flex; justify-content: space-between; border-bottom: 2px solid #ffd184; }
-    .tasks-list { padding: 0.5rem; display: flex; flex-direction: column; gap: 0.4rem; }
-    .task-item { display: flex; gap: 8px; background: #fefef7; padding: 0.4rem 0.5rem; border-radius: 0.9rem; border: 1px solid #ffe5c2; align-items: flex-start; }
-    .task-checkbox { flex-shrink: 0; width: 18px; height: 18px; margin-top: 2px; accent-color: #f5a623; }
-    .task-text { flex: 1; font-size: 0.8rem; line-height: 1.3; word-break: break-word; }
-    .comment-icon { cursor: pointer; opacity: 0.6; font-size: 0.8rem; margin-left: 4px; flex-shrink: 0; }
-    .comment-preview { font-size: 0.65rem; color: #aa7733; margin-top: 2px; }
-    .legend-badge { background: #f5c481; border-radius: 20px; padding: 0.05rem 0.4rem; font-size: 0.6rem; margin-left: 6px; white-space: nowrap; }
-    .chat-container {
-      background: white;
-      border-radius: 1.5rem;
-      padding: 1rem;
-      margin-bottom: 1rem;
-      max-height: 500px;
-      overflow-y: auto;
-    }
-    .chat-message {
-      background: #fef5e6;
-      border-radius: 1rem;
-      padding: 0.7rem;
-      margin-bottom: 1rem;
-      border-left: 4px solid #f5a623;
-      position: relative;
-    }
-    .chat-name { font-weight: bold; color: #c0621a; margin-right: 8px; }
-    .chat-date { font-size: 0.6rem; color: #999; margin-left: 8px; }
-    .delete-msg {
-      position: absolute;
-      top: 8px;
-      right: 12px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 1rem;
-      opacity: 0.5;
-    }
+    .category-card { background: var(--surface); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
+    .category-card.is-empty { display: none; }
+    .category-header { background: var(--surface-3); padding: 0.6rem 0.9rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border-strong); }
+    .category-header h3 { font-size: 0.95rem; }
+    .cat-stats { font-size: 0.78rem; font-weight: 700; color: var(--accent-strong); background: var(--surface); padding: 0.15rem 0.6rem; border-radius: var(--radius-pill); }
+    .tasks-list { padding: 0.6rem; display: flex; flex-direction: column; gap: 0.45rem; }
+    .task-item { display: flex; gap: 10px; background: var(--surface-2); padding: 0.5rem 0.6rem; border-radius: 14px; border: 1px solid var(--border); align-items: flex-start; transition: border-color 0.15s, background 0.15s; }
+    .task-item:hover { border-color: var(--border-strong); }
+    .task-item.done { opacity: 0.62; }
+    .task-item.done .task-text strong { text-decoration: line-through; text-decoration-color: var(--accent); }
+    .task-item.hidden { display: none; }
+    .task-checkbox { flex-shrink: 0; width: 20px; height: 20px; margin-top: 2px; accent-color: var(--accent); cursor: pointer; }
+    .task-text { flex: 1; font-size: 0.84rem; line-height: 1.35; word-break: break-word; }
+    .comment-icon { cursor: pointer; opacity: 0.7; font-size: 0.85rem; margin-left: 4px; background: none; border: none; color: inherit; }
+    .comment-icon:hover { opacity: 1; }
+    .comment-preview { font-size: 0.68rem; color: var(--muted); margin-top: 3px; }
+    .legend-badge { background: linear-gradient(120deg, #ffd27a, #f5a623); color: #6b4a12; border-radius: var(--radius-pill); padding: 0.05rem 0.45rem; font-size: 0.6rem; font-weight: 800; margin-left: 6px; white-space: nowrap; }
+    .empty-state { text-align: center; color: var(--muted); padding: 2rem; font-size: 0.9rem; grid-column: 1 / -1; }
+
+    /* ---------- Chat ---------- */
+    .chat-settings { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+    .link-btn { background: none; border: none; font-size: 0.85rem; color: var(--accent-strong); cursor: pointer; text-decoration: underline; }
+    .notification-toggle { display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--text-soft); }
+    .notification-toggle input { width: auto; margin: 0; }
+    .chat-container { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; margin-bottom: 1rem; max-height: 520px; overflow-y: auto; box-shadow: var(--shadow-sm); }
+    .chat-message { background: var(--surface-2); border-radius: 14px; padding: 0.75rem 0.85rem; margin-bottom: 0.9rem; border-left: 4px solid var(--accent); position: relative; }
+    .chat-message.mine { border-left-color: var(--accent-strong); }
+    .chat-name { font-weight: 700; color: var(--accent-strong); margin-right: 8px; }
+    .chat-date { font-size: 0.62rem; color: var(--muted); }
+    .delete-msg { position: absolute; top: 8px; right: 10px; background: none; border: none; cursor: pointer; font-size: 1rem; opacity: 0.5; color: inherit; }
     .delete-msg:hover { opacity: 1; }
-    .chat-question { margin-top: 4px; word-break: break-word; }
-    .chat-answer { margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px dashed #ffcf8a; color: #b45f2b; }
-    .chat-form {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      background: #fffef5;
-      border-radius: 1.5rem;
-      padding: 1rem;
+    .chat-question { margin-top: 5px; word-break: break-word; }
+    .chat-question.deleted { font-style: italic; color: var(--muted); }
+    .chat-answer { margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px dashed var(--border-strong); color: var(--accent-strong); font-size: 0.88rem; }
+    .chat-form { display: flex; flex-direction: column; gap: 10px; background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem; }
+    .chat-form textarea { resize: vertical; min-height: 52px; }
+    .chat-status { font-size: 0.74rem; color: var(--muted); text-align: center; min-height: 1em; }
+
+    /* ---------- Forms ---------- */
+    label { display: block; font-size: 0.85rem; color: var(--text-soft); }
+    input, textarea, select {
+      width: 100%; border-radius: 12px; border: 1px solid var(--border-strong);
+      padding: 0.55rem 0.7rem; margin: 0.4rem 0; font-size: 0.88rem;
+      background: var(--surface-2); color: var(--text); font-family: inherit;
     }
-    .chat-form textarea { resize: vertical; }
-    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); align-items: center; justify-content: center; z-index: 1000; }
-    .modal-content { background: white; max-width: 450px; width: 90%; border-radius: 1.5rem; padding: 1.2rem; }
-    input, textarea, select { width: 100%; border-radius: 1rem; border: 1px solid #ffcf8a; padding: 0.5rem; margin: 0.4rem 0; font-size: 0.85rem; }
-    .btn { background: #f5a623; border: none; padding: 0.4rem 1rem; border-radius: 1.5rem; cursor: pointer; margin-right: 6px; font-weight: bold; }
-    .btn-secondary { background: #ddd; }
-    footer { text-align: center; margin-top: 1.8rem; font-size: 0.7rem; color: #b87a3c; }
-    .chat-settings {
-      text-align: right;
-      margin-bottom: 8px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    input[type="checkbox"] { width: auto; }
+    input::placeholder, textarea::placeholder { color: var(--muted); opacity: 0.7; }
+
+    /* ---------- Modal ---------- */
+    .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); align-items: center; justify-content: center; z-index: 1000; padding: 1rem; }
+    .modal.open { display: flex; }
+    .modal-content { background: var(--surface); max-width: 460px; width: 100%; border-radius: var(--radius); padding: 1.3rem; box-shadow: var(--shadow); border: 1px solid var(--border); }
+    .modal-content h3 { margin-bottom: 0.6rem; }
+    .modal-content hr { border: none; border-top: 1px solid var(--border); margin: 0.9rem 0; }
+    .modal-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 0.8rem; }
+    .switch-row { display: flex; align-items: center; gap: 10px; margin: 0.7rem 0; }
+
+    /* ---------- Toast ---------- */
+    .toast-wrap { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; gap: 8px; z-index: 1100; width: min(92vw, 380px); }
+    .toast { background: var(--surface); border: 1px solid var(--border-strong); border-left: 5px solid var(--accent); border-radius: 14px; padding: 0.7rem 0.9rem; box-shadow: var(--shadow); font-size: 0.85rem; animation: toastIn 0.25s ease; }
+    @keyframes toastIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+    footer { text-align: center; margin-top: 1.8rem; font-size: 0.72rem; color: var(--muted); }
+
+    @media (max-width: 520px) {
+      body { padding: 0.7rem; }
+      .checklist-grid { grid-template-columns: 1fr; }
+      .tab-btn { padding: 0.5rem 1rem; }
     }
-    .chat-settings button {
-      background: none;
-      border: none;
-      font-size: 0.9rem;
-      color: #c0621a;
-      cursor: pointer;
-      text-decoration: underline;
-    }
-    .notification-toggle {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.8rem;
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
     }
   </style>
 </head>
 <body>
 <div class="container">
-  <div class="header-row">
-    <div class="icon-btn" id="settingsBtn">⚙️</div>
+  <div class="topbar">
+    <button class="icon-btn" id="themeBtn" aria-label="Přepnout téma" title="Téma">🌙</button>
+    <button class="icon-btn" id="settingsBtn" aria-label="Nastavení" title="Nastavení">⚙️</button>
   </div>
-  <div class="hero">
+
+  <header class="hero">
     <h1>☀️ LEGENDARY SUMMER 2026 ☀️</h1>
     <div class="counters">
-      <div class="counter" id="summerCounter">🌞 Léto: <span id="summerTotal">0</span> dní · zbývá <span id="summerLeft">0</span></div>
-      <div class="counter" id="vacCounter">🏖️ Prázdniny: <span id="vacTotal">0</span> dní · zbývá <span id="vacLeft">0</span></div>
+      <div class="counter" id="summerCounter">🌞 Léto: <b id="summerTotal">0</b> dní · zbývá <b id="summerLeft">0</b></div>
+      <div class="counter" id="vacCounter">🏖️ Prázdniny: <b id="vacTotal">0</b> dní · zbývá <b id="vacLeft">0</b></div>
     </div>
-  </div>
+  </header>
 
-  <div class="tabs">
-    <button class="tab-btn active" data-tab="checklist">📋 Checklist</button>
-    <button class="tab-btn" data-tab="chat">💬 Chat s adminem</button>
-  </div>
+  <nav class="tabs" role="tablist">
+    <button class="tab-btn active" data-tab="checklist" role="tab" aria-selected="true">📋 Checklist</button>
+    <button class="tab-btn" data-tab="chat" role="tab" aria-selected="false">💬 Chat s adminem</button>
+  </nav>
 
-  <div id="tab-checklist" class="tab-content active">
-    <div class="stats-card">
+  <section id="tab-checklist" class="tab-content active" role="tabpanel">
+    <div class="card stats-card">
       <div class="progress-text" id="progressLabel">🏆 Splněno: 0/0</div>
       <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-      <button class="reset-btn" id="resetAllBtn">🌀 Reset vše</button>
+      <button class="btn-secondary btn" id="resetAllBtn">🌀 Reset vše</button>
     </div>
-    <div class="achievements-panel">
-      <div id="achievementsTitle">🏅 Dosažené úspěchy</div>
+
+    <div class="card">
+      <div class="panel-title" id="achievementsTitle">🏅 Dosažené úspěchy</div>
       <div class="badge-list" id="badgeList"></div>
     </div>
-    <div class="calendar-mini">
-      <div id="calendarTitle">📅 Aktivita (den s odškrtnutím)</div>
+
+    <div class="card">
+      <div class="panel-title" id="calendarTitle">📅 Aktivita (den s odškrtnutím)</div>
       <div id="calendarGrid" class="calendar-grid"></div>
     </div>
-    <div id="checklistRoot" class="checklist-grid"></div>
-  </div>
 
-  <div id="tab-chat" class="tab-content">
+    <div class="card controls">
+      <div class="search-wrap">
+        <span>🔍</span>
+        <input type="search" id="searchInput" placeholder="Hledat úkol...">
+      </div>
+      <div class="filter-group" id="filterGroup">
+        <button class="filter-btn active" data-filter="all">Vše</button>
+        <button class="filter-btn" data-filter="active">Nesplněné</button>
+        <button class="filter-btn" data-filter="done">Splněné</button>
+      </div>
+    </div>
+
+    <div id="checklistRoot" class="checklist-grid"></div>
+  </section>
+
+  <section id="tab-chat" class="tab-content" role="tabpanel">
     <div class="chat-settings">
-      <button id="changeNameBtn">✏️ Změnit jméno</button>
+      <button id="changeNameBtn" class="link-btn">✏️ Změnit jméno</button>
       <label class="notification-toggle">
         <input type="checkbox" id="notificationsToggle"> 🔔 Upozornění na odpověď
       </label>
     </div>
-    <div class="chat-container" id="chatMessages">
-      <div style="text-align: center; color: #b87a3c;">Načítání zpráv...</div>
+    <div class="chat-container" id="chatMessages" aria-live="polite">
+      <div class="empty-state">Načítání zpráv...</div>
     </div>
     <div class="chat-form">
       <textarea id="chatMessageInput" rows="2" placeholder="Napiš svůj dotaz nebo nápad..."></textarea>
       <button id="sendChatMsgBtn" class="btn">📤 Odeslat zprávu</button>
+      <div class="chat-status" id="chatStatus"></div>
     </div>
-  </div>
+  </section>
 
   <footer id="footerText">💾 vše se ukládá v prohlížeči · komentáře · chat s adminem</footer>
 </div>
 
+<!-- Settings modal -->
 <div id="settingsModal" class="modal">
   <div class="modal-content">
     <h3 id="setTitle">⚙️ Nastavení</h3>
-    <label><span id="langLabel">Jazyk / Language:</span>
-      <select id="langSelect">
-        <option value="cs">🇨🇿 Čeština</option>
-        <option value="ru">🇷🇺 Русский</option>
-      </select>
-    </label>
-    <label><input type="checkbox" id="soundCheck"> <span id="soundLabel">🔊 Zvuk při odškrtnutí</span></label>
+    <label for="langSelect" id="langLabel">Jazyk / Language:</label>
+    <select id="langSelect">
+      <option value="cs">🇨🇿 Čeština</option>
+      <option value="ru">🇷🇺 Русский</option>
+    </select>
+    <div class="switch-row">
+      <input type="checkbox" id="soundCheck">
+      <label for="soundCheck" id="soundLabel">🔊 Zvuk při odškrtnutí</label>
+    </div>
+    <div class="switch-row">
+      <input type="checkbox" id="themeCheck">
+      <label for="themeCheck" id="themeLabel">🌙 Tmavý režim</label>
+    </div>
     <hr>
-    <button id="resetAchBtn" style="background:#f0c0a0;">🏅 Resetovat achievements</button>
-    <button id="closeSetBtn" class="btn-secondary btn">Zavřít</button>
+    <div class="modal-actions">
+      <button id="resetAchBtn" class="btn-secondary btn">🏅 Resetovat achievements</button>
+      <button id="closeSetBtn" class="btn">Zavřít</button>
+    </div>
   </div>
 </div>
 
+<!-- Comment modal -->
 <div id="commentModal" class="modal">
   <div class="modal-content">
     <h3 id="commentTitle">📝 Komentář k úkolu</h3>
     <textarea id="commentText" rows="3"></textarea>
-    <button id="saveCommentBtn" class="btn">Uložit</button>
-    <button id="closeCommentBtn" class="btn-secondary">Zrušit</button>
+    <div class="modal-actions">
+      <button id="saveCommentBtn" class="btn">Uložit</button>
+      <button id="closeCommentBtn" class="btn-secondary btn">Zrušit</button>
+    </div>
   </div>
 </div>
 
+<!-- Name modal -->
 <div id="nameModal" class="modal">
   <div class="modal-content">
-    <h3>👤 Tvé jméno v chatu</h3>
-    <input type="text" id="userNameInput" placeholder="Zadej přezdívku">
-    <button id="saveNameBtn" class="btn">Uložit</button>
-    <button id="closeNameBtn" class="btn-secondary">Zrušit</button>
+    <h3 id="nameTitle">👤 Tvé jméno v chatu</h3>
+    <input type="text" id="userNameInput" placeholder="Zadej přezdívku" maxlength="40">
+    <div class="modal-actions">
+      <button id="saveNameBtn" class="btn">Uložit</button>
+      <button id="closeNameBtn" class="btn-secondary btn">Zrušit</button>
+    </div>
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
+<div class="toast-wrap" id="toastWrap" aria-live="polite"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 <script>
-  // ==================== KONFIGURACE ====================
-  const BOT_TOKEN = "8613265812:AAE3uVJYnZ-t5Kd8viX4H2xGJZaqnYk6vx8";
-  const CHAT_ID = "5417843713";
-  const SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbygC2YOOV3kVtZKeN5U_v7yiRR3x_-GVyvvd0h2n_Zl2bxRfi9sNYBBX6yesatM0lTt-A/exec";
-  const SHEETS_EDIT_URL = "https://docs.google.com/spreadsheets/d/1IIlhuEbm1Rul9KOSW7IQBBbkOsWHOEHMKVZvrNsbe_I/edit";
-  // ====================================================
+"use strict";
 
-  // ---------- SEZNAM ÚKOLŮ (PODLE PDF) ----------
-  const TASKS = [
-    { id:0, cat:"adventures", cz:"Nachodit 20 000 kroků za den", ru:"Пройти 20 000 шагов за день", emoji:"👣" },
-    { id:1, cat:"adventures", cz:"Nachodit 30 000 kroků za den", ru:"Пройти 30 000 шагов за день", emoji:"🚶" },
-    { id:2, cat:"adventures", cz:"Nachodit 40 000 kroků za den (Hard)", ru:"Пройти 40 000 шагов за день (Хард)", emoji:"⚡" },
-    { id:3, cat:"adventures", cz:"Ujít 30 km za den (Legenda)", ru:"Пройти 30 км за день (Легенда)", emoji:"🏅", leg:true },
-    { id:4, cat:"adventures", cz:"Jít daleko od domova (15–20 km)", ru:"Уйти далеко от дома (15–20 км)", emoji:"🗺️" },
-    { id:5, cat:"adventures", cz:"Jet na náhodné místo a prozkoumat ho", ru:"Поехать в случайное место и исследовать его", emoji:"🎲" },
-    { id:6, cat:"adventures", cz:"Den bez plánu", ru:"День без плана", emoji:"🌀" },
-    { id:7, cat:"adventures", cz:"Celý den jen pěšky", ru:"Целый день только пешком", emoji:"🥾" },
-    { id:8, cat:"adventures", cz:"Celý den na kolech", ru:"Целый день на велосипедах", emoji:"🚲" },
-    { id:9, cat:"adventures", cz:"Celodenní výlet do lesa", ru:"Поход в лес на целый день", emoji:"🌲" },
-    { id:10, cat:"adventures", cz:"Najít nové místo, kde nikdo z vás ještě nebyl", ru:"Найти новое место, где никто из вас раньше не был", emoji:"✨" },
-    { id:11, cat:"adventures", cz:"Prozkoumat 3 nová místa za jeden den", ru:"Исследовать 3 новых места за один день", emoji:"🔍" },
-    { id:12, cat:"adventures", cz:"Den turisty ve vlastním městě", ru:"День туриста в своём городе", emoji:"🏙️" },
-    { id:13, cat:"adventures", cz:"Najít nejkrásnější místo léta", ru:"Найти самое красивое место лета", emoji:"📸" },
-    { id:14, cat:"nature", cz:"Postavit přístřešek (šaloun)", ru:"Построить шалаш", emoji:"🏕️" },
-    { id:15, cat:"nature", cz:"Postavit základnu v lese a později se k ní vrátit", ru:"Построить базу в лесу и вернуться к ней позже", emoji:"🌿" },
-    { id:16, cat:"nature", cz:"Připravit si jídlo v přírodě", ru:"Приготовить еду на природе", emoji:"🔥" },
-    { id:17, cat:"nature", cz:"Rybaření", ru:"Рыбалка", emoji:"🎣" },
-    { id:18, cat:"nature", cz:"Koupání v jezeře nebo řece", ru:"Купание в озере или реке", emoji:"💦" },
-    { id:19, cat:"nature", cz:"Den lesního zálesáka", ru:"День лесного выживальщика", emoji:"🌲🪓" },
-    { id:20, cat:"nature", cz:"Zmoknout během dobrodružství", ru:"Попасть под дождь во время приключения", emoji:"🌧️" },
-    { id:21, cat:"challenges", cz:"Začít den s 0 korunami a vydělat si na jídlo nebo pití", ru:"Начать день с 0 крон и заработать на еду или напиток", emoji:"💰" },
-    { id:22, cat:"challenges", cz:"24 hodin bez telefonu", ru:"24 часа без телефона", emoji:"📵" },
-    { id:23, cat:"challenges", cz:"Den náhodných rozhodnutí", ru:"День случайных решений", emoji:"🎭" },
-    { id:24, cat:"challenges", cz:"Nespat celou noc", ru:"Не спать всю ночь", emoji:"🌙" },
-    { id:25, cat:"night", cz:"Noční procházka", ru:"Ночная прогулка", emoji:"🌃" },
-    { id:26, cat:"night", cz:"Vydat se na východ slunce", ru:"Встретить рассвет", emoji:"🌅" },
-    { id:27, cat:"night", cz:"Noční piknik", ru:"Ночной пикник", emoji:"🧺✨" },
-    { id:28, cat:"night", cz:"Sledování hororových videí v noci", ru:"Смотреть страшные видео ночью", emoji:"👻" },
-    { id:29, cat:"night", cz:"Projít temnou trasu v noci", ru:"Пройти тёмный маршрут ночью", emoji:"🌑" },
-    { id:30, cat:"night", cz:"Strašidelné příběhy v noci", ru:"Страшные истории ночью", emoji:"📖" },
-    { id:31, cat:"night", cz:"Upřímný noční rozhovor", ru:"Ночной разговор по-честному", emoji:"💬" },
-    { id:32, cat:"night", cz:"Vidět hvězdnou oblohu mimo město", ru:"Увидеть звёздное небо за городом", emoji:"⭐" },
-    { id:33, cat:"night", cz:"Zažít západ slunce a následný východ slunce v jedné partě (Legenda)", ru:"Встретить закат и следующий рассвет одной компанией (Легенда)", emoji:"🌄", leg:true },
-    { id:34, cat:"group", cz:"Sejít se jako celá parta 10krát za léto", ru:"Собраться всей компанией 10 раз за лето", emoji:"👥" },
-    { id:35, cat:"group", cz:"Strávit den bez jediné hádky", ru:"Провести день без единого спора", emoji:"🤝" },
-    { id:36, cat:"group", cz:"Vymyslet tradici party", ru:"Придумать традицию компании", emoji:"🎉" },
-    { id:37, cat:"group", cz:"Uspořádat fotbalový turnaj", ru:"Устроить турнир по футболу", emoji:"⚽" },
-    { id:38, cat:"group", cz:"Sehrát zápas proti jiné partě", ru:"Сыграть матч против другой компании", emoji:"🏆" },
-    { id:39, cat:"group", cz:"Udělat společnou fotku na začátku a na konci léta", ru:"Сделать общее фото в начале и конце лета", emoji:"📷" },
-    { id:40, cat:"memories", cz:"Vytvořit sbírku nejlepších fotek léta", ru:"Сделать коллекцию лучших фото лета", emoji:"🖼️" },
-    { id:41, cat:"memories", cz:"Natočit film o létě", ru:"Снять фильм про лето", emoji:"🎬" },
-    { id:42, cat:"memories", cz:"Podívat se na film s celou partou na konci léta", ru:"Посмотреть фильм всей компанией в конце лета", emoji:"🍿" },
-    { id:43, cat:"memories", cz:"Vybrat nejlepší den léta", ru:"Выбрать лучший день лета", emoji:"🌟" }
-  ];
+/* ==================== CONFIG ====================
+   POZOR: token Telegram bota NIKDY nedávej do tohoto souboru!
+   Stránka je veřejná a token by se dal odcizit.
+   Odeslání zprávy do Telegramu řeší Google Apps Script (server),
+   kde je token uložen v Script Properties. Viz apps-script/Code.gs.
+*/
+const SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbxzgZt55aJr1Z0GAktDR-ebYAXgh7aDpRsMuMHSUYS5Azk_EaapfEjxCRUCt0hdKOtMeA/exec";
+const SHEETS_EDIT_URL = "https://docs.google.com/spreadsheets/d/1POSfjJEYIBsbxE5suYjUlJCxjHC13Qm7131ffkN2wwU/edit";
+const CHAT_POLL_MS = 8000;
+/* ================================================ */
 
-  const categories = {
-    adventures: { cs: "🌞 Dobrodružství", ru: "🌞 Приключения" },
-    nature: { cs: "🌿 Příroda & přežití", ru: "🌿 Природа и выживание" },
-    challenges: { cs: "⚡ Výzvy", ru: "⚡ Челленджи" },
-    night: { cs: "🌙 Noční dobrodružství", ru: "🌙 Ночные приключения" },
-    group: { cs: "🤝 Parta", ru: "🤝 Компания" },
-    memories: { cs: "📸 Vzpomínky na léto", ru: "📸 Память о лете" }
-  };
+const TASKS = [
+  { id:0, cat:"adventures", cz:"Nachodit 20 000 kroků za den", ru:"Пройти 20 000 шагов за день", emoji:"👣" },
+  { id:1, cat:"adventures", cz:"Nachodit 30 000 kroků za den", ru:"Пройти 30 000 шагов за день", emoji:"🚶" },
+  { id:2, cat:"adventures", cz:"Nachodit 40 000 kroků za den (Hard)", ru:"Пройти 40 000 шагов за день (Хард)", emoji:"⚡" },
+  { id:3, cat:"adventures", cz:"Ujít 30 km za den (Legenda)", ru:"Пройти 30 км за день (Легенда)", emoji:"🏅", leg:true },
+  { id:4, cat:"adventures", cz:"Jít daleko od domova (15–20 km)", ru:"Уйти далеко от дома (15–20 км)", emoji:"🗺️" },
+  { id:5, cat:"adventures", cz:"Jet na náhodné místo a prozkoumat ho", ru:"Поехать в случайное место и исследовать его", emoji:"🎲" },
+  { id:6, cat:"adventures", cz:"Den bez plánu", ru:"День без плана", emoji:"🌀" },
+  { id:7, cat:"adventures", cz:"Celý den jen pěšky", ru:"Целый день только пешком", emoji:"🥾" },
+  { id:8, cat:"adventures", cz:"Celý den na kolech", ru:"Целый день на велосипедах", emoji:"🚲" },
+  { id:9, cat:"adventures", cz:"Celodenní výlet do lesa", ru:"Поход в лес на целый день", emoji:"🌲" },
+  { id:10, cat:"adventures", cz:"Najít nové místo, kde nikdo z vás ještě nebyl", ru:"Найти новое место, где никто из вас раньше не был", emoji:"✨" },
+  { id:11, cat:"adventures", cz:"Prozkoumat 3 nová místa za jeden den", ru:"Исследовать 3 новых места за один день", emoji:"🔍" },
+  { id:12, cat:"adventures", cz:"Den turisty ve vlastním městě", ru:"День туриста в своём городе", emoji:"🏙️" },
+  { id:13, cat:"adventures", cz:"Najít nejkrásnější místo léta", ru:"Найти самое красивое место лета", emoji:"📸" },
+  { id:14, cat:"nature", cz:"Postavit přístřešek (šaloun)", ru:"Построить шалаш", emoji:"🏕️" },
+  { id:15, cat:"nature", cz:"Postavit základnu v lese a později se k ní vrátit", ru:"Построить базу в лесу и вернуться к ней позже", emoji:"🌿" },
+  { id:16, cat:"nature", cz:"Připravit si jídlo v přírodě", ru:"Приготовить еду на природе", emoji:"🔥" },
+  { id:17, cat:"nature", cz:"Rybaření", ru:"Рыбалка", emoji:"🎣" },
+  { id:18, cat:"nature", cz:"Koupání v jezeře nebo řece", ru:"Купание в озере или реке", emoji:"💦" },
+  { id:19, cat:"nature", cz:"Den lesního zálesáka", ru:"День лесного выживальщика", emoji:"🌲🪓" },
+  { id:20, cat:"nature", cz:"Zmoknout během dobrodružství", ru:"Попасть под дождь во время приключения", emoji:"🌧️" },
+  { id:21, cat:"challenges", cz:"Začít den s 0 korunami a vydělat si na jídlo nebo pití", ru:"Начать день с 0 крон и заработать на еду или напиток", emoji:"💰" },
+  { id:22, cat:"challenges", cz:"24 hodin bez telefonu", ru:"24 часа без телефона", emoji:"📵" },
+  { id:23, cat:"challenges", cz:"Den náhodných rozhodnutí", ru:"День случайных решений", emoji:"🎭" },
+  { id:24, cat:"challenges", cz:"Nespat celou noc", ru:"Не спать всю ночь", emoji:"🌙" },
+  { id:25, cat:"night", cz:"Noční procházka", ru:"Ночная прогулка", emoji:"🌃" },
+  { id:26, cat:"night", cz:"Vydat se na východ slunce", ru:"Встретить рассвет", emoji:"🌅" },
+  { id:27, cat:"night", cz:"Noční piknik", ru:"Ночной пикник", emoji:"🧺✨" },
+  { id:28, cat:"night", cz:"Sledování hororových videí v noci", ru:"Смотреть страшные видео ночью", emoji:"👻" },
+  { id:29, cat:"night", cz:"Projít temnou trasu v noci", ru:"Пройти тёмный маршрут ночью", emoji:"🌑" },
+  { id:30, cat:"night", cz:"Strašidelné příběhy v noci", ru:"Страшные истории ночью", emoji:"📖" },
+  { id:31, cat:"night", cz:"Upřímný noční rozhovor", ru:"Ночной разговор по-честному", emoji:"💬" },
+  { id:32, cat:"night", cz:"Vidět hvězdnou oblohu mimo město", ru:"Увидеть звёздное небо за городом", emoji:"⭐" },
+  { id:33, cat:"night", cz:"Zažít západ slunce a následný východ slunce v jedné partě (Legenda)", ru:"Встретить закат и следующий рассвет одной компанией (Легенда)", emoji:"🌄", leg:true },
+  { id:34, cat:"group", cz:"Sejít se jako celá parta 10krát za léto", ru:"Собраться всей компанией 10 раз за лето", emoji:"👥" },
+  { id:35, cat:"group", cz:"Strávit den bez jediné hádky", ru:"Провести день без единого спора", emoji:"🤝" },
+  { id:36, cat:"group", cz:"Vymyslet tradici party", ru:"Придумать традицию компании", emoji:"🎉" },
+  { id:37, cat:"group", cz:"Uspořádat fotbalový turnaj", ru:"Устроить турнир по футболу", emoji:"⚽" },
+  { id:38, cat:"group", cz:"Sehrát zápas proti jiné partě", ru:"Сыграть матч против другой компании", emoji:"🏆" },
+  { id:39, cat:"group", cz:"Udělat společnou fotku na začátku a na konci léta", ru:"Сделать общее фото в начале и конце лета", emoji:"📷" },
+  { id:40, cat:"memories", cz:"Vytvořit sbírku nejlepších fotek léta", ru:"Сделать коллекцию лучших фото лета", emoji:"🖼️" },
+  { id:41, cat:"memories", cz:"Natočit film o létě", ru:"Снять фильм про лето", emoji:"🎬" },
+  { id:42, cat:"memories", cz:"Podívat se na film s celou partou na konci léta", ru:"Посмотреть фильм всей компанией в конце лета", emoji:"🍿" },
+  { id:43, cat:"memories", cz:"Vybrat nejlepší den léta", ru:"Выбрать лучший день лета", emoji:"🌟" }
+];
 
-  const translations = {
-    cs: {
-      progress: "🏆 Splněno:", resetBtn: "🌀 Reset vše", achievementsTitle: "🏅 Dosažené úspěchy",
-      calendarTitle: "📅 Aktivita", footer: "💾 vše se ukládá · komentáře · chat s adminem",
-      commentTitle: "📝 Komentář", save: "Uložit", cancel: "Zrušit",
-      settingsTitle: "⚙️ Nastavení", langLabel: "Jazyk / Language:", soundLabel: "🔊 Zvuk",
-      resetAch: "🏅 Resetovat achievements", close: "Zavřít",
-      summerLabel: "🌞 Léto: {total} dní · zbývá {left}", vacLabel: "🏖️ Prázdniny: {total} dní · zbývá {left}",
-      achNames: { first: "První krev", half: "50%", full: "100%", nature: "Les", night: "Noc", group: "Parta", legend: "Legenda" },
-      alertNew: "🏆 NOVÝ ÚSPĚCH!", confirmReset: "Resetovat vše?", confirmResetAch: "Resetovat achievements?",
-      chatPlaceholder: "Napiš dotaz...", sendBtn: "📤 Odeslat"
-    },
-    ru: {
-      progress: "🏆 Выполнено:", resetBtn: "🌀 Сбросить всё", achievementsTitle: "🏅 Достижения",
-      calendarTitle: "📅 Активность", footer: "💾 всё сохраняется · комментарии · чат с админом",
-      commentTitle: "📝 Комментарий", save: "Сохранить", cancel: "Отмена",
-      settingsTitle: "⚙️ Настройки", langLabel: "Язык / Language:", soundLabel: "🔊 Звук",
-      resetAch: "🏅 Сбросить достижения", close: "Закрыть",
-      summerLabel: "🌞 Лето: {total} дн. · осталось {left}", vacLabel: "🏖️ Каникулы: {total} дн. · осталось {left}",
-      achNames: { first: "Первая", half: "50%", full: "100%", nature: "Лес", night: "Ночь", group: "Компания", legend: "Легенда" },
-      alertNew: "🏆 НОВОЕ ДОСТИЖЕНИЕ!", confirmReset: "Сбросить всё?", confirmResetAch: "Сбросить достижения?",
-      chatPlaceholder: "Напиши вопрос...", sendBtn: "📤 Отправить"
-    }
-  };
+const categories = {
+  adventures: { cs: "🌞 Dobrodružství", ru: "🌞 Приключения" },
+  nature: { cs: "🌿 Příroda & přežití", ru: "🌿 Природа и выживание" },
+  challenges: { cs: "⚡ Výzvy", ru: "⚡ Челленджи" },
+  night: { cs: "🌙 Noční dobrodružství", ru: "🌙 Ночные приключения" },
+  group: { cs: "🤝 Parta", ru: "🤝 Компания" },
+  memories: { cs: "📸 Vzpomínky na léto", ru: "📸 Память о лете" }
+};
 
-  let lang = "cs";
-  let checks = new Array(44).fill(false);
-  let comments = {};
-  let achievements = [];
-  let activity = {};
-  let soundEnabled = true;
-  let chatInterval = null;
-  let currentUserId = localStorage.getItem("chat_userId") || (Math.random().toString(36) + Date.now().toString(36));
-  let currentUserName = localStorage.getItem("chat_userName") || "";
-  let notificationsEnabled = localStorage.getItem("chat_notifications") !== "false";
-  let lastAnswers = {};
-
-  // ---------- CHAT FUNCTIONS ----------
-  async function sendMessageToSheet(message, name, userId) {
-    try {
-      await fetch(SHEETS_API_URL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message, name, userId })
-      });
-      return true;
-    } catch(e) { return false; }
+const translations = {
+  cs: {
+    progress: "🏆 Splněno:", resetBtn: "🌀 Reset vše", achievementsTitle: "🏅 Dosažené úspěchy",
+    calendarTitle: "📅 Aktivita (den s odškrtnutím)", footer: "💾 vše se ukládá v prohlížeči · komentáře · chat s adminem",
+    commentTitle: "📝 Komentář k úkolu", save: "Uložit", cancel: "Zrušit",
+    settingsTitle: "⚙️ Nastavení", langLabel: "Jazyk / Language:", soundLabel: "🔊 Zvuk při odškrtnutí",
+    themeLabel: "🌙 Tmavý režim", resetAch: "🏅 Resetovat achievements", close: "Zavřít",
+    summerLabel: "🌞 Léto: <b>{total}</b> dní · zbývá <b>{left}</b>", vacLabel: "🏖️ Prázdniny: <b>{total}</b> dní · zbývá <b>{left}</b>",
+    achNames: { first: "První krev", half: "50%", full: "100%", nature: "Les", night: "Noc", group: "Parta", legend: "Legenda" },
+    achNew: "🏆 NOVÝ ÚSPĚCH!", confirmReset: "Opravdu resetovat všechny úkoly?", confirmResetAch: "Opravdu resetovat achievements?",
+    confirmDelete: "Opravdu smazat tuto zprávu?",
+    chatPlaceholder: "Napiš svůj dotaz nebo nápad...", sendBtn: "📤 Odeslat zprávu",
+    changeName: "✏️ Změnit jméno", notifLabel: "🔔 Upozornění na odpověď", nameTitle: "👤 Tvé jméno v chatu",
+    namePlaceholder: "Zadej přezdívku", searchPlaceholder: "Hledat úkol...",
+    fAll: "Vše", fActive: "Nesplněné", fDone: "Splněné",
+    loading: "Načítání zpráv...", noMessages: "Zatím žádné zprávy. Napiš první!",
+    deletedMsg: "[zpráva smazána]", adminAnswer: "Odpověď admina:", noAnswer: "Zatím bez odpovědi...",
+    sending: "Odesílání...", sent: "✅ Odesláno!", sendError: "❌ Chyba odeslání, zkus to znovu.",
+    newAnswer: "📬 Nová odpověď od admina", monthNames: ["Červen","Červenec","Srpen"]
+  },
+  ru: {
+    progress: "🏆 Выполнено:", resetBtn: "🌀 Сбросить всё", achievementsTitle: "🏅 Достижения",
+    calendarTitle: "📅 Активность (день с отметкой)", footer: "💾 всё сохраняется в браузере · комментарии · чат с админом",
+    commentTitle: "📝 Комментарий к задаче", save: "Сохранить", cancel: "Отмена",
+    settingsTitle: "⚙️ Настройки", langLabel: "Язык / Language:", soundLabel: "🔊 Звук при отметке",
+    themeLabel: "🌙 Тёмная тема", resetAch: "🏅 Сбросить достижения", close: "Закрыть",
+    summerLabel: "🌞 Лето: <b>{total}</b> дн. · осталось <b>{left}</b>", vacLabel: "🏖️ Каникулы: <b>{total}</b> дн. · осталось <b>{left}</b>",
+    achNames: { first: "Первая кровь", half: "50%", full: "100%", nature: "Лес", night: "Ночь", group: "Компания", legend: "Легенда" },
+    achNew: "🏆 НОВОЕ ДОСТИЖЕНИЕ!", confirmReset: "Точно сбросить все задачи?", confirmResetAch: "Точно сбросить достижения?",
+    confirmDelete: "Точно удалить это сообщение?",
+    chatPlaceholder: "Напиши свой вопрос или идею...", sendBtn: "📤 Отправить сообщение",
+    changeName: "✏️ Изменить имя", notifLabel: "🔔 Уведомления об ответе", nameTitle: "👤 Твоё имя в чате",
+    namePlaceholder: "Введи никнейм", searchPlaceholder: "Искать задачу...",
+    fAll: "Все", fActive: "Невыполненные", fDone: "Выполненные",
+    loading: "Загрузка сообщений...", noMessages: "Пока нет сообщений. Напиши первым!",
+    deletedMsg: "[сообщение удалено]", adminAnswer: "Ответ админа:", noAnswer: "Пока без ответа...",
+    sending: "Отправка...", sent: "✅ Отправлено!", sendError: "❌ Ошибка отправки, попробуй ещё раз.",
+    newAnswer: "📬 Новый ответ от админа", monthNames: ["Июнь","Июль","Август"]
   }
+};
 
-  async function deleteMessageFromSheet(msgId, userId) {
-    try {
-      await fetch(SHEETS_API_URL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ action: "delete", id: msgId, userId })
-      });
-      return true;
-    } catch(e) { return false; }
-  }
+/* ---------- state ---------- */
+let lang = "cs";
+let theme = "light";
+let checks = new Array(TASKS.length).fill(false);
+let comments = {};
+let achievements = [];
+let activity = {};
+let soundEnabled = true;
+let chatInterval = null;
+let currentUserId = localStorage.getItem("chat_userId") || (Math.random().toString(36).slice(2) + Date.now().toString(36));
+let currentUserName = localStorage.getItem("chat_userName") || "";
+let notificationsEnabled = localStorage.getItem("chat_notifications") !== "false";
+let lastAnswers = {};
+let filterMode = "all";
+let searchTerm = "";
 
-  async function loadMessagesFromSheet() {
-    try {
-      const res = await fetch(SHEETS_API_URL);
-      return await res.json();
-    } catch(e) { return []; }
-  }
+const $ = (id) => document.getElementById(id);
+const t = () => translations[lang];
 
-  async function requestNotificationPermission() {
-    if (!("Notification" in window)) return;
-    if (Notification.permission === "default") {
-      await Notification.requestPermission();
-    }
-  }
+/* ---------- persistence ---------- */
+function save() {
+  localStorage.setItem("summer_checks", JSON.stringify(checks));
+  localStorage.setItem("summer_comments", JSON.stringify(comments));
+  localStorage.setItem("summer_achievements", JSON.stringify(achievements));
+  localStorage.setItem("summer_activity", JSON.stringify(activity));
+  localStorage.setItem("summer_lang", lang);
+  localStorage.setItem("summer_theme", theme);
+  localStorage.setItem("summer_sound", String(soundEnabled));
+  localStorage.setItem("chat_userId", currentUserId);
+  localStorage.setItem("chat_userName", currentUserName);
+  localStorage.setItem("chat_notifications", String(notificationsEnabled));
+}
 
-  function showNotification(title, body) {
-    if (!notificationsEnabled) return;
-    if (!("Notification" in window)) return;
-    if (Notification.permission === "granted") {
-      new Notification(title, { body });
-    } else if (Notification.permission === "default") {
-      requestNotificationPermission().then(() => {
-        if (Notification.permission === "granted") {
-          new Notification(title, { body });
-        }
-      });
-    }
-  }
+function safeParse(key, fallback) {
+  try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; }
+  catch (e) { return fallback; }
+}
 
-  async function sendChatMessage() {
-    const msg = document.getElementById("chatMessageInput").value.trim();
-    if (!msg) return;
-    if (!currentUserName) {
-      document.getElementById("nameModal").style.display = "flex";
-      return;
-    }
-    document.getElementById("chatMessageInput").value = "";
-    const ok = await sendMessageToSheet(msg, currentUserName, currentUserId);
-    if (ok) {
-      try {
-        const tgMsg = `💬 <b>Nová zpráva z chatu webu</b>\n👤 ${currentUserName}\n📝 ${msg}\n\n✏️ Odpověz zde: ${SHEETS_EDIT_URL}`;
-        await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ chat_id: CHAT_ID, text: tgMsg, parse_mode: "HTML" })
-        });
-      } catch(e) {}
-      setTimeout(() => renderChat(), 1000);
-    } else {
-      alert("Chyba odeslání, zkuste znovu.");
-    }
-  }
+function loadData() {
+  const c = safeParse("summer_checks", null); if (Array.isArray(c)) checks = c.slice(0, TASKS.length).concat(new Array(Math.max(0, TASKS.length - c.length)).fill(false));
+  comments = safeParse("summer_comments", {}) || {};
+  achievements = safeParse("summer_achievements", []) || [];
+  activity = safeParse("summer_activity", {}) || {};
+  const l = localStorage.getItem("summer_lang"); if (l === "cs" || l === "ru") lang = l;
+  const th = localStorage.getItem("summer_theme"); if (th === "light" || th === "dark") theme = th;
+  const s = localStorage.getItem("summer_sound"); if (s !== null) soundEnabled = s === "true";
+  const uid = localStorage.getItem("chat_userId"); if (uid) currentUserId = uid;
+  const uname = localStorage.getItem("chat_userName"); if (uname) currentUserName = uname;
+  const notif = localStorage.getItem("chat_notifications"); if (notif !== null) notificationsEnabled = notif === "true";
 
-  async function deleteMessage(msgId) {
-    if (confirm("Opravdu chcete smazat tuto zprávu?")) {
-      await deleteMessageFromSheet(msgId, currentUserId);
-      renderChat();
-    }
-  }
+  $("langSelect").value = lang;
+  $("soundCheck").checked = soundEnabled;
+  $("themeCheck").checked = theme === "dark";
+  $("notificationsToggle").checked = notificationsEnabled;
+}
 
-  async function renderChat() {
-    const container = document.getElementById("chatMessages");
-    const messages = await loadMessagesFromSheet();
-    if (!messages || messages.length === 0) {
-      container.innerHTML = '<div style="text-align: center; color: #b87a3c;">Zatím žádné zprávy. Napiš první!</div>';
-      return;
-    }
-    messages.sort((a,b) => new Date(a.timestamp) - new Date(b.timestamp));
-    // Kontrola nových odpovědí pro aktuálního uživatele
-    for (let msg of messages) {
-      if (msg.userId === currentUserId && msg.answer && msg.answer !== lastAnswers[msg.id]) {
-        if (lastAnswers[msg.id] !== undefined) {
-          showNotification("📬 Nová odpověď od admina", `Tvá zpráva: "${msg.message}"\nOdpověď: ${msg.answer}`);
-        }
-        lastAnswers[msg.id] = msg.answer;
-      }
-    }
-    container.innerHTML = messages.map(msg => {
-      const isOwner = (msg.userId === currentUserId);
-      const displayMessage = msg.deleted ? "[сообщение удалено]" : msg.message;
-      return `
-        <div class="chat-message">
-          <div>
-            <span class="chat-name">${escapeHtml(msg.name)}</span>
-            <span class="chat-date">${new Date(msg.timestamp).toLocaleString()}</span>
-            ${isOwner && !msg.deleted ? `<button class="delete-msg" data-id="${msg.id}">🗑️</button>` : ''}
-          </div>
-          <div class="chat-question">${escapeHtml(displayMessage)}</div>
-          <div class="chat-answer">✏️ <strong>Odpověď admina:</strong> ${msg.answer ? escapeHtml(msg.answer) : "<em>Zatím bez odpovědi...</em>"}</div>
-        </div>
-      `;
-    }).join('');
-    container.querySelectorAll('.delete-msg').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        deleteMessage(btn.getAttribute('data-id'));
-      });
+/* ---------- theme ---------- */
+function applyTheme() {
+  document.documentElement.setAttribute("data-theme", theme);
+  $("themeBtn").textContent = theme === "dark" ? "☀️" : "🌙";
+  $("themeCheck").checked = theme === "dark";
+}
+
+/* ---------- helpers ---------- */
+function escapeHtml(str) {
+  return String(str == null ? "" : str).replace(/[&<>"]/g, m => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[m]));
+}
+
+function toast(message) {
+  const el = document.createElement("div");
+  el.className = "toast";
+  el.innerHTML = message;
+  $("toastWrap").appendChild(el);
+  setTimeout(() => { el.style.opacity = "0"; el.style.transition = "opacity .3s"; setTimeout(() => el.remove(), 300); }, 3500);
+}
+
+function fireConfetti(opts) {
+  if (typeof confetti === "function") confetti(opts);
+}
+
+function playBeep() {
+  if (!soundEnabled) return;
+  try {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    const ctx = new AudioCtx();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain); gain.connect(ctx.destination);
+    osc.frequency.value = 880; gain.gain.value = 0.1;
+    osc.start();
+    gain.gain.exponentialRampToValueAtTime(0.00001, ctx.currentTime + 0.3);
+    osc.stop(ctx.currentTime + 0.3);
+  } catch (e) { /* no audio */ }
+}
+
+/* ---------- chat backend ---------- */
+async function sendMessageToSheet(message, name, userId) {
+  try {
+    await fetch(SHEETS_API_URL, {
+      method: "POST", mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message, name, userId })
     });
-    container.scrollTop = container.scrollHeight;
-  }
+    return true;
+  } catch (e) { return false; }
+}
 
-  function escapeHtml(str) {
-    if (!str) return "";
-    return str.replace(/[&<>]/g, m => m==='&'?'&amp;':m==='<'?'&lt;':'&gt;');
-  }
+async function deleteMessageFromSheet(msgId, userId) {
+  try {
+    await fetch(SHEETS_API_URL, {
+      method: "POST", mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action: "delete", id: msgId, userId })
+    });
+    return true;
+  } catch (e) { return false; }
+}
 
-  // ---------- NAME MODAL ----------
-  function saveUserName() {
-    const newName = document.getElementById("userNameInput").value.trim();
-    if (newName) {
-      currentUserName = newName;
-      localStorage.setItem("chat_userName", currentUserName);
-      localStorage.setItem("chat_userId", currentUserId);
-      document.getElementById("nameModal").style.display = "none";
-    }
-  }
-  function showNameModal() {
-    document.getElementById("userNameInput").value = currentUserName;
-    document.getElementById("nameModal").style.display = "flex";
-  }
+async function loadMessagesFromSheet() {
+  try {
+    const res = await fetch(SHEETS_API_URL);
+    const data = await res.json();
+    return Array.isArray(data) ? data : [];
+  } catch (e) { return []; }
+}
 
-  // ---------- CHECKLIST FUNCTIONS ----------
-  function save() {
-    localStorage.setItem("summer_checks", JSON.stringify(checks));
-    localStorage.setItem("summer_comments", JSON.stringify(comments));
-    localStorage.setItem("summer_achievements", JSON.stringify(achievements));
-    localStorage.setItem("summer_activity", JSON.stringify(activity));
-    localStorage.setItem("summer_lang", lang);
-    localStorage.setItem("summer_sound", soundEnabled);
-    localStorage.setItem("chat_userId", currentUserId);
-    localStorage.setItem("chat_userName", currentUserName);
-    localStorage.setItem("chat_notifications", notificationsEnabled);
+/* ---------- notifications ---------- */
+async function requestNotificationPermission() {
+  if (!("Notification" in window)) return;
+  if (Notification.permission === "default") {
+    try { await Notification.requestPermission(); } catch (e) {}
   }
+}
 
-  function loadData() {
-    const c = localStorage.getItem("summer_checks"); if (c) checks = JSON.parse(c);
-    const cm = localStorage.getItem("summer_comments"); if (cm) comments = JSON.parse(cm);
-    const a = localStorage.getItem("summer_achievements"); if (a) achievements = JSON.parse(a);
-    const ac = localStorage.getItem("summer_activity"); if (ac) activity = JSON.parse(ac);
-    const l = localStorage.getItem("summer_lang"); if (l === "cs" || l === "ru") lang = l;
-    const s = localStorage.getItem("summer_sound"); if (s !== null) soundEnabled = s === "true";
-    const uid = localStorage.getItem("chat_userId"); if (uid) currentUserId = uid;
-    const uname = localStorage.getItem("chat_userName"); if (uname) currentUserName = uname;
-    const notif = localStorage.getItem("chat_notifications");
-    if (notif !== null) notificationsEnabled = notif === "true";
-    document.getElementById("langSelect").value = lang;
-    document.getElementById("soundCheck").checked = soundEnabled;
-    document.getElementById("notificationsToggle").checked = notificationsEnabled;
+function showNotification(title, body) {
+  if (!notificationsEnabled || !("Notification" in window)) return;
+  if (Notification.permission === "granted") new Notification(title, { body });
+}
+
+/* ---------- chat UI ---------- */
+async function sendChatMessage() {
+  const input = $("chatMessageInput");
+  const msg = input.value.trim();
+  if (!msg) return;
+  if (!currentUserName) { showNameModal(); return; }
+  const status = $("chatStatus");
+  status.textContent = t().sending;
+  input.value = "";
+  const ok = await sendMessageToSheet(msg, currentUserName, currentUserId);
+  if (ok) {
+    status.textContent = t().sent;
+    setTimeout(() => { status.textContent = ""; }, 2500);
+    setTimeout(renderChat, 1000);
+  } else {
+    status.textContent = t().sendError;
+    input.value = msg;
   }
+}
 
-  function playBeep() {
-    if (!soundEnabled) return;
-    try {
-      const AudioContext = window.AudioContext || window.webkitAudioContext;
-      const ctx = new AudioContext();
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.frequency.value = 880;
-      gain.gain.value = 0.1;
-      osc.start();
-      gain.gain.exponentialRampToValueAtTime(0.00001, ctx.currentTime + 0.3);
-      osc.stop(ctx.currentTime + 0.3);
-    } catch(e) {}
+async function deleteMessage(msgId) {
+  if (confirm(t().confirmDelete)) {
+    await deleteMessageFromSheet(msgId, currentUserId);
+    setTimeout(renderChat, 800);
   }
+}
 
-  function recordActivity() {
-    activity[new Date().toISOString().slice(0,10)] = true;
-    save();
-    renderCalendar();
+async function renderChat() {
+  const container = $("chatMessages");
+  const messages = await loadMessagesFromSheet();
+  if (!messages.length) {
+    container.innerHTML = `<div class="empty-state">${t().noMessages}</div>`;
+    return;
   }
-
-  function checkAchievements() {
-    const total = TASKS.length;
-    const doneTotal = checks.filter(v=>v).length;
-    const catDone = {};
-    for (let t of TASKS) {
-      if (!catDone[t.cat]) catDone[t.cat] = { total:0, done:0 };
-      catDone[t.cat].total++;
-      if (checks[t.id]) catDone[t.cat].done++;
-    }
-    const newA = [];
-    if (doneTotal >= 1 && !achievements.includes("first")) newA.push("first");
-    if (doneTotal >= total/2 && !achievements.includes("half")) newA.push("half");
-    if (doneTotal === total && !achievements.includes("full")) newA.push("full");
-    if (catDone.nature && catDone.nature.done === catDone.nature.total && !achievements.includes("nature")) newA.push("nature");
-    if (catDone.night && catDone.night.done === catDone.night.total && !achievements.includes("night")) newA.push("night");
-    if (catDone.group && catDone.group.done === catDone.group.total && !achievements.includes("group")) newA.push("group");
-    if (TASKS.some(t=>t.leg&&checks[t.id]) && !achievements.includes("legend")) newA.push("legend");
-    for (let a of newA) {
-      achievements.push(a);
-      if (soundEnabled) playBeep();
-      alert(`${translations[lang].alertNew} ${translations[lang].achNames[a]}`);
-    }
-    if (newA.length) save();
-    renderAchievements();
-  }
-
-  function renderAchievements() {
-    const all = ["first","half","full","nature","night","group","legend"];
-    document.getElementById("badgeList").innerHTML = all.map(a => `<div class="badge ${achievements.includes(a)?'':'locked'}">${achievements.includes(a)?'🏅':'🔒'} ${translations[lang].achNames[a]}</div>`).join('');
-  }
-
-  function renderCalendar() {
-    let html = '';
-    for (let m=5; m<=7; m++) {
-      const days = new Date(2026, m+1, 0).getDate();
-      for (let d=1; d<=days; d++) {
-        const date = `2026-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-        html += `<div class="cal-day ${activity[date]?'active':''}">${d}</div>`;
+  messages.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+  for (const msg of messages) {
+    if (msg.userId === currentUserId && msg.answer && msg.answer !== lastAnswers[msg.id]) {
+      if (lastAnswers[msg.id] !== undefined) {
+        showNotification(t().newAnswer, `${msg.message} → ${msg.answer}`);
       }
+      lastAnswers[msg.id] = msg.answer;
     }
-    document.getElementById("calendarGrid").innerHTML = html;
   }
-
-  function updateCounters() {
-    const today = new Date();
-    const june1 = new Date(2026,5,1), aug31 = new Date(2026,7,31), july1 = new Date(2026,6,1);
-    const totalS = Math.ceil((aug31-june1)/864e5)+1, leftS = Math.max(0, Math.ceil((aug31-today)/864e5));
-    const totalV = Math.ceil((aug31-july1)/864e5)+1, leftV = Math.max(0, Math.ceil((aug31-today)/864e5));
-    document.getElementById("summerTotal").innerText = totalS;
-    document.getElementById("summerLeft").innerText = leftS;
-    document.getElementById("vacTotal").innerText = totalV;
-    document.getElementById("vacLeft").innerText = leftV;
-    document.getElementById("summerCounter").innerHTML = translations[lang].summerLabel.replace("{total}", totalS).replace("{left}", leftS);
-    document.getElementById("vacCounter").innerHTML = translations[lang].vacLabel.replace("{total}", totalV).replace("{left}", leftV);
-  }
-
-  function updateProgress() {
-    const done = checks.filter(v=>v).length;
-    const total = TASKS.length;
-    document.getElementById("progressLabel").innerHTML = `${translations[lang].progress} ${done}/${total}`;
-    document.getElementById("progressFill").style.width = `${(done/total)*100}%`;
-    if (done === total) canvasConfetti({ particleCount:200, spread:70 });
-  }
-
-  function renderChecklist() {
-    const groups = new Map();
-    for (let t of TASKS) {
-      if (!groups.has(t.cat)) groups.set(t.cat, []);
-      groups.get(t.cat).push(t);
-    }
-    const root = document.getElementById("checklistRoot");
-    root.innerHTML = "";
-    for (let [cat, tasks] of groups.entries()) {
-      const catName = categories[cat][lang];
-      const doneInCat = tasks.filter(t=>checks[t.id]).length;
-      const card = document.createElement("div");
-      card.className = "category-card";
-      card.innerHTML = `
-        <div class="category-header">
-          <h3>${catName}</h3>
-          <div class="cat-stats">${doneInCat}/${tasks.length}</div>
+  container.innerHTML = messages.map(msg => {
+    const isOwner = msg.userId === currentUserId;
+    const displayMessage = msg.deleted ? t().deletedMsg : msg.message;
+    return `
+      <div class="chat-message ${isOwner ? "mine" : ""}">
+        <div>
+          <span class="chat-name">${escapeHtml(msg.name)}</span>
+          <span class="chat-date">${msg.timestamp ? new Date(msg.timestamp).toLocaleString() : ""}</span>
+          ${isOwner && !msg.deleted ? `<button class="delete-msg" data-id="${escapeHtml(msg.id)}" aria-label="Smazat">🗑️</button>` : ""}
         </div>
-        <div class="tasks-list" id="list-${cat}"></div>
-      `;
-      const listDiv = card.querySelector(`.tasks-list`);
-      tasks.forEach(task => {
-        const checked = checks[task.id];
-        const comment = comments[task.id] || "";
-        const text = lang === "cs" ? task.cz : task.ru;
-        const taskDiv = document.createElement("div");
-        taskDiv.className = "task-item";
-        taskDiv.innerHTML = `
-          <input type="checkbox" class="task-checkbox" data-id="${task.id}" ${checked?"checked":""}>
-          <div class="task-text">
-            <strong>${task.emoji} ${text}</strong> ${task.leg?'<span class="legend-badge">🏅 LEGEND</span>':''}
-            <span class="comment-icon" data-id="${task.id}">💬 ${comment?"✏️":""}</span>
-            ${comment?`<div class="comment-preview">📌 ${comment.slice(0,40)}${comment.length>40?"...":""}</div>`:""}
-          </div>
-        `;
-        const chk = taskDiv.querySelector("input");
-        chk.addEventListener("change", () => {
-          checks[task.id] = chk.checked;
-          recordActivity();
-          save();
-          updateProgress();
-          checkAchievements();
-          renderChecklist();
-          if (soundEnabled && chk.checked) playBeep();
-          if (checks.filter(v=>v).length === TASKS.length) canvasConfetti({ particleCount:300 });
-        });
-        taskDiv.querySelector(".comment-icon").addEventListener("click", (e) => {
-          e.stopPropagation();
-          openComment(task.id);
-        });
-        listDiv.appendChild(taskDiv);
-      });
-      root.appendChild(card);
+        <div class="chat-question ${msg.deleted ? "deleted" : ""}">${escapeHtml(displayMessage)}</div>
+        <div class="chat-answer">✏️ <strong>${t().adminAnswer}</strong> ${msg.answer ? escapeHtml(msg.answer) : `<em>${t().noAnswer}</em>`}</div>
+      </div>`;
+  }).join("");
+  container.querySelectorAll(".delete-msg").forEach(btn => {
+    btn.addEventListener("click", (e) => { e.stopPropagation(); deleteMessage(btn.getAttribute("data-id")); });
+  });
+  container.scrollTop = container.scrollHeight;
+}
+
+/* ---------- name modal ---------- */
+function saveUserName() {
+  const newName = $("userNameInput").value.trim();
+  if (newName) {
+    currentUserName = newName;
+    save();
+    closeModal("nameModal");
+  }
+}
+function showNameModal() {
+  $("userNameInput").value = currentUserName;
+  openModal("nameModal");
+  setTimeout(() => $("userNameInput").focus(), 50);
+}
+
+/* ---------- checklist ---------- */
+function recordActivity() {
+  activity[new Date().toISOString().slice(0, 10)] = true;
+  renderCalendar();
+}
+
+function checkAchievements() {
+  const total = TASKS.length;
+  const doneTotal = checks.filter(Boolean).length;
+  const catDone = {};
+  for (const task of TASKS) {
+    if (!catDone[task.cat]) catDone[task.cat] = { total: 0, done: 0 };
+    catDone[task.cat].total++;
+    if (checks[task.id]) catDone[task.cat].done++;
+  }
+  const newA = [];
+  const add = (key, cond) => { if (cond && !achievements.includes(key)) newA.push(key); };
+  add("first", doneTotal >= 1);
+  add("half", doneTotal >= total / 2);
+  add("full", doneTotal === total);
+  add("nature", catDone.nature && catDone.nature.done === catDone.nature.total);
+  add("night", catDone.night && catDone.night.done === catDone.night.total);
+  add("group", catDone.group && catDone.group.done === catDone.group.total);
+  add("legend", TASKS.some(task => task.leg && checks[task.id]));
+  for (const a of newA) {
+    achievements.push(a);
+    if (soundEnabled) playBeep();
+    toast(`${t().achNew} <b>${t().achNames[a]}</b>`);
+  }
+  if (newA.length) save();
+  renderAchievements();
+}
+
+function renderAchievements() {
+  const all = ["first", "half", "full", "nature", "night", "group", "legend"];
+  $("badgeList").innerHTML = all.map(a => {
+    const unlocked = achievements.includes(a);
+    return `<div class="badge ${unlocked ? "unlocked" : "locked"}">${unlocked ? "🏅" : "🔒"} ${t().achNames[a]}</div>`;
+  }).join("");
+}
+
+function renderCalendar() {
+  const today = new Date().toISOString().slice(0, 10);
+  let html = "";
+  for (let m = 5; m <= 7; m++) {
+    html += `<div class="cal-month-label">${t().monthNames[m - 5]}</div>`;
+    const days = new Date(2026, m + 1, 0).getDate();
+    for (let d = 1; d <= days; d++) {
+      const date = `2026-${String(m + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+      const cls = `cal-day ${activity[date] ? "active" : ""} ${date === today ? "today" : ""}`.trim();
+      html += `<div class="${cls}">${d}</div>`;
     }
-    updateProgress();
   }
+  $("calendarGrid").innerHTML = html;
+}
 
-  let currentTask = null;
-  function openComment(id) {
-    currentTask = id;
-    document.getElementById("commentText").value = comments[id] || "";
-    document.getElementById("commentModal").style.display = "flex";
+function daysBetween(a, b) { return Math.ceil((b - a) / 864e5); }
+
+function updateCounters() {
+  const today = new Date();
+  const june1 = new Date(2026, 5, 1), aug31 = new Date(2026, 7, 31), july1 = new Date(2026, 6, 1);
+  const totalS = daysBetween(june1, aug31) + 1, leftS = Math.max(0, daysBetween(today, aug31));
+  const totalV = daysBetween(july1, aug31) + 1, leftV = Math.max(0, daysBetween(today, aug31));
+  $("summerCounter").innerHTML = t().summerLabel.replace("{total}", totalS).replace("{left}", leftS);
+  $("vacCounter").innerHTML = t().vacLabel.replace("{total}", totalV).replace("{left}", leftV);
+}
+
+function updateProgress() {
+  const done = checks.filter(Boolean).length;
+  const total = TASKS.length;
+  $("progressLabel").innerHTML = `${t().progress} ${done}/${total}`;
+  $("progressFill").style.width = `${(done / total) * 100}%`;
+}
+
+function taskVisible(task) {
+  if (filterMode === "active" && checks[task.id]) return false;
+  if (filterMode === "done" && !checks[task.id]) return false;
+  if (searchTerm) {
+    const hay = `${task.cz} ${task.ru}`.toLowerCase();
+    if (!hay.includes(searchTerm)) return false;
   }
-  document.getElementById("saveCommentBtn").onclick = () => {
-    if (currentTask !== null) {
-      const val = document.getElementById("commentText").value.trim();
-      if (val) comments[currentTask] = val;
-      else delete comments[currentTask];
-      save();
-      renderChecklist();
-    }
-    document.getElementById("commentModal").style.display = "none";
-  };
-  document.getElementById("closeCommentBtn").onclick = () => document.getElementById("commentModal").style.display = "none";
+  return true;
+}
 
-  function applyLanguage() {
-    document.getElementById("achievementsTitle").innerText = translations[lang].achievementsTitle;
-    document.getElementById("calendarTitle").innerHTML = translations[lang].calendarTitle;
-    document.getElementById("footerText").innerText = translations[lang].footer;
-    document.getElementById("commentTitle").innerText = translations[lang].commentTitle;
-    document.getElementById("saveCommentBtn").innerText = translations[lang].save;
-    document.getElementById("closeCommentBtn").innerText = translations[lang].cancel;
-    document.getElementById("setTitle").innerText = translations[lang].settingsTitle;
-    document.getElementById("langLabel").innerText = translations[lang].langLabel;
-    document.getElementById("soundLabel").innerText = translations[lang].soundLabel;
-    document.getElementById("resetAchBtn").innerText = translations[lang].resetAch;
-    document.getElementById("closeSetBtn").innerText = translations[lang].close;
-    document.getElementById("resetAllBtn").innerText = translations[lang].resetBtn;
-    document.getElementById("chatMessageInput").placeholder = translations[lang].chatPlaceholder;
-    document.getElementById("sendChatMsgBtn").innerText = translations[lang].sendBtn;
-    updateCounters();
-    updateProgress();
-    renderAchievements();
-    renderChecklist();
+function renderChecklist() {
+  const root = $("checklistRoot");
+  root.innerHTML = "";
+  let anyVisible = false;
+  for (const cat of Object.keys(categories)) {
+    const tasks = TASKS.filter(task => task.cat === cat);
+    const visibleTasks = tasks.filter(taskVisible);
+    const doneInCat = tasks.filter(task => checks[task.id]).length;
+    const card = document.createElement("div");
+    card.className = "category-card" + (visibleTasks.length ? "" : " is-empty");
+    card.innerHTML = `
+      <div class="category-header">
+        <h3>${categories[cat][lang]}</h3>
+        <div class="cat-stats">${doneInCat}/${tasks.length}</div>
+      </div>
+      <div class="tasks-list"></div>`;
+    const listDiv = card.querySelector(".tasks-list");
+    visibleTasks.forEach(task => {
+      anyVisible = true;
+      const checked = checks[task.id];
+      const comment = comments[task.id] || "";
+      const text = lang === "cs" ? task.cz : task.ru;
+      const taskDiv = document.createElement("div");
+      taskDiv.className = "task-item" + (checked ? " done" : "");
+      taskDiv.innerHTML = `
+        <input type="checkbox" class="task-checkbox" ${checked ? "checked" : ""} aria-label="${escapeHtml(text)}">
+        <div class="task-text">
+          <strong>${task.emoji} ${escapeHtml(text)}</strong> ${task.leg ? '<span class="legend-badge">🏅 LEGEND</span>' : ""}
+          <button class="comment-icon" aria-label="Komentář">💬 ${comment ? "✏️" : ""}</button>
+          ${comment ? `<div class="comment-preview">📌 ${escapeHtml(comment.slice(0, 60))}${comment.length > 60 ? "…" : ""}</div>` : ""}
+        </div>`;
+      taskDiv.querySelector("input").addEventListener("change", (e) => onToggleTask(task.id, e.target.checked));
+      taskDiv.querySelector(".comment-icon").addEventListener("click", (e) => { e.stopPropagation(); openComment(task.id); });
+      listDiv.appendChild(taskDiv);
+    });
+    root.appendChild(card);
   }
+  if (!anyVisible) {
+    root.innerHTML = `<div class="empty-state">🤷 ${lang === "cs" ? "Nic nenalezeno" : "Ничего не найдено"}</div>`;
+  }
+  updateProgress();
+}
 
-  // ---------- NAVIGACE, MODÁLY ----------
-  document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const tabId = btn.getAttribute('data-tab');
-      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-      document.getElementById(`tab-${tabId}`).classList.add('active');
-      if (tabId === 'chat') {
+function onToggleTask(id, checked) {
+  checks[id] = checked;
+  if (checked) recordActivity();
+  save();
+  updateProgress();
+  checkAchievements();
+  renderChecklist();
+  if (soundEnabled && checked) playBeep();
+  if (checks.filter(Boolean).length === TASKS.length) {
+    fireConfetti({ particleCount: 300, spread: 90, origin: { y: 0.6 } });
+  } else if (checked) {
+    fireConfetti({ particleCount: 40, spread: 55, origin: { y: 0.7 } });
+  }
+}
+
+/* ---------- comment modal ---------- */
+let currentTask = null;
+function openComment(id) {
+  currentTask = id;
+  $("commentText").value = comments[id] || "";
+  openModal("commentModal");
+  setTimeout(() => $("commentText").focus(), 50);
+}
+
+/* ---------- modal helpers ---------- */
+function openModal(id) { $(id).classList.add("open"); }
+function closeModal(id) { $(id).classList.remove("open"); }
+
+/* ---------- language ---------- */
+function applyLanguage() {
+  document.documentElement.lang = lang;
+  $("achievementsTitle").textContent = t().achievementsTitle;
+  $("calendarTitle").textContent = t().calendarTitle;
+  $("footerText").textContent = t().footer;
+  $("commentTitle").textContent = t().commentTitle;
+  $("saveCommentBtn").textContent = t().save;
+  $("closeCommentBtn").textContent = t().cancel;
+  $("setTitle").textContent = t().settingsTitle;
+  $("langLabel").textContent = t().langLabel;
+  $("soundLabel").textContent = t().soundLabel;
+  $("themeLabel").textContent = t().themeLabel;
+  $("resetAchBtn").textContent = t().resetAch;
+  $("closeSetBtn").textContent = t().close;
+  $("resetAllBtn").textContent = t().resetBtn;
+  $("chatMessageInput").placeholder = t().chatPlaceholder;
+  $("sendChatMsgBtn").textContent = t().sendBtn;
+  $("changeNameBtn").textContent = t().changeName;
+  $("nameTitle").textContent = t().nameTitle;
+  $("userNameInput").placeholder = t().namePlaceholder;
+  $("searchInput").placeholder = t().searchPlaceholder;
+  $("saveNameBtn").textContent = t().save;
+  $("closeNameBtn").textContent = t().cancel;
+  document.querySelectorAll("#filterGroup .filter-btn").forEach(btn => {
+    const f = btn.getAttribute("data-filter");
+    btn.textContent = f === "all" ? t().fAll : f === "active" ? t().fActive : t().fDone;
+  });
+  updateCounters();
+  renderAchievements();
+  renderCalendar();
+  renderChecklist();
+}
+
+/* ---------- events ---------- */
+function bindEvents() {
+  document.querySelectorAll(".tab-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".tab-btn").forEach(b => { b.classList.remove("active"); b.setAttribute("aria-selected", "false"); });
+      btn.classList.add("active"); btn.setAttribute("aria-selected", "true");
+      const tabId = btn.getAttribute("data-tab");
+      document.querySelectorAll(".tab-content").forEach(tab => tab.classList.remove("active"));
+      $(`tab-${tabId}`).classList.add("active");
+      if (chatInterval) { clearInterval(chatInterval); chatInterval = null; }
+      if (tabId === "chat") {
         renderChat();
-        if (chatInterval) clearInterval(chatInterval);
-        chatInterval = setInterval(() => renderChat(), 8000);
-      } else {
-        if (chatInterval) clearInterval(chatInterval);
+        chatInterval = setInterval(renderChat, CHAT_POLL_MS);
       }
     });
   });
 
-  const setModal = document.getElementById("settingsModal");
-  document.getElementById("settingsBtn").onclick = () => setModal.style.display = "flex";
-  document.getElementById("closeSetBtn").onclick = () => setModal.style.display = "none";
-  document.getElementById("langSelect").onchange = (e) => { lang = e.target.value; save(); applyLanguage(); };
-  document.getElementById("soundCheck").onchange = (e) => { soundEnabled = e.target.checked; save(); };
-  document.getElementById("resetAchBtn").onclick = () => { if(confirm(translations[lang].confirmResetAch)) { achievements = []; save(); renderAchievements(); } };
-  document.getElementById("resetAllBtn").onclick = () => { if(confirm(translations[lang].confirmReset)) { checks.fill(false); save(); renderChecklist(); updateProgress(); checkAchievements(); } };
-  document.getElementById("sendChatMsgBtn").onclick = sendChatMessage;
-  document.getElementById("changeNameBtn").onclick = showNameModal;
-  document.getElementById("saveNameBtn").onclick = saveUserName;
-  document.getElementById("closeNameBtn").onclick = () => document.getElementById("nameModal").style.display = "none";
-  document.getElementById("notificationsToggle").onchange = (e) => {
-    notificationsEnabled = e.target.checked;
-    localStorage.setItem("chat_notifications", notificationsEnabled);
-    if (notificationsEnabled && Notification.permission === "default") {
-      requestNotificationPermission();
+  $("themeBtn").onclick = () => { theme = theme === "dark" ? "light" : "dark"; applyTheme(); save(); };
+  $("themeCheck").onchange = (e) => { theme = e.target.checked ? "dark" : "light"; applyTheme(); save(); };
+
+  $("settingsBtn").onclick = () => openModal("settingsModal");
+  $("closeSetBtn").onclick = () => closeModal("settingsModal");
+  $("langSelect").onchange = (e) => { lang = e.target.value; save(); applyLanguage(); };
+  $("soundCheck").onchange = (e) => { soundEnabled = e.target.checked; save(); };
+  $("resetAchBtn").onclick = () => { if (confirm(t().confirmResetAch)) { achievements = []; save(); renderAchievements(); } };
+  $("resetAllBtn").onclick = () => { if (confirm(t().confirmReset)) { checks.fill(false); save(); renderChecklist(); checkAchievements(); } };
+
+  $("saveCommentBtn").onclick = () => {
+    if (currentTask !== null) {
+      const val = $("commentText").value.trim();
+      if (val) comments[currentTask] = val; else delete comments[currentTask];
+      save();
+      renderChecklist();
     }
+    closeModal("commentModal");
+  };
+  $("closeCommentBtn").onclick = () => closeModal("commentModal");
+
+  $("sendChatMsgBtn").onclick = sendChatMessage;
+  $("changeNameBtn").onclick = showNameModal;
+  $("saveNameBtn").onclick = saveUserName;
+  $("closeNameBtn").onclick = () => closeModal("nameModal");
+  $("notificationsToggle").onchange = (e) => {
+    notificationsEnabled = e.target.checked;
+    save();
+    if (notificationsEnabled) requestNotificationPermission();
   };
 
-  function init() {
-    loadData();
-    if (!currentUserName) {
-      setTimeout(() => showNameModal(), 500);
-    }
-    applyLanguage();
-    renderCalendar();
-    updateCounters();
-    renderAchievements();
-    requestNotificationPermission();
-    loadMessagesFromSheet().then(messages => {
-      if (messages) {
-        for (let msg of messages) {
-          if (msg.userId === currentUserId && msg.answer) {
-            lastAnswers[msg.id] = msg.answer;
-          }
-        }
-      }
+  $("searchInput").addEventListener("input", (e) => { searchTerm = e.target.value.trim().toLowerCase(); renderChecklist(); });
+  document.querySelectorAll("#filterGroup .filter-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll("#filterGroup .filter-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      filterMode = btn.getAttribute("data-filter");
+      renderChecklist();
     });
-  }
-  init();
+  });
+
+  document.querySelectorAll(".modal").forEach(modal => {
+    modal.addEventListener("click", (e) => { if (e.target === modal) modal.classList.remove("open"); });
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") document.querySelectorAll(".modal.open").forEach(m => m.classList.remove("open"));
+  });
+}
+
+/* ---------- init ---------- */
+function init() {
+  loadData();
+  bindEvents();
+  applyTheme();
+  applyLanguage();
+  updateCounters();
+  if (!currentUserName) setTimeout(showNameModal, 600);
+  requestNotificationPermission();
+  loadMessagesFromSheet().then(messages => {
+    for (const msg of messages) {
+      if (msg.userId === currentUserId && msg.answer) lastAnswers[msg.id] = msg.answer;
+    }
+  });
+}
+
+init();
 </script>
 </body>
 </html>
